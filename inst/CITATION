@@ -1,4 +1,4 @@
-citHeader("To cite zscorer in publications use:")
+citHeader("To cite codeditr in publications use:")
 
 citEntry(
   entry    = "Manual",
