@@ -1,0 +1,26 @@
+Package: codeditr
+Type: Package
+Title: Implementing Basic Checks on Cause-of-Death Data Based on World Health 
+    Organization's CoDEdit Tool 
+Version: 0.0.0.9000
+Authors@R: c(
+    person("Anita", "Makori", email = "mark@brixtonhealth.com",
+           role = c("aut", "cph")),
+    person("Ernest", "Guevarra", 
+           comment = c(ORCID = "0000-0002-4887-4415"), 
+           email = "ernest@guevarra.io", role = c("aut", "cre", "cph")))
+Description: The World Health Organization's CoDEdit electronic tool is intended 
+    to help producers of cause-of-death statistics in strengthening their 
+    capacity to perform routine checks on their data. This package ports the
+    original tool built using Microsoft Acess into R so as to leverage the
+    utility and function of the original tool into a usable application
+    program interface that can be used for building more universal tools or for
+    creating programmatic scientific workflows aimed at routine, automated, and
+    large-scale monitoring of cause-of-death data.
+License: GPL (>= 3)
+Depends: 
+    R (>= 2.10)
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.2.3
+
