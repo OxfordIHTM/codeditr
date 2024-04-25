@@ -5,16 +5,15 @@
 \alias{icd10_example}
 \title{Example death records dataset with ICD10 cause-of-death coding}
 \format{
-A data frame with 6 columns and 3613 rows:
-
-| **Variable** | **Description** |
-| :--- | :--- |
-| *FreeId* | Record identifier |
-| *Sex* | Sex: 1 = Male; 2 = Female; 9 = unknown |
-| *Age Value* | Integer value for age |
-| *Age Type* | Is the age value in days (D), months (M), or years (Y) |
-| *Code* | ICD10 code for cause-of-death |
-| *Death Date* | Date of death in year format |
+A data frame with 6 columns and 3613 rows:\tabular{ll}{
+   \strong{Variable} \tab \strong{Description} \cr
+   \emph{FreeId} \tab Record identifier \cr
+   \emph{Sex} \tab Sex: 1 = Male; 2 = Female; 9 = unknown \cr
+   \emph{Age Value} \tab Integer value for age \cr
+   \emph{Age Type} \tab Is the age value in days (D), months (M), or years (Y) \cr
+   \emph{Code} \tab ICD10 code for cause-of-death \cr
+   \emph{Death Date} \tab Date of death in year format \cr
+}
 }
 \source{
 https://www.who.int/standards/classifications/classification-of-diseases/services/codedit-tool

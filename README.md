@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# codeditr: Implementing Basic Checks on Cause-of-Death Data Based on World Health Organization’s CoDEdit Tool <img src='man/figures/logo.png' width='200px' align='right' />
+# codeditr: Implementing Cause-of-Death Data Checks Based on the WHO CoDEdit Tool <img src='man/figures/logo.png' width='200px' align='right' />
 
 <!-- badges: start -->
 
@@ -20,7 +20,7 @@ electronic
 tool](https://www.who.int/standards/classifications/classification-of-diseases/services/codedit-tool)
 is intended to help producers of cause-of-death statistics in
 strengthening their capacity to perform routine checks on their data.
-This package ports the original tool built using Microsoft Acess into R
+This package ports the original tool built using Microsoft Access into R
 so as to leverage the utility and function of the original tool into a
 usable application program interface that can be used for building more
 universal tools or for creating programmatic scientific workflows aimed
@@ -31,7 +31,7 @@ data.
 
 The `codeditr` package provides functions for implementing data quality
 checks on cause-of-death records. It is built upon the same heuristics
-and algorithms that the WHO CodEdit v2.0 electronic tool uses to
+and algorithms that the WHO CoDEdit v2.0 electronic tool uses to
 evaluate quality of cause-of-death data produced and used by country
 level statisticians in charge of mortality reporting.
 
@@ -42,14 +42,14 @@ applications for routine monitoring of cause-of-death data.
 
 ## Installation
 
-`coeditr` is not yet on CRAN.
-
-You can install the development version of `codeditr` from
-[GitHub](https://github.com/OxfordIHTM/codeditr) with:
+`coeditr` is not yet on CRAN but can be installed through the [Oxford
+IHTM R-universe](https://oxfordihtm.r-universe.dev) with:
 
 ``` r
-if(!require(remotes)) install.packages("remotes")
-remotes::install_github("OxfordIHTM/codeditr")
+install.packages(
+  "codeditr",
+  repos = c("https://oxfordihtm.r-universe.dev", "https://cloud.r-project.org")
+)
 ```
 
 then load `codeditr`
@@ -63,8 +63,9 @@ library(codeditr)
 
 ## Citation
 
-If you find the `codeitr` package useful please cite using the suggested
-citation provided by a call to the `citation()` function as follows:
+If you find the `codeditr` package useful please cite using the
+suggested citation provided by a call to the `citation()` function as
+follows:
 
 ``` r
 citation("codeditr")

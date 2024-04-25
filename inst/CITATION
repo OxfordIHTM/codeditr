@@ -1,16 +1,9 @@
-citHeader("To cite codeditr in publications use:")
-
-citEntry(
-  entry    = "Manual",
-  title    = "codeditr: Implementing Basic Checks on Cause-of-Death Data Based on World Health Organization's CoDEdit Tool",
+bibentry(
+  bibtype  = "Manual",
+  header   = "To cite codeditr in publications use:",
+  title    = "codeditr: Implementing Cause-of-Death Data Checks Based on World Health Organization's CoDEdit Tool",
   author   = c(person("Anita Makori"),  person("Ernest Guevarra")),
   year     = "2024",
   note     = "R package version 0.0.9000",
-  url      = "https://oxford-ihtm.io/codeditr/",
-  textVersion = paste(
-    paste("Anita Makori and Ernest Guevarra (2024).",
-          "codeditr: Implementing Basic Checks on Cause-of-Death Data Based on World Health Organization's CoDEdit Tool.",
-          "R package version 0.0.9000.",
-          "URL https://oxford-ihtm.io/codeditr/")
-  )
+  url      = "https://oxford-ihtm.io/codeditr/"
 )
