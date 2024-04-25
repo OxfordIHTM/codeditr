@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# codeditr: Implementing Basic Checks on Cause-of-Death Data Based on World Health Organization’s CoDEdit Tool
+# codeditr: Implementing Basic Checks on Cause-of-Death Data Based on World Health Organization’s CoDEdit Tool <img src='man/figures/logo.png' width='200px' align='right' />
 
 <!-- badges: start -->
 
