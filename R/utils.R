@@ -20,14 +20,14 @@ get_age_values <- function(age_value, age_type = c("D", "M", "Y")) {
       "Age value of greater than 100 for age type `year` has been provided. Please double check that these are correct inputs."
     )
 
-  if (age_value > 31 & age_type == "D")
+  if (age_value >= 28 & age_type == "D")
     warning(
-      "Age value of greater than 31 for age type `day` has been provided. Please double check that these are correct inputs."
+      "Age value of 28 or greater for age type `day` has been provided. Please double check that these are correct inputs."
     )
 
-  if (age_value > 12 & age_type == "M")
+  if (age_value >= 12 & age_type == "M")
     warning(
-      "Age value of greater than 12 for age type `month` has been provided. Please double check that these are correct inputs."
+      "Age value of 12 or greater for age type `month` has been provided. Please double check that these are correct inputs."
     )
 
   if (age_type == "D")

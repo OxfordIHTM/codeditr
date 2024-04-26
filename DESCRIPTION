@@ -21,6 +21,11 @@ Description: The World Health Organization's CoDEdit electronic tool is intended
 License: GPL (>= 3)
 Depends: 
     R (>= 2.10)
+Imports: 
+    dplyr,
+    methods,
+    rlang,
+    tibble
 Suggests:
     covr,
     spelling
