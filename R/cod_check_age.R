@@ -39,10 +39,9 @@ cod_check_age <- function(age_value,
     )
 
   ## Recode age_type ----
-  age_type[age_type == age_type_code[1]] <- "D"
-  age_type[age_type == age_type_code[2]] <- "M"
-  age_type[age_type == age_type_code[3]] <- "Y"
-  age_type[!age_type %in% age_type_code] <- NA_character_
+  age_type <- cod_recode_age_type(
+    age_type = age_type, age_type_code = age_type_code
+  )
 
   ## Create age_score vector ----
   age_check <- vector(mode = "integer", length = length(age_value))

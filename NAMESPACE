@@ -2,6 +2,7 @@
 
 export(cod_calculate_age)
 export(cod_check_age)
+export(cod_recode_age_type)
 export(cod_recode_sex)
 export(get_age_values)
 importFrom(dplyr,case_when)
