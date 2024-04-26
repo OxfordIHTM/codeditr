@@ -1,5 +1,5 @@
 #'
-#' Recode cause of death data on sex
+#' Recode sex value of cause of death data based on CoDEdit rules
 #'
 #' @param sex_value A character or integer value or vector of values signifying
 #'   the sex.
