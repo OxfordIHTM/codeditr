@@ -13,5 +13,9 @@
 #' @docType package
 #' @keywords internal
 #' @name codeditr
+#' @importFrom methods is
+#' @importFrom tibble tibble
+#' @importFrom dplyr mutate select case_when
+#' @importFrom rlang .data
 #'
 "_PACKAGE"
