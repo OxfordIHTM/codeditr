@@ -13,6 +13,7 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 [![R-CMD-check](https://github.com/OxfordIHTM/codeditr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/OxfordIHTM/codeditr/actions/workflows/R-CMD-check.yaml)
 [![Codecov test
 coverage](https://codecov.io/gh/OxfordIHTM/codeditr/branch/main/graph/badge.svg)](https://app.codecov.io/gh/OxfordIHTM/codeditr?branch=main)
+[![CodeFactor](https://www.codefactor.io/repository/github/OxfordIHTM/codeditr/badge)](https://www.codefactor.io/repository/github/OxfordIHTM/codeditr)
 <!-- badges: end -->
 
 The [World Health Organization](https://www.who.int/)’s [CoDEdit
@@ -69,17 +70,17 @@ follows:
 
 ``` r
 citation("codeditr")
-#> To cite zscorer in publications use:
+#> To cite codeditr in publications use:
 #> 
-#>   Anita Makori and Ernest Guevarra (2024). codeditr: Implementing Basic
-#>   Checks on Cause-of-Death Data Based on World Health Organization's
-#>   CoDEdit Tool. R package version 0.0.9000. URL
-#>   https://oxford-ihtm.io/codeditr/
+#>   Anita Makori, Ernest Guevarra (2024). _codeditr: Implementing
+#>   Cause-of-Death Data Checks Based on World Health Organization's
+#>   CoDEdit Tool_. R package version 0.0.9000,
+#>   <https://oxford-ihtm.io/codeditr/>.
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
 #>   @Manual{,
-#>     title = {codeditr: Implementing Basic Checks on Cause-of-Death Data Based on World Health Organization's CoDEdit Tool},
+#>     title = {codeditr: Implementing Cause-of-Death Data Checks Based on World Health Organization's CoDEdit Tool},
 #>     author = {{Anita Makori} and {Ernest Guevarra}},
 #>     year = {2024},
 #>     note = {R package version 0.0.9000},
