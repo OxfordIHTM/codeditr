@@ -4,7 +4,7 @@
 \alias{cod_recode_sex}
 \title{Recode sex value of cause of death data based on CoDEdit rules}
 \usage{
-cod_recode_sex(sex_value, sex_code = c(1, 2), codedit = TRUE)
+cod_recode_sex(sex_value, sex_code = c(1L, 2L), codedit = TRUE)
 }
 \arguments{
 \item{sex_value}{A character or integer value or vector of values signifying

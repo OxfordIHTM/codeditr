@@ -23,7 +23,7 @@
 #' @export
 #'
 
-cod_recode_sex <- function(sex_value, sex_code = c(1, 2), codedit = TRUE) {
+cod_recode_sex <- function(sex_value, sex_code = c(1L, 2L), codedit = TRUE) {
   if (codedit) {
     sex_value[!sex_value %in% sex_code] <- 9L
   } else {
