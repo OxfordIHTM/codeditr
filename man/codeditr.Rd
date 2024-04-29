@@ -15,6 +15,14 @@ that can be used for building more universal tools or for creating
 programmatic scientific workflows aimed at routine, automated, and
 large-scale monitoring of cause-of-death data quality.
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/OxfordIHTM/codeditr}
+  \item \url{http://oxford-ihtm.io/codeditr/}
+}
+
+}
 \author{
 \strong{Maintainer}: Ernest Guevarra \email{ernest@guevarra.io} (\href{https://orcid.org/0000-0002-4887-4415}{ORCID}) [copyright holder]
 

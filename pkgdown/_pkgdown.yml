@@ -1,0 +1,72 @@
+title: codeditr
+
+url: https://oxford-ihtm.io/codeditr/
+
+development:
+  mode: auto
+
+template:
+  bootstrap: 5
+  bootswatch: litera
+  theme: haddock
+  ganalytics: #
+
+home:
+  links:
+  - text: Read more about the International Classification of Diseases
+    href: https://www.who.int/standards/classifications/classification-of-diseases
+  - text: Read more about the WHO CoDEdit tool
+    href: https://www.who.int/standards/classifications/classification-of-diseases/services/codedit-tool
+
+navbar:
+  bg: primary
+  type: light
+  structure:
+    left:  [home, intro, reference, articles, news]
+    right: [twitter, facebook, linkedin, github]
+
+  components:
+    # articles:
+    #   text: Articles
+    #   menu:
+    #   - text: "ICD-11 Foundation"
+    #     href: articles/icd11_foundation.html
+    twitter:
+      icon: "fab fa-twitter fa-lg"
+      href: http://twitter.com/OxIHTM
+    facebook:
+      icon: "fab fa-facebook fa-lg"
+      href: https://www.facebook.com/MSc-in-International-Health-and-Tropical-Medicine-University-of-Oxford-433056700228246/
+    linkedin:
+      icon: "fab fa-linkedin fa-lg"
+      href: https://www.linkedin.com/company/international-health-and-tropical-medicine
+
+
+reference:
+  - title: Description
+    contents:
+    - codeditr-package
+
+  - title: Recode
+    contents:
+    - cod_recode_sex
+    - cod_recode_age_type
+
+  - title: Calculate
+    contents:
+    - cod_calculate_age
+
+  - title: Check
+    contents:
+    - cod_check_age
+    - cod_check_missing
+
+  - title: Utilities
+    contents:
+    - get_age_values
+
+  - title: Supporting datasets
+    contents:
+    - icd10_example
+    - icd11_example
+
