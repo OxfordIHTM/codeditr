@@ -47,27 +47,22 @@ cod_check_age <- function(age_value,
   age_check <- vector(mode = "integer", length = length(age_value))
 
   ## Classify errors/issues ----
-  if (age_type == "D") {
-    age_check <- ifelse(age_value >= 28 & age_value <= 31, 1, age_check)
-    age_check <- ifelse(age_value > 31, 2, age_check)
-  }
+  age_check[age_type == "D" & age_value >= 28 & age_value <= 31] <- 1L
+  age_check[age_type == "D" & age_value > 31] <- 2L
 
-  if (age_type == "M") {
-    age_check <- ifelse(age_value < 1, 3, age_check)
-    age_check <- ifelse(age_value >= 12, 4, age_check)
-  }
+  age_check[age_type == "M" & age_value < 1] <- 3L
+  age_check[age_type == "M" & age_value >= 12] <- 4L
 
-  if (age_type == "Y") {
-    age_check <- ifelse(age_value < 1, 5, age_check)
-    age_check <- ifelse(age_value > 125, 6, age_check)
-  }
+  age_check[age_type == "Y" & age_value < 1] <- 5L
+  age_check[age_type == "Y" & age_value > 125] <- 6L
 
-  if (is.na(age_value)) age_check <- 7
-  if (is.na(age_type)) age_check <- 8
+  age_check[is.na(age_value) & !is.na(age_type)] <- 7L
+  age_check[!is.na(age_value) & is.na(age_type)] <- 8L
+  age_check[is.na(age_value) & is.na(age_type)] <- 9L
 
   age_check_note <- cut(
     x = age_check,
-    breaks = c(0, 1, 2, 3, 4, 5, 6, 7, 8, Inf),
+    breaks = c(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, Inf),
     labels = c(
       "No issues with age value and age type",
       "Should probably be age value of 1 and age type of months (M)",
@@ -77,12 +72,13 @@ cod_check_age <- function(age_value,
       "Should probably be converted to age value of age type months (M)",
       "Age value is more than 125 years which is highly unlikely",
       "Missing age value",
-      "Missing age type"
+      "Missing age type",
+      "Missing age value and age type"
     ),
     include.lowest = TRUE, right = FALSE
   )
 
-
   ## Return age checks ----
   tibble::tibble(age_check, age_check_note)
 }
+
