@@ -60,6 +60,7 @@ reference:
   - title: Check
     contents:
     - cod_check_age
+    - cod_check_sex
     - cod_check_missing
 
   - title: Utilities
