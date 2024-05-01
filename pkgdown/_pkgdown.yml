@@ -55,10 +55,12 @@ reference:
   - title: Calculate
     contents:
     - cod_calculate_age
+    - cod_calculate_ages
 
   - title: Check
     contents:
     - cod_check_age
+    - cod_check_sex
     - cod_check_missing
 
   - title: Utilities

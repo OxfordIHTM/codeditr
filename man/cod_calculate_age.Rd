@@ -2,9 +2,12 @@
 % Please edit documentation in R/cod_calculate_age.R
 \name{cod_calculate_age}
 \alias{cod_calculate_age}
+\alias{cod_calculate_ages}
 \title{Calculate age at death based on date of birth and date of death}
 \usage{
 cod_calculate_age(dob, dod, date_format = "\%Y-\%m-\%d", codedit = TRUE)
+
+cod_calculate_ages(dob, dod, date_format = "\%Y-\%m-\%d", codedit = TRUE)
 }
 \arguments{
 \item{dob}{Date of birth. This should ideally be in standard ISO extended
