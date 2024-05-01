@@ -1,3 +1,6 @@
+codecov:
+  token: ${{ secrets.CODECOV_TOKEN }}
+
 comment: false
 
 coverage:
