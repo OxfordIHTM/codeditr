@@ -15,7 +15,7 @@
 #' @name codeditr
 #' @importFrom methods is
 #' @importFrom tibble tibble
-#' @importFrom dplyr mutate select case_when
+#' @importFrom dplyr mutate select case_when bind_rows
 #' @importFrom rlang .data
 #'
 "_PACKAGE"

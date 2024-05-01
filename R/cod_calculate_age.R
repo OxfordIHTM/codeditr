@@ -73,3 +73,22 @@ cod_calculate_age <- function(dob,
   ## Return age_df ----
   age_df
 }
+
+#'
+#' @rdname cod_calculate_age
+#' @export
+#'
+
+cod_calculate_ages <- function(dob,
+                               dod,
+                               date_format = "%Y-%m-%d",
+                               codedit = TRUE) {
+  Map(
+    f = cod_calculate_age,
+    dob = dob,
+    dod = dod,
+    date_format = date_format,
+    codedit = codedit
+  ) |>
+    dplyr::bind_rows()
+}
