@@ -17,5 +17,6 @@
 #' @importFrom tibble tibble
 #' @importFrom dplyr mutate select case_when bind_rows
 #' @importFrom rlang .data
+#' @importFrom stringr str_detect str_count
 #'
 "_PACKAGE"
