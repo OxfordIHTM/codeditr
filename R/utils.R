@@ -51,3 +51,48 @@ get_age_values <- function(age_value, age_type = c("D", "M", "Y")) {
       years = age_value
     )
 }
+
+
+get_score_combo <- function(scores, labels) {
+  ## Check that length(scores) == length(labels) ----
+  if (length(scores) != length(labels))
+    stop("Scores should have the same lenght as labels.")
+
+  ## Initialize a list to store all combinations ----
+  all_combinations_scores <- list()
+  all_combinations_labels <- list()
+
+  ## Loop over the length of combinations ----
+  for (len in seq_len(length(scores))) {
+    ### Get all combinations of length 'len' ----
+    combs_scores <- utils::combn(x = scores, m = len)
+    combs_labels <- utils::combn(x = labels, m = len)
+
+    ### Convert matrix to list of vectors ----
+    combs_scores_list <- lapply(
+      X = seq_len(ncol(combs_scores)),
+      FUN = function(i) combs_scores[ , i]
+    )
+
+    combs_labels_list <- lapply(
+      X = seq_len(ncol(combs_labels)),
+      FUN = function(i) combs_labels[ , i]
+    )
+
+    ### Append to the list of all combinations ----
+    all_combinations_scores <- c(all_combinations_scores, combs_scores_list)
+    all_combinations_labels <- c(all_combinations_labels, combs_labels_list)
+  }
+
+  df <- tibble::tibble(
+    score_combos = lapply(all_combinations_scores, paste0, collapse = ",") |>
+        unlist(),
+    cod_check = lapply(all_combinations_scores, sum) |>
+      unlist() |> as.integer(),
+    cod_check_note = lapply(all_combinations_labels, paste0, collapse = "; ") |>
+        unlist()
+  ) |>
+    dplyr::arrange(.data$cod_check)
+
+  df
+}
