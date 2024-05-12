@@ -21,9 +21,11 @@ cod_check_code <- function(cod, version = c("icd10", "icd11")) {
   ## Determine value for version ----
   version <- match.arg(version)
 
-  check_expr <- paste0("cod_check_code_", version, "(cod = cod)")
-
-  eval(parse(text = check_expr))
+  eval(
+    parse(
+      text = paste0("cod_check_code_", version, "(cod = cod)")
+    )
+  )
 }
 
 
@@ -90,7 +92,11 @@ cod_check_code_icd10 <- function(cod) {
   cod_check_note <- cut(
     x = cod_check,
     breaks = c(0, check_values$cod_check, 16, Inf),
-    labels = c("No issues found in CoD code", check_values$cod_check_note, "CoD code is missing"),
+    labels = c(
+      "No issues found in CoD code",
+      check_values$cod_check_note,
+      "CoD code is missing"
+    ),
     include.lowest = TRUE, right = FALSE
   )
 
@@ -175,7 +181,11 @@ cod_check_code_icd11 <- function(cod) {
   cod_check_note <- cut(
     x = cod_check,
     breaks = c(0, check_values$cod_check, 64, Inf),
-    labels = c("No issues found in CoD code", check_values$cod_check_note, "CoD code is missing"),
+    labels = c(
+      "No issues found in CoD code",
+      check_values$cod_check_note,
+      "CoD code is missing"
+    ),
     include.lowest = TRUE, right = FALSE
   )
 
