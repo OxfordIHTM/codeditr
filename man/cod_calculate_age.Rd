@@ -34,6 +34,7 @@ Values for age in days, months and years. IF \code{codedit}
 Calculate age at death based on date of birth and date of death
 }
 \examples{
-# example code
+cod_calculate_age("1977-11-05", Sys.Date())
+cod_calculate_age("1965-05-20", "2023-10-03")
 
 }

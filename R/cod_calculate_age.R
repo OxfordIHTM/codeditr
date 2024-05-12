@@ -18,7 +18,8 @@
 #' @returns Values for age in days, months and years. IF `codedit`
 #'
 #' @examples
-#' # example code
+#' cod_calculate_age("1977-11-05", Sys.Date())
+#' cod_calculate_age("1965-05-20", "2023-10-03")
 #'
 #' @rdname cod_calculate_age
 #' @export
@@ -33,7 +34,7 @@ cod_calculate_age <- function(dob,
     dob <- as.Date(dob, format = date_format)
 
   if (!is(dod, "Date"))
-    dob <- as.Date(dod, format = date_format)
+    dod <- as.Date(dod, format = date_format)
 
   ## Calculate different age values for different age types ----
   age_days   <- as.numeric(dod - dob)

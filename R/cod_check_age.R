@@ -14,7 +14,7 @@
 #'   in the vector).
 #'
 #' @returns A tibble with number of rows equal to length of `age_value` and
-#'   two columns for age_check_score and age_check_note.
+#'   two columns for age_check and age_check_note.
 #'
 #' @examples
 #' cod_check_age(120, "Y")

@@ -7,6 +7,17 @@
 #'   which values are to be considered pertaining to males (first value in the
 #'   vector) or to females (second value in the vector).
 #'
+#' @returns A tibble with number of rows equal to length of `sex_value` and
+#'   two columns for sex_check and sex_check_note.
+#'
+#' @examples
+#' cod_check_sex("m", c("m", "f"))
+#' cod_check_sex("male", c("male", "female"))
+#' cod_check_sex(1, 1:2)
+#'
+#' @rdname cod_check_sex
+#' @export
+#'
 
 cod_check_sex <- function(sex_value, sex_code) {
   ## Recode sex ----

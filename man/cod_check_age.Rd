@@ -23,7 +23,7 @@ in the vector).}
 }
 \value{
 A tibble with number of rows equal to length of \code{age_value} and
-two columns for age_check_score and age_check_note.
+two columns for age_check and age_check_note.
 }
 \description{
 Check age values in cause of death data based on CoDEdit rules
