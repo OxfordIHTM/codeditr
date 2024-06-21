@@ -4,6 +4,8 @@
 #' @param cod A character value or vector of values for cause of death code/s.
 #' @param version A character value for ICD version used. This should be either
 #'   *"icd10"* or *"icd11"*. Default is *"icd10"*.
+#' @param sex A character value or vector of values for sex of individual
+#'   associated with the specified `cod`.
 #'
 #' @returns A tibble with 2 columns/fields. First is an integer value indicating
 #'   whether there is an issue with the cause of death code provided in relation
@@ -223,7 +225,11 @@ cod_check_code_ill_defined_icd11 <- function(cod) {
     cod %in% list_ill_defined_icd11(), 1L, 0L
   )
 
-  cod_check_note <- "CoD code is an ill-defined code"
+  cod_check_note <- ifelse(
+    cod_check == 0L,
+    "No issues found in CoD code",
+    "CoD code is an ill-defined code"
+  )
 
   tibble::tibble(cod_check, cod_check_note)
 }
@@ -247,8 +253,38 @@ cod_check_code_unlikely_icd11 <- function(cod) {
     cod %in% codeditr::icd11_unlikely_cod, 1L, 0L
   )
 
-  cod_check_note <- "CoD code is an unlikely cause-of-death"
+  cod_check_note <- ifelse(
+    cod_check == 0L,
+    "No issues found in CoD code",
+    "CoD code is an unlikely cause-of-death"
+  )
 
   tibble::tibble(cod_check, cod_check_note)
 }
 
+#'
+#' @rdname cod_check_code
+#' @export
+#'
+
+cod_check_code_sex_icd11 <- function(cod, sex) {
+  if (cod %in% codeditr::icd11_cod_by_sex$code) {
+    cod_sex <- codeditr::icd11_cod_by_sex |>
+      dplyr::filter(.data$code == cod) |>
+      dplyr::pull(.data$gender)
+
+    cod_check <- ifelse(
+      sex == cod_sex, 0L, 1L
+    )
+  } else {
+    cod_check <- 0L
+  }
+
+  cod_check_note <- ifelse(
+    cod_check == 0L,
+    "No issues found in CoD code",
+    "CoD code is not appropriate for person's sex"
+  )
+
+  tibble::tibble(cod_check, cod_check_note)
+}

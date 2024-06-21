@@ -3,7 +3,7 @@
 \docType{data}
 \name{icd11_unlikely_cod}
 \alias{icd11_unlikely_cod}
-\title{Unlikely caused of death for ICD 11}
+\title{Unlikely causes of death for ICD 11}
 \format{
 A data frame with 2 columns and 269 rows:\tabular{ll}{
    \strong{Variable} \tab \strong{Description} \cr
@@ -18,7 +18,7 @@ https://icd.who.int/valuesets/viewer/582/en
 icd11_unlikely_cod
 }
 \description{
-Unlikely caused of death for ICD 11
+Unlikely causes of death for ICD 11
 }
 \examples{
 icd11_unlikely_cod
