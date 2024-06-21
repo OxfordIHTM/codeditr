@@ -68,9 +68,13 @@
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">cod_check_code</span><span class="op">(</span><span class="va">cod</span>, version <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"icd10"</span>, <span class="st">"icd11"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">cod_check_code_icd10</span><span class="op">(</span><span class="va">cod</span><span class="op">)</span></span>
+<span><span class="fu">cod_check_code_structure_icd10</span><span class="op">(</span><span class="va">cod</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">cod_check_code_icd11</span><span class="op">(</span><span class="va">cod</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">cod_check_code_structure_icd11</span><span class="op">(</span><span class="va">cod</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">cod_check_code_ill_defined_icd10</span><span class="op">(</span><span class="va">cod</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">cod_check_code_ill_defined_icd11</span><span class="op">(</span><span class="va">cod</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -96,15 +100,7 @@ to a potential code entry mistake and/or and issue of code completeness.</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">cod_check_code</span><span class="op">(</span><span class="st">"U100"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 2</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   cod_check cod_check_note                           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>                                    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>         8 CoD code contains the character value `U`</span>
 <span class="r-in"><span><span class="fu">cod_check_code</span><span class="op">(</span><span class="st">"2C6Z"</span>, version <span class="op">=</span> <span class="st">"icd11"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 2</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   cod_check cod_check_note                          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>                                   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>        16 CoD code has a letter as its third value</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
