@@ -2,15 +2,21 @@
 % Please edit documentation in R/cod_check_code.R
 \name{cod_check_code}
 \alias{cod_check_code}
-\alias{cod_check_code_icd10}
-\alias{cod_check_code_icd11}
+\alias{cod_check_code_structure_icd10}
+\alias{cod_check_code_structure_icd11}
+\alias{cod_check_code_ill_defined_icd10}
+\alias{cod_check_code_ill_defined_icd11}
 \title{Check cause of death code for code entry mistakes and/or code completeness}
 \usage{
 cod_check_code(cod, version = c("icd10", "icd11"))
 
-cod_check_code_icd10(cod)
+cod_check_code_structure_icd10(cod)
 
-cod_check_code_icd11(cod)
+cod_check_code_structure_icd11(cod)
+
+cod_check_code_ill_defined_icd10(cod)
+
+cod_check_code_ill_defined_icd11(cod)
 }
 \arguments{
 \item{cod}{A character value or vector of values for cause of death code/s.}

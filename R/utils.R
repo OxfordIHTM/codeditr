@@ -96,3 +96,42 @@ get_score_combo <- function(scores, labels) {
 
   df
 }
+
+
+#'
+#' List ill-defined ICD 11 codes
+#'
+#' @returns An character vector of ICD 11 codes classified as ill-defined for
+#'   cause of death
+#'
+#' @examples
+#' list_ill_defined_icd11()
+#'
+#' @export
+#'
+
+list_ill_defined_icd11 <- function() {
+  ## Create vector of ill-defined heart failure BD10-BD1Z ----
+  set1 <- codigo::icd11_linearization_mms |>
+    dplyr::filter(
+      .data$ChapterNo == 11 &
+        stringr::str_detect(string = .data$Code, pattern = "BD")
+    ) |>
+    dplyr::slice(1:11) |>
+    dplyr::pull(.data$Code)
+
+  ## Create vector of ill-defined others ----
+  set2 <- c("BA2Z", "BE2Y", "BE2Z", "CB41.0", "CB41.2", "KB2D", "KB2E")
+
+  ## Get codes for Chapter 21 except 	MA15, MG43, MG44.1, MH11, MH15 ----
+  set3 <- codigo::icd11_linearization_mms |>
+    dplyr::filter(.data$ChapterNo == 21 & !is.na(.data$Code)) |>
+    dplyr::filter(
+      !.data$Code %in% c("MA15", "MG43", "MG44.1", "MH11", "MH15")
+    ) |>
+    dplyr::pull(.data$Code)
+
+  ## Concatenate ill-defined code vectors ----
+  c(set1, set2, set3)
+}
+

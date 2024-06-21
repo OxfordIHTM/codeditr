@@ -22,6 +22,7 @@ License: GPL (>= 3)
 Depends: 
     R (>= 2.10)
 Imports: 
+    codigo,
     dplyr,
     methods,
     rlang,
@@ -31,6 +32,8 @@ Suggests:
     covr,
     spelling,
     testthat (>= 3.0.0)
+Remotes: 
+    OxfordIHTM/codigo
 Encoding: UTF-8
 Language: en-GB
 LazyData: true
