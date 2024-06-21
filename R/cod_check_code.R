@@ -21,9 +21,15 @@ cod_check_code <- function(cod, version = c("icd10", "icd11")) {
   ## Determine value for version ----
   version <- match.arg(version)
 
-  eval(
+  cod_code_structure <- eval(
     parse(
-      text = paste0("cod_check_code_", version, "(cod = cod)")
+      text = paste0("cod_check_code_structure_", version, "(cod = cod)")
+    )
+  )
+
+  cod_check_code_ill_defined <- eval(
+    parse(
+      text = paste0("cod_check_code_ill_defined_", version, "(cod = cod)")
     )
   )
 }
@@ -34,7 +40,7 @@ cod_check_code <- function(cod, version = c("icd10", "icd11")) {
 #' @export
 #'
 
-cod_check_code_icd10 <- function(cod) {
+cod_check_code_structure_icd10 <- function(cod) {
   ## Create concatenating vector for check scores ----
   cod_check <- vector(mode = "integer", length = length(cod))
 
@@ -109,7 +115,7 @@ cod_check_code_icd10 <- function(cod) {
 #' @export
 #'
 
-cod_check_code_icd11 <- function(cod) {
+cod_check_code_structure_icd11 <- function(cod) {
   ## Create concatenating vector for check scores ----
   cod_check <- vector(mode = "integer", length = length(cod))
 
@@ -152,7 +158,7 @@ cod_check_code_icd11 <- function(cod) {
 
   ### Third character is a number ----
   cod_check <- ifelse(
-    stringr::str_detect(string = cod, pattern = ".{3}[0-9]{1}", negate = TRUE),
+    stringr::str_detect(string = cod, pattern = "^.{2}[0-9]{1}", negate = TRUE),
     cod_check + 16L, cod_check
   )
 
@@ -192,5 +198,26 @@ cod_check_code_icd11 <- function(cod) {
   tibble::tibble(cod_check, cod_check_note)
 }
 
+#'
+#' @rdname cod_check_code
+#' @export
+#'
+cod_check_code_ill_defined_icd10 <- function(cod) {
+  NA
+}
 
 
+#'
+#' @rdname cod_check_code
+#' @export
+#'
+
+cod_check_code_ill_defined_icd11 <- function(cod) {
+  cod_check <- ifelse(
+    cod %in% list_ill_defined_icd11(), 1L, 0L
+  )
+
+  cod_check_note <- "CoD code is an ill-defined code"
+
+  tibble::tibble(cod_check, cod_check_note)
+}

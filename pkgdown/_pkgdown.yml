@@ -67,6 +67,7 @@ reference:
   - title: Utilities
     contents:
     - get_age_values
+    - list_ill_defined_icd11
 
   - title: Supporting datasets
     contents:
