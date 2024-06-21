@@ -23,22 +23,24 @@ cod_check_code <- function(cod, version = c("icd10", "icd11")) {
   ## Determine value for version ----
   version <- match.arg(version)
 
-  cod_code_structure <- eval(
-    parse(
-      text = paste0("cod_check_code_structure_", version, "(cod = cod)")
-    )
-  )
+  cod_check_code_structure <- eval(
+    parse(text = paste0("cod_check_code_structure_", version, "(cod = cod)"))
+  ) |>
+    dplyr::rename_with(.fn = function(x) paste0("structure_", x))
 
   cod_check_code_ill_defined <- eval(
-    parse(
-      text = paste0("cod_check_code_ill_defined_", version, "(cod = cod)")
-    )
-  )
+    parse(text = paste0("cod_check_code_ill_defined_", version, "(cod = cod)"))
+  ) |>
+    dplyr::rename_with(.fn = function(x) paste0("ill_defined_", x))
 
   cod_check_code_unlikely <- eval(
-    parse(
-      text = paste0("cod_check_code_unlikely_", version, "(cod = cod)")
-    )
+    parse(text = paste0("cod_check_code_unlikely_", version, "(cod = cod)"))
+  ) |>
+    dplyr::rename_with(.fn = function(x) paste0("unlikely_", x))
+
+  tibble::tibble(
+    cod_check_code_structure, cod_check_code_ill_defined,
+    cod_check_code_unlikely
   )
 }
 
@@ -211,7 +213,10 @@ cod_check_code_structure_icd11 <- function(cod) {
 #' @export
 #'
 cod_check_code_ill_defined_icd10 <- function(cod) {
-  NA
+  cod_check <- NA_integer_
+  cod_check_note <- NA_character_
+
+  tibble(cod_check, cod_check_note)
 }
 
 
@@ -240,7 +245,10 @@ cod_check_code_ill_defined_icd11 <- function(cod) {
 #' @export
 #'
 cod_check_code_unlikely_icd10 <- function(cod) {
-  NA
+  cod_check <- NA_integer_
+  cod_check_note <- NA_character_
+
+  tibble(cod_check, cod_check_note)
 }
 
 #'
