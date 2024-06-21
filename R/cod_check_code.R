@@ -32,6 +32,12 @@ cod_check_code <- function(cod, version = c("icd10", "icd11")) {
       text = paste0("cod_check_code_ill_defined_", version, "(cod = cod)")
     )
   )
+
+  cod_check_code_unlikely <- eval(
+    parse(
+      text = paste0("cod_check_code_unlikely_", version, "(cod = cod)")
+    )
+  )
 }
 
 
@@ -221,3 +227,28 @@ cod_check_code_ill_defined_icd11 <- function(cod) {
 
   tibble::tibble(cod_check, cod_check_note)
 }
+
+
+#'
+#' @rdname cod_check_code
+#' @export
+#'
+cod_check_code_unlikely_icd10 <- function(cod) {
+  NA
+}
+
+#'
+#' @rdname cod_check_code
+#' @export
+#'
+
+cod_check_code_unlikely_icd11 <- function(cod) {
+  cod_check <- ifelse(
+    cod %in% codeditr::icd11_unlikely_cod, 1L, 0L
+  )
+
+  cod_check_note <- "CoD code is an unlikely cause-of-death"
+
+  tibble::tibble(cod_check, cod_check_note)
+}
+
