@@ -1,0 +1,165 @@
+code,title,gender
+1C14,Obstetrical tetanus,female
+1F23.10,Vulvovaginal candidosis,female
+2B58.1,Leiomyosarcoma of uterus,female
+2B5C,"Endometrial stromal sarcoma, primary site",female
+2B5D.0,Malignant mixed epithelial mesenchymal tumour of ovary,female
+2B5D.1,Malignant mixed epithelial and mesenchymal tumour of corpus uteri,female
+2B5F.0,"Sarcoma, not elsewhere classified of uterus",female
+2B5G,"Myosarcoma of uterus, part not specified",female
+2C65,Hereditary breast and ovarian cancer syndrome,female
+2C70-2C7Z,Malignant neoplasms of female genital organs,female
+2E05,Malignant neoplasm metastasis in female reproductive system,female
+2E66,Carcinoma in situ of cervix uteri,female
+2E67.0,Carcinoma in situ of endometrium,female
+2E67.1,Carcinoma in situ of vulva,female
+2E67.2,Carcinoma in situ of vagina,female
+2E67.3,Carcinoma in situ of other or unspecified female genital organs,female
+2E86.0,Leiomyoma of uterus,female
+2E88,Benign endometrial stromal tumour,female
+2F31,Non-mesenchymal benign neoplasms of uterus,female
+2F32,Benign neoplasm of ovary,female
+2F33,Benign neoplasm of other or unspecified female genital organs,female
+2F76,Neoplasms of uncertain behaviour of female genital organs,female
+2F96,Neoplasms of unknown behaviour of female genital organs,female
+4A45.2,Antiphospholipid syndrome in pregnancy,female
+5A71.0,"46,XX disorders of sex development induced by androgens of foetal origin",female
+5A71.1,"46,XX disorders of sex development induced by androgens of maternal origin",female
+5A80,Ovarian dysfunction,female
+5D44,Postprocedural ovarian failure,female
+6E20,"Mental or behavioural disorders associated with pregnancy, childbirth and the puerperium, without psychotic symptoms",female
+6E21,"Mental or behavioural disorders associated with pregnancy, childbirth or the puerperium, with psychotic symptoms",female
+6E2Z,"Mental or behavioural disorders associated with pregnancy, childbirth and the puerperium, unspecified",female
+BD75.2,Vulval varices,female
+EA83.00,Lichen simplex of vulva,female
+EA87.1,Dermatitis or eczema of female genitalia,female
+EB60.0,Lichen sclerosus of vulva,female
+ED61.11,Vulval melanotic macule,female
+ED70.1,Female pattern hair loss,female
+ED70.31,Postpartum telogen effluvium,female
+EE40.10,Stretch marks of pregnancy,female
+EK02.13,Irritant contact dermatitis of vulva,female
+FB83.10,Premenopausal idiopathic osteoporosis,female
+FB83.11,Postmenopausal osteoporosis,female
+FC01.9,Postoophorectomy osteoporosis,female
+GA00-GA6Z,Diseases of the female genital system,female
+GB23.4,Galactorrhoea not associated with childbirth,female
+GC04.1,Fistulae involving female genital tract,female
+GC04.2,Ureteral fistula,female
+GC40-GC4Z,Female pelvic floor dysfunction,female
+GC50.10,Absent or diminished bladder sensation associated with pelvic organ prolapse,female
+GC51,Female Genital Mutilation,female
+GC70,Postoperative adhesions of vagina,female
+GC71,Prolapse of vaginal vault after hysterectomy,female
+GC77,Postprocedural nonmenstrual uterine bleeding,female
+GC78,Postprocedural acute female pelvic inflammatory disease,female
+HA01.0,Female sexual arousal dysfunction,female
+HA20,Sexual pain-penetration disorder,female
+JA00-JB6Z,"Pregnancy, childbirth or the puerperium",female
+KA83.9,Neonatal vaginal or uterine haemorrhage,female
+LA90.32,Uterine arteriovenous malformations,female
+LB40-LB4Z,Structural developmental anomalies of the female genital system,female
+LD2A.1,"46,XY gonadal dysgenesis",female
+LD2A.4,"46,XY disorder of sex development due to androgen resistance",female
+LD50.0,Turner syndrome,female
+LD50.1,"Karyotype 47,XXX",female
+LD50.2,"Mosaicism, lines with various numbers of X chromosomes",female
+LD50.Y,Other specified number anomalies of chromosome X,female
+LD50.Z,"Number anomalies of chromosome X, unspecified",female
+LD90.4,Rett syndrome,female
+MF30-MF3Y,"Symptoms, signs or clinical findings involving the female genital system",female
+MF60-MF6Z,Clinical findings in specimens from female genital organs,female
+MG24.01,Fear of breast cancer female,female
+MG24.D,Fear of complications of pregnancy,female
+MG24.E,Fear of sexually transmitted disease female,female
+MG24.F,Fear of female genital or breast disease,female
+NB92.4,Injury of ovary,female
+NB92.5,Injury of fallopian tube,female
+NB92.6,Injury of uterus,female
+NB93.02,Crushing injury of vulva,female
+NB93.24,Traumatic amputation of entire vulva,female
+NB93.25,Traumatic amputation of part of vulva,female
+NB98,Injury to female genital organ without further specification,female
+ND56.9,Injury complicating pregnancy,female
+ND74.2,Foreign body in vulva or vagina,female
+ND74.3,"Foreign body in uterus, any part",female
+PK80.5,Gynaecological or breast procedure associated with injury or harm in therapeutic use,female
+PK80.7,Obstetric procedure associated with injury or harm in therapeutic use,female
+PK96,"Obstetric or gynaecological devices, implants or grafts associated with injury or harm",female
+QA00.9,Gynaecological examination,female
+QA09.4,Special screening examination for neoplasm of cervix,female
+QA21.0,Contact with health services for postcoital contraception,female
+QA21.2,Contact with health services for insertion of contraceptive device,female
+QA21.4,Contact with health services for menstrual extraction,female
+QA21.6,Surveillance of contraceptive device,female
+QA30.00,Contact with health services for gamete intrafallopian transfer,female
+QA30.01,Contact with health services for procreative management by artificial insemination,female
+QA30.02,Contact with health services for medically assisted sperm insemination,female
+QA30.0Y,Contact with health services for other specified assisted insemination,female
+QA30.0Z,Contact with health services for unspecified assisted insemination,female
+QA30.1,Contact with health services for assisted reproductive technology,female
+QA30.2,Contact with health services for other assisted fertilisation methods,female
+QA30.Y,Other specified contact with health services for medically assisted reproduction,female
+QA40,Pregnancy examination or test,female
+QA41,Pregnant state,female
+QA42,Supervision of normal pregnancy,female
+QA43,Supervision of high-risk pregnancy,female
+QA45,Antenatal screening,female
+QA46,Outcome of delivery,female
+QA48,Postpartum care or examination,female
+QA49,Problems related to unwanted pregnancy,female
+QA4A,Problems related to multiparity,female
+QA4B,Contact with health services for menopausal counselling,female
+QB51.C,Presence of contraceptive device,female
+QB62.5,Attention to artificial vagina,female
+QD31,Contact with health services for concerns about body image related to pregnancy,female
+QF01.10,Acquired absence of female genital organs,female
+1A70.00,Gonorrhoea of penis,male
+1D80.1,Orchitis due to mumps virus,male
+1F23.11,Candida balanoposthitis,male
+2B55.2,Rhabdomyosarcoma of male genital organs,male
+2B59.2,Liposarcoma of male genital organs,male
+2C80-2C8Z,Malignant neoplasms of male genital organs,male
+2E06,Malignant neoplasm metastasis in male genital organs,male
+2E67.4,Carcinoma in situ of penis,male
+2E67.5,Carcinoma in situ of prostate,male
+2E67.6,Carcinoma in situ of other or unspecified male genital organs,male
+2F34,Benign neoplasm of male genital organs,male
+2F77,Neoplasms of uncertain behaviour of male genital organs,male
+2F97,Neoplasms of unknown behaviour of male genital organs,male
+5A81,Testicular dysfunction or testosterone-related disorders,male
+5D45,Postprocedural testicular hypofunction,male
+BD75.1,Scrotal varices,male
+EA83.01,Lichen simplex of male genitalia,male
+EA87.0,Dermatitis or eczema of male genitalia,male
+EB60.1,Lichen sclerosus of penis,male
+EC92.0,Penoscrotodynia,male
+ED61.10,Penile melanotic macule,male
+GA80-GB0Z,Diseases of the male genital system,male
+HA01.1,Male erectile dysfunction,male
+HA03,Ejaculatory dysfunctions,male
+LB50-LB5Z,Structural developmental anomalies of the male genital system,male
+LD2A.0,Ovotesticular disorder of sex development,male
+LD2A.2,Testicular agenesis,male
+LD2A.3,"46,XY disorder of sex development due to a defect in testosterone metabolism",male
+LD50.3,Klinefelter syndrome,male
+LD52,Number anomalies of chromosome Y,male
+LD53,Structural anomalies of chromosome Y,male
+LD54,Male with sex chromosome mosaicism,male
+MA14.1B,Prostate specific antigen positive,male
+MF40-MF4Y,"Symptoms, signs or clinical findings involving the male genital system",male
+MF70-MF7Z,Clinical findings in specimens from male genital organs,male
+MG24.02,Fear of genital cancer male,male
+MG24.G,Fear of sexually transmitted disease male,male
+MG24.H,Fear of genital disease male,male
+NB93.00,Crushing injury of penis,male
+NB93.01,Crushing injury of testes or scrotum,male
+NB93.20,Traumatic amputation of entire penis,male
+NB93.21,Traumatic amputation of part of penis,male
+NB93.22,Traumatic amputation of entire testes or scrotum,male
+NB93.23,Traumatic amputation of part of testes or scrotum,male
+NB97.1,Fractured penis,male
+NB99,Injury to male genital organ without further specification,male
+QA09.5,Special screening examination for neoplasm of prostate,male
+QB82,Contact with health services for routine or ritual circumcision,male
+QF01.11,Acquired absence of male genital organs,male

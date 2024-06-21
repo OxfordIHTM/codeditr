@@ -42,3 +42,42 @@
 #'
 "icd11_example"
 
+
+
+#'
+#' Unlikely causes of death for ICD 11
+#'
+#' @format A data frame with 2 columns and 269 rows:
+#'
+#' | **Variable** | **Description** |
+#' | :--- | :--- |
+#' | *code* | ICD 11 Cause of Death code |
+#' | *title* | Cause of death title |
+#'
+#' @examples
+#' icd11_unlikely_cod
+#'
+#' @source https://icd.who.int/valuesets/viewer/582/en
+#'
+"icd11_unlikely_cod"
+
+
+
+#'
+#' Sex-specific causes of death for ICD 11
+#'
+#' @format A data frame with 3 columns and 547 rows:
+#'
+#' | **Variable** | **Description** |
+#' | :--- | :--- |
+#' | *code* | ICD 11 Cause of Death code |
+#' | *title* | Cause of death title |
+#' | *gender* | Gender - male or female |
+#'
+#'
+#' @examples
+#' icd11_cod_by_sex
+#'
+#' @source https://icdcdn.who.int/icd11referenceguide/en/html/index.html#list-of-categories-limited-to-or-more-likely-to-occur-in-female-persons
+#'
+"icd11_cod_by_sex"
