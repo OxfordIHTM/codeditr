@@ -38,15 +38,23 @@ cod_check_code <- function(cod, version = c("icd10", "icd11"), sex) {
   ) |>
     dplyr::rename_with(.fn = function(x) paste0(x, "_unlikely"))
 
+  cod_check_code_sex <- eval(
+    parse(
+      text = paste0("cod_check_code_sex_", version, "(cod = cod, sex = sex)")
+    )
+  ) |>
+    dplyr::rename_with(.fn = function(x) paste0(x, "_sex"))
+
   tibble::tibble(
     cod_check_code_structure, cod_check_code_ill_defined,
-    cod_check_code_unlikely
+    cod_check_code_unlikely, cod_check_code_sex
   ) |>
     dplyr::mutate(
       cod_check = sum(
         .data$cod_check_structure,
         .data$cod_check_ill_defined,
         .data$cod_check_unlikely,
+        .data$cod_check_sex,
         na.rm = TRUE
       )
     )
@@ -277,6 +285,19 @@ cod_check_code_unlikely_icd11 <- function(cod) {
 
   tibble::tibble(cod_check, cod_check_note)
 }
+
+#'
+#' @rdname cod_check_code
+#' @export
+#'
+
+cod_check_code_sex_icd10 <- function(cod, sex) {
+  cod_check <- NA_integer_
+  cod_check_note <- NA_character_
+
+  tibble(cod_check, cod_check_note)
+}
+
 
 #'
 #' @rdname cod_check_code
