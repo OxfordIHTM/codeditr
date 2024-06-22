@@ -9,7 +9,7 @@ A data frame with 3 columns and 547 rows:\tabular{ll}{
    \strong{Variable} \tab \strong{Description} \cr
    \emph{code} \tab ICD 11 Cause of Death code \cr
    \emph{title} \tab Cause of death title \cr
-   \emph{gender} \tab Gender - male or female \cr
+   \emph{sex} \tab Sex - 1 for male; 2 for female \cr
 }
 }
 \source{
