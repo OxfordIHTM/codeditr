@@ -11,7 +11,7 @@
 \alias{cod_check_code_sex_icd11}
 \title{Check cause of death code for code entry mistakes and/or code completeness}
 \usage{
-cod_check_code(cod, version = c("icd10", "icd11"))
+cod_check_code(cod, version = c("icd10", "icd11"), sex)
 
 cod_check_code_structure_icd10(cod)
 

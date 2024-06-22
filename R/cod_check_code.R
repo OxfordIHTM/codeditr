@@ -19,7 +19,7 @@
 #' @export
 #'
 
-cod_check_code <- function(cod, version = c("icd10", "icd11")) {
+cod_check_code <- function(cod, version = c("icd10", "icd11"), sex) {
   ## Determine value for version ----
   version <- match.arg(version)
 
@@ -287,11 +287,9 @@ cod_check_code_sex_icd11 <- function(cod, sex) {
   if (cod %in% codeditr::icd11_cod_by_sex$code) {
     cod_sex <- codeditr::icd11_cod_by_sex |>
       dplyr::filter(.data$code == cod) |>
-      dplyr::pull(.data$gender)
+      dplyr::pull(.data$sex)
 
-    cod_check <- ifelse(
-      sex == cod_sex, 0L, 1L
-    )
+    cod_check <- ifelse(sex == cod_sex, 0L, 1L)
   } else {
     cod_check <- 0L
   }

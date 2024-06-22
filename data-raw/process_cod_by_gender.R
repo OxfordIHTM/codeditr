@@ -20,15 +20,17 @@ expanded_multiples <- lapply(
   (\(x) { names(x) <- multiple_cod_codes$gender; x })() |>
   dplyr::bind_rows(.id = "gender") |>
   dplyr::mutate(
-    Title = stringr::str_remove_all(string = Title, pattern = "- ")
+    Title = stringr::str_remove_all(string = Title, pattern = "- "),
+    gender = ifelse(gender == "male", 1, 2)
   ) |>
-  dplyr::rename(code = Code, title = Title) |>
-  dplyr::select(code, title, gender)
+  dplyr::rename(code = Code, title = Title, sex = gender) |>
+  dplyr::select(code, title, sex)
 
 icd11_cod_by_sex <- cod_by_sex |>
   dplyr::filter(!code %in% multiple_cod_codes$code ) |>
+  dplyr::rename(sex = gender) |>
   rbind(expanded_multiples) |>
-  dplyr::arrange(gender, code)
+  dplyr::arrange(sex, code)
 
 
 

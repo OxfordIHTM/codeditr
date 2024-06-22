@@ -72,7 +72,7 @@
 #' | :--- | :--- |
 #' | *code* | ICD 11 Cause of Death code |
 #' | *title* | Cause of death title |
-#' | *gender* | Gender - male or female |
+#' | *sex* | Sex - 1 for male; 2 for female |
 #'
 #'
 #' @examples
