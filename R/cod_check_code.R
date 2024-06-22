@@ -26,22 +26,30 @@ cod_check_code <- function(cod, version = c("icd10", "icd11")) {
   cod_check_code_structure <- eval(
     parse(text = paste0("cod_check_code_structure_", version, "(cod = cod)"))
   ) |>
-    dplyr::rename_with(.fn = function(x) paste0("structure_", x))
+    dplyr::rename_with(.fn = function(x) paste0(x, "_structure"))
 
   cod_check_code_ill_defined <- eval(
     parse(text = paste0("cod_check_code_ill_defined_", version, "(cod = cod)"))
   ) |>
-    dplyr::rename_with(.fn = function(x) paste0("ill_defined_", x))
+    dplyr::rename_with(.fn = function(x) paste0(x, "_ill_defined"))
 
   cod_check_code_unlikely <- eval(
     parse(text = paste0("cod_check_code_unlikely_", version, "(cod = cod)"))
   ) |>
-    dplyr::rename_with(.fn = function(x) paste0("unlikely_", x))
+    dplyr::rename_with(.fn = function(x) paste0(x, "_unlikely"))
 
   tibble::tibble(
     cod_check_code_structure, cod_check_code_ill_defined,
     cod_check_code_unlikely
-  )
+  ) |>
+    dplyr::mutate(
+      cod_check = sum(
+        .data$cod_check_structure,
+        .data$cod_check_ill_defined,
+        .data$cod_check_unlikely,
+        na.rm = TRUE
+      )
+    )
 }
 
 
