@@ -71,7 +71,7 @@
 
     <div class="section level2">
     <h2 id="format">Format<a class="anchor" aria-label="anchor" href="#format"></a></h2>
-    <p>A data frame with 3 columns and 547 rows:</p><table class="table table"><tr><td><strong>Variable</strong></td><td><strong>Description</strong></td></tr><tr><td><em>code</em></td><td>ICD 11 Cause of Death code</td></tr><tr><td><em>title</em></td><td>Cause of death title</td></tr><tr><td><em>gender</em></td><td>Gender - male or female</td></tr></table></div>
+    <p>A data frame with 3 columns and 547 rows:</p><table class="table table"><tr><td><strong>Variable</strong></td><td><strong>Description</strong></td></tr><tr><td><em>code</em></td><td>ICD 11 Cause of Death code</td></tr><tr><td><em>title</em></td><td>Cause of death title</td></tr><tr><td><em>sex</em></td><td>Sex - 1 for male; 2 for female</td></tr></table></div>
     <div class="section level2">
     <h2 id="source">Source<a class="anchor" aria-label="anchor" href="#source"></a></h2>
     <p>https://icdcdn.who.int/icd11referenceguide/en/html/index.html#list-of-categories-limited-to-or-more-likely-to-occur-in-female-persons</p>
@@ -80,20 +80,20 @@
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">icd11_cod_by_sex</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 942 × 3</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    code    title                                                          gender</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 1C14    Obstetrical tetanus                                            female</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 1F23.10 Vulvovaginal candidosis                                        female</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 2B58.1  Leiomyosarcoma of uterus                                       female</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 2B5C    Endometrial stromal sarcoma, primary site                      female</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 2B5D.0  Malignant mixed epithelial mesenchymal tumour of ovary         female</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 2B5D.1  Malignant mixed epithelial and mesenchymal tumour of corpus u… female</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 2B5F.0  Sarcoma, not elsewhere classified of uterus                    female</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 2B5G    Myosarcoma of uterus, part not specified                       female</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 2C65    Hereditary breast and ovarian cancer syndrome                  female</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 2C70    Malignant neoplasms of vulva                                   female</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 932 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 547 × 3</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    code   title                                         sex  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 2C80   Malignant neoplasms of testis                 1    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 2C80.2 Germ cell tumour of testis                    1    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 2C80.Y Other specified malignant neoplasms of testis 1    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 2C80.Z Malignant neoplasms of testis, unspecified    1    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 2C81   Malignant neoplasms of penis                  1    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 2C81.0 Squamous cell carcinoma of penis              1    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 2C81.1 Melanoma of penis                             1    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 2C81.Y Other specified malignant neoplasm of penis   1    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 2C81.Z Malignant neoplasms of penis, unspecified     1    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 2C82   Malignant neoplasms of prostate               1    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 537 more rows</span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
