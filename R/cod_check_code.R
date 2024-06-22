@@ -13,7 +13,7 @@
 #'
 #' @examples
 #' cod_check_code("U100")
-#' cod_check_code("2C6Z", version = "icd11")
+#' cod_check_code("2C6Z", version = "icd11", sex = 1)
 #'
 #' @rdname cod_check_code
 #' @export
@@ -304,7 +304,7 @@ cod_check_code_sex_icd10 <- function(cod, sex) {
 #' @export
 #'
 
-cod_check_code_sex_icd11 <- function(cod, sex) {
+cod_check_code_sex_icd11_ <- function(cod, sex) {
   if (cod %in% codeditr::icd11_cod_by_sex$code) {
     cod_sex <- codeditr::icd11_cod_by_sex |>
       dplyr::filter(.data$code == cod) |>
@@ -323,3 +323,19 @@ cod_check_code_sex_icd11 <- function(cod, sex) {
 
   tibble::tibble(cod_check, cod_check_note)
 }
+
+
+#'
+#' @rdname cod_check_code
+#' @export
+#'
+
+cod_check_code_sex_icd11 <- function(cod, sex) {
+  Map(
+    f = cod_check_code_sex_icd11_,
+    cod = cod,
+    sex = sex
+  ) |>
+    dplyr::bind_rows()
+}
+
