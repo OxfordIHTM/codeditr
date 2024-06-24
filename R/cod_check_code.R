@@ -50,11 +50,13 @@ cod_check_code <- function(cod, version = c("icd10", "icd11"), sex) {
     cod_check_code_unlikely, cod_check_code_sex
   ) |>
     dplyr::mutate(
-      cod_check = sum(
-        .data$cod_check_structure,
-        .data$cod_check_ill_defined,
-        .data$cod_check_unlikely,
-        .data$cod_check_sex,
+      cod_check = rowSums(
+        data.frame(
+          .data$cod_check_structure,
+          .data$cod_check_ill_defined,
+          .data$cod_check_unlikely,
+          .data$cod_check_sex
+        ),
         na.rm = TRUE
       )
     )
