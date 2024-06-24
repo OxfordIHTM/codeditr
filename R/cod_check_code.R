@@ -58,7 +58,8 @@ cod_check_code <- function(cod, version = c("icd10", "icd11"), sex) {
           .data$cod_check_sex
         ),
         na.rm = TRUE
-      )
+      ) |>
+        (\(x) ifelse(x == 0, 0, 1))()
     )
 }
 
