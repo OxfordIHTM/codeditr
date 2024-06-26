@@ -232,8 +232,40 @@ cod_check_code_structure_icd11 <- function(cod) {
 #' @export
 #'
 cod_check_code_ill_defined_icd10 <- function(cod) {
-  cod_check <- NA_integer_
-  cod_check_note <- NA_character_
+  # I46.1
+  # I46.9
+  # I50.-
+  #   I95.9
+  # I99
+  # J96.0
+  # J96.9
+  # P28.5
+  # R00-R57.1,
+  # R57.8-R64,
+  # R65.2-R65.3,
+  # R68.0-R94,
+  # R96-R99
+
+  set1 <- ifelse(
+    cod %in% c("I46.1", "I46.9", "I95.9", "I99", "J96.0", "P28.5"), 1L, 0L
+  )
+
+  set2 <- ifelse(stringr::str_detect(string = cod, pattern = "^I50"), 1L, 0L)
+
+  set3 <- ifelse(
+    stringr::str_detect(
+      string = cod,
+      pattern = "^R0|R1|R2|R3|R4|R50|R51|R52|R53|R54|R55|R56|R57|R61|R62|R63|R64|R65.2|R65.3|R68|R69|R7|R8|R91|R92|R93|R94|R96|R97|R98|R99"
+    ),
+    1L, 0L
+  )
+
+  cod_check <- rowSums(data.frame(set1, set2, set3), na.rm = TRUE)
+  cod_check_note <- ifelse(
+    cod_check == 0L,
+    "No issues found in CoD code",
+    "CoD code is an ill-defined code"
+  )
 
   tibble(cod_check, cod_check_note)
 }
