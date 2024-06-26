@@ -5,15 +5,13 @@
 \title{List ill-defined ICD 11 codes}
 \usage{
 list_ill_defined_icd11()
-
-list_ill_defined_icd11()
 }
 \value{
 An character vector of ICD 11 codes classified as ill-defined for
 cause of death
 }
 \description{
-Based on https://icdcdn.who.int/icd11referenceguide/en/html/index.html#list-of-illdefined-conditions
+List ill-defined ICD 11 codes
 }
 \examples{
 list_ill_defined_icd11()

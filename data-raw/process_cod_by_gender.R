@@ -1,4 +1,6 @@
+# Process CoD by sex/gender ----------------------------------------------------
 
+## ICD 11 ----
 cod_by_sex <- read.csv("data-raw/cod_by_sex.csv") |>
   tibble::tibble()
 
@@ -37,3 +39,27 @@ icd11_cod_by_sex <- cod_by_sex |>
 usethis::use_data(icd11_cod_by_sex, overwrite = TRUE, compress = "xz")
 
 
+## ICD 10 ----
+
+### Female codes (goes from p1 to p35)
+link <- "https://www.icd10data.com/ICD10CM/Codes/Rules/Female_Diagnosis_Codes/"
+
+
+#### Male codes (goes from p1 to p6)
+#https://www.icd10data.com/ICD10CM/Codes/Rules/Male_Diagnosis_Codes/1
+
+list_cod_by_sex_icd10_ <- function(link, page, sex = c(1, 2)) {
+  link_url <- paste0(link, page)
+
+  session <- rvest::session("data-raw/2024 Female ICD-10-CM Codes.html")
+
+  rvest::read_html("data-raw/2024 Female ICD-10-CM Codes.html") |>
+    rvest::html_elements(css = ".body-content ul li") |>
+    rvest::html_text()
+}
+
+### NOTE: data scraping doesn't work as site doesn't allow headless access
+
+### Get list of ICD 10 codes specific to sex ----
+
+icd_10_guide <- pdftools::pdf_text("data-raw/ICD10Volume2_en_2019.pdf")
