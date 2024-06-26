@@ -15,8 +15,8 @@
 #' @name codeditr
 #' @importFrom methods is
 #' @importFrom tibble tibble
-#' @importFrom dplyr mutate select case_when bind_rows
+#' @importFrom dplyr mutate select case_when bind_rows rename_with
 #' @importFrom rlang .data
-#' @importFrom stringr str_detect str_count
+#' @importFrom stringr str_detect str_count str_replace_all str_trim
 #'
 "_PACKAGE"
