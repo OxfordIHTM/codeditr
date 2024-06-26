@@ -43,6 +43,23 @@
 "icd11_example"
 
 
+#'
+#' Unlikely causes of death for ICD 10
+#'
+#' @format A data frame with 2 columns and 424 rows:
+#'
+#' | **Variable** | **Description** |
+#' | :--- | :--- |
+#' | *code* | ICD 10 Cause of Death code |
+#' | *title* | Cause of death title |
+#'
+#' @examples
+#' icd10_unlikely_cod
+#'
+#' @source https://icd.who.int/browse10/Content/statichtml/ICD10Volume2_en_2019.pdf
+#'
+"icd10_unlikely_cod"
+
 
 #'
 #' Unlikely causes of death for ICD 11
