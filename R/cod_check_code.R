@@ -333,10 +333,23 @@ cod_check_code_unlikely_icd11 <- function(cod) {
 #'
 
 cod_check_code_sex_icd10 <- function(cod, sex) {
-  cod_check <- NA_integer_
-  cod_check_note <- NA_character_
+  if (cod %in% codeditr::icd10_cod_by_sex$code) {
+    cod_sex <- codeditr::icd10_cod_by_sex |>
+      dplyr::filter(.data$code == cod) |>
+      dplyr::pull(.data$sex)
 
-  tibble(cod_check, cod_check_note)
+    cod_check <- ifelse(sex == cod_sex, 0L, 1L)
+  } else {
+    cod_check <- 0L
+  }
+
+  cod_check_note <- ifelse(
+    cod_check == 0L,
+    "No issues found in CoD code",
+    "CoD code is not appropriate for person's sex"
+  )
+
+  tibble::tibble(cod_check, cod_check_note)
 }
 
 
