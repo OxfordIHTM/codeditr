@@ -76,5 +76,6 @@ reference:
     - icd11_example
     - icd10_unlikely_cod
     - icd11_unlikely_cod
+    - icd10_cod_by_sex
     - icd11_cod_by_sex
 

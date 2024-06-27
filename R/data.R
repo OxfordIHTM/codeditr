@@ -98,3 +98,23 @@
 #' @source https://icdcdn.who.int/icd11referenceguide/en/html/index.html#list-of-categories-limited-to-or-more-likely-to-occur-in-female-persons
 #'
 "icd11_cod_by_sex"
+
+
+#'
+#' Sex-specific causes of death for ICD 10
+#'
+#' @format A data frame with 3 columns and 880 rows:
+#'
+#' | **Variable** | **Description** |
+#' | :--- | :--- |
+#' | *code* | ICD 10 Cause of Death code |
+#' | *title* | Cause of death title |
+#' | *sex* | Sex - 1 for male; 2 for female |
+#'
+#'
+#' @examples
+#' icd10_cod_by_sex
+#'
+#' @source https://icd.who.int/browse10/Content/statichtml/ICD10Volume2_en_2019.pdf
+#'
+"icd10_cod_by_sex"
