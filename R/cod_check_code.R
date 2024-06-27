@@ -110,23 +110,30 @@ cod_check_code_structure_icd10 <- function(cod) {
     cod_check + 8L, cod_check
   )
 
+  ### code uses asterisk code style ----
+  cod_check <- ifelse(
+    substr(x = cod, start = nchar(cod), stop = nchar(cod)) == "*",
+    cod_check + 16L, cod_check
+  )
+
   ### code is missing ----
-  cod_check <- ifelse(is.na(cod), 16L, cod_check)
+  cod_check <- ifelse(is.na(cod), 32L, cod_check)
 
   ## Get combination of scores, total scores, and labels ----
   check_values <- get_score_combo(
-    scores = c(1, 2, 4, 8),
+    scores = c(1, 2, 4, 8, 16),
     labels = c(
       "CoD code has a period (`.`) character in the wrong place",
       "CoD code is 2 or less characters long",
       "CoD code does not start with a character value",
-      "CoD code contains the character value `U`"
+      "CoD code contains the character value `U`",
+      "CoD code uses asterisk"
     )
   )
 
   cod_check_note <- cut(
     x = cod_check,
-    breaks = c(0, check_values$cod_check, 16, Inf),
+    breaks = c(0, check_values$cod_check, 32, Inf),
     labels = c(
       "No issues found in CoD code",
       check_values$cod_check_note,
