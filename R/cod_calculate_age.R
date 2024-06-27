@@ -66,7 +66,7 @@ cod_calculate_age <- function(dob,
           !is.na(.data$age_years) ~ "Y"
         )
       ) |>
-      dplyr::select(.data$age_value, .data$age_type)
+      dplyr::select("age_value", "age_type")
   } else {
     age_df <- tibble::tibble(age_days, age_months, age_years)
   }
