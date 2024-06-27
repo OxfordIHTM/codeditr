@@ -63,3 +63,49 @@ list_cod_by_sex_icd10_ <- function(link, page, sex = c(1, 2)) {
 ### Get list of ICD 10 codes specific to sex ----
 
 icd_10_guide <- pdftools::pdf_text("data-raw/ICD10Volume2_en_2019.pdf")
+
+list_females <- icd_10_guide[268:272] |>
+  stringr::str_split(pattern = "\n") |>
+  lapply(
+    FUN = function(x) ifelse(
+      stringr::str_detect(
+        string = x,
+        pattern = "INTERNATIONAL CLASSIFICATION OF DISEASES|[0-9]{3}|7.8|just one sex|persons"
+      ),
+      "", x
+    ) |>
+      (\(x) x[x != ""])() |>
+      stringr::str_trim(side = "left") |>
+      stringr::str_split(pattern = " ", simplify = TRUE) |>
+      c() |>
+      (\(x) x[x != ""])()
+  ) |>
+  unlist() |>
+  tibble::tibble(title = NA_character_, sex = 2) |>
+  dplyr::rename_with(.fn = function(x) c("code", "title", "sex"))
+
+list_males <- icd_10_guide[273] |>
+  stringr::str_split(pattern = "\n") |>
+  lapply(
+    FUN = function(x) ifelse(
+      stringr::str_detect(
+        string = x,
+        pattern = "INTERNATIONAL CLASSIFICATION OF DISEASES|[0-9]{3}|7.8|persons"
+      ),
+      "", x
+    ) |>
+      (\(x) x[x != ""])() |>
+      stringr::str_trim(side = "left") |>
+      stringr::str_split(pattern = " ", simplify = TRUE) |>
+      c() |>
+      (\(x) x[x != ""])()
+  ) |>
+  unlist() |>
+  tibble::tibble(title = NA_character_, sex = 1) |>
+  dplyr::rename_with(.fn = function(x) c("code", "title", "sex"))
+
+icd10_cod_by_sex <- rbind(list_males, list_females) |>
+  dplyr::arrange(sex, code)
+
+usethis::use_data(icd10_cod_by_sex, overwrite = TRUE, compress = "xz")
+
