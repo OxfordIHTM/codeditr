@@ -11,6 +11,37 @@ testthat::test_that(
   )
 )
 
+testthat::test_that(
+  "get_age_values warns appropriately",
+  testthat::expect_warning(
+    get_age_values(age[5], age_type[5])
+  )
+)
+
+testthat::test_that(
+  "get_age_values warns appropriately",
+  testthat::expect_warning(
+    get_age_values(age[3], age_type[3])
+  )
+)
+
+testthat::test_that(
+  "get_age_values warns appropriately",
+  testthat::expect_warning(
+    get_age_values(age[2], age_type[2])
+  )
+)
+
+testthat::test_that(
+  "get_score_combo outputs appropriate results",
+  testthat::expect_s3_class(
+    get_score_combo(
+      scores = c(1, 2, 3, 4, 5),
+      labels = c("A", "B", "C", "D", "E")
+    ),
+    "tbl"
+  )
+)
 
 testthat::test_that(
   "list_ill_defined_icd11 outputs appropriate results",
