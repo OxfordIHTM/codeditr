@@ -134,3 +134,65 @@ list_ill_defined_icd11 <- function() {
   ## Concatenate ill-defined code vectors ----
   c(set1, set2, set3)
 }
+
+
+#'
+#' Enumerate ICD 10 codes given a code range
+#'
+#' @param code_range A character value or a vector of character values
+#'   indicating a range of ICD 10 codes. See Details for syntax of code range/s.
+#'
+#' @returns A vector of ICD 10 codes that are within the range of codes
+#'   specified by `code_range`.
+#'
+#' @examples
+#' expand_icd10_code_range("A71.0-A71.9")
+#' expand_icd10_code_range("F50.1,F50.3-F50.9")
+#'
+#' @rdname expand_icd10
+#' @export
+#'
+
+expand_icd10_code_range <- function(code_range) {
+  code_values <- stringr::str_split(
+    string = code_range, pattern = ",", simplify = TRUE
+  ) |>
+    c()
+
+  lapply(
+    X = code_values,
+    FUN = function(x) if (substr(x, 4, 4) == ".") {
+      ifelse(
+        stringr::str_detect(string = x, pattern = "-"),
+        paste0(
+          stringr::str_extract(string = x, pattern = "^.{4}"),
+          seq(
+            from = stringr::str_extract_all(
+              string = x, pattern = "(?<=\\.)\\d+", simplify = TRUE
+            ) |> c() |> as.numeric() |> (\(x) x[1])(),
+            to = stringr::str_extract_all(
+              x, pattern = "(?<=\\.)\\d+", simplify = TRUE
+            ) |> c() |> as.numeric() |> (\(x) x[2])()
+          )
+        ) |>
+          paste(collapse = ","),
+        x
+      )
+    } else {
+      ifelse(
+        stringr::str_detect(string = x, pattern = "-"),
+        paste0(
+          stringr::str_extract(string = x, pattern = "^.{2}"),
+          seq(
+            from = substr(x, 3, 3) |> c() |> as.numeric(),
+            to = substr(x, nchar(x), nchar(x)) |> c() |> as.numeric()
+          )
+        ) |>
+          paste(collapse = ","),
+        x
+      )
+    }
+  ) |>
+    stringr::str_split(pattern = ",") |>
+    unlist()
+}

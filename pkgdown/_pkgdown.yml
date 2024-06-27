@@ -68,6 +68,7 @@ reference:
     contents:
     - get_age_values
     - list_ill_defined_icd11
+    - expand_icd10_code_range
 
   - title: Supporting datasets
     contents:
