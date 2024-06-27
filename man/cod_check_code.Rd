@@ -8,6 +8,7 @@
 \alias{cod_check_code_ill_defined_icd11}
 \alias{cod_check_code_unlikely_icd10}
 \alias{cod_check_code_unlikely_icd11}
+\alias{cod_check_code_sex_icd10_}
 \alias{cod_check_code_sex_icd10}
 \alias{cod_check_code_sex_icd11_}
 \alias{cod_check_code_sex_icd11}
@@ -26,6 +27,8 @@ cod_check_code_ill_defined_icd11(cod)
 cod_check_code_unlikely_icd10(cod)
 
 cod_check_code_unlikely_icd11(cod)
+
+cod_check_code_sex_icd10_(cod, sex)
 
 cod_check_code_sex_icd10(cod, sex)
 
@@ -51,7 +54,7 @@ to a potential code entry mistake and/or and issue of code completeness.
 Check cause of death code for code entry mistakes and/or code completeness
 }
 \examples{
-cod_check_code("U100")
+cod_check_code("U100", sex = 1)
 cod_check_code("2C6Z", version = "icd11", sex = 1)
 
 }
