@@ -7,8 +7,8 @@ library(openxlsx2)
 
 ### ICD10 example ----
 icd10_example <- openxlsx2::read_xlsx(file = "data-raw/data_example_icd10.xlsx")
-usethis::use_data(icd10_example)
+usethis::use_data(icd10_example, overwrite = TRUE, compress = "xz")
 
 ### ICD11 example ----
-icd11_example <- openxlsx2::read_xlsx(file = "data-raw/data_exemple_icd11.xlsx")
-usethis::use_data(icd11_example)
+icd11_example <- openxlsx2::read_xlsx(file = "data-raw/data_example_icd11.xlsx")
+usethis::use_data(icd11_example, overwrite = TRUE, compress = "xz")
