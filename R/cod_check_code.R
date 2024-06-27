@@ -296,8 +296,14 @@ cod_check_code_ill_defined_icd11 <- function(cod) {
 #' @export
 #'
 cod_check_code_unlikely_icd10 <- function(cod) {
-  cod_check <- NA_integer_
-  cod_check_note <- NA_character_
+  unlikely_cod <- expand_icd10_code_range(codeditr::icd10_unlikely_cod$code)
+
+  cod_check <- ifelse(cod %in% unlikely_cod, 1L, 0L)
+  cod_check_note <- ifelse(
+    cod_check == 0L,
+    "No issues found in CoD code",
+    "CoD code is an unlikely cause-of-death"
+  )
 
   tibble(cod_check, cod_check_note)
 }
