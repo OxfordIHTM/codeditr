@@ -51,5 +51,7 @@ test_that(
       cod_check_age(age_value = age_value, age_type = age_type)$age_check_note,
       "factor"
     )
+
+    expect_error(cod_check_age(age_value = "1", age_type = "D"))
   }
 )
