@@ -28,7 +28,8 @@ corresponds to \emph{"YYYY-MM-DD"}.}
 coding rules. Default to TRUE.}
 }
 \value{
-Values for age in days, months and years. IF \code{codedit}
+Values for age in days, months and years. IF \code{codedit} is TRUE,
+a tibble with age value and age type as required by CoDEdit.
 }
 \description{
 Calculate age at death based on date of birth and date of death
