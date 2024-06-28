@@ -4,20 +4,22 @@ age <- c(1, 20, 45, 63, 125)
 age_type <- c("Y", "M", "D", "M", "Y")
 
 testthat::test_that("get_age_values outputs appropriate results", {
-  testthat::expect_type(
+  expect_type(
     get_age_values(age[1], age_type[1]),
     "list"
   )
 })
 
 testthat::test_that("get_age_values warns appropriately", {
-  testthat::expect_warning(get_age_values(age[5], age_type[5]))
-  testthat::expect_warning(get_age_values(age[3], age_type[3]))
-  testthat::expect_warning(get_age_values(age[2], age_type[2]))
+  expect_warning(get_age_values(age[5], age_type[5]))
+
+  expect_warning(get_age_values(age[3], age_type[3]))
+
+  expect_warning(get_age_values(age[2], age_type[2]))
 })
 
 testthat::test_that("get_score_combo outputs appropriate results", {
-  testthat::expect_s3_class(
+  expect_s3_class(
     get_score_combo(
       scores = c(1, 2, 3, 4, 5),
       labels = c("A", "B", "C", "D", "E")
@@ -27,7 +29,7 @@ testthat::test_that("get_score_combo outputs appropriate results", {
 })
 
 testthat::test_that("get_score_combo errors appropriately", {
-  testthat::expect_error(
+  expect_error(
     get_score_combo(
       scores = c(1, 2, 3, 4, 5),
       labels = c("A", "B", "C", "D")
@@ -36,7 +38,7 @@ testthat::test_that("get_score_combo errors appropriately", {
 })
 
 testthat::test_that("list_ill_defined_icd11 outputs appropriate results", {
-  testthat::expect_vector(list_ill_defined_icd11())
+  expect_vector(list_ill_defined_icd11())
 })
 
 
