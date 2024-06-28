@@ -62,7 +62,10 @@ reference:
     - cod_check_age
     - cod_check_sex
     - cod_check_code
-    - cod_check_missing
+
+  - title: Structure
+    contents:
+    - cod_structure_input
 
   - title: Utilities
     contents:
