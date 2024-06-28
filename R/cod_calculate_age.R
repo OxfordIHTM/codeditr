@@ -15,7 +15,8 @@
 #' @param codedit Logical. Should output be based on the CoDEdit version 2
 #'   coding rules. Default to TRUE.
 #'
-#' @returns Values for age in days, months and years. IF `codedit`
+#' @returns Values for age in days, months and years. IF `codedit` is TRUE,
+#'   a tibble with age value and age type as required by CoDEdit.
 #'
 #' @examples
 #' cod_calculate_age("1977-11-05", Sys.Date())
