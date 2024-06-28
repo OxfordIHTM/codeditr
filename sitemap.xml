@@ -28,9 +28,6 @@
     <loc>https://oxford-ihtm.io/codeditr/reference/cod_check_code.html</loc>
   </url>
   <url>
-    <loc>https://oxford-ihtm.io/codeditr/reference/cod_check_missing.html</loc>
-  </url>
-  <url>
     <loc>https://oxford-ihtm.io/codeditr/reference/cod_check_sex.html</loc>
   </url>
   <url>
@@ -38,6 +35,9 @@
   </url>
   <url>
     <loc>https://oxford-ihtm.io/codeditr/reference/cod_recode_sex.html</loc>
+  </url>
+  <url>
+    <loc>https://oxford-ihtm.io/codeditr/reference/cod_structure.html</loc>
   </url>
   <url>
     <loc>https://oxford-ihtm.io/codeditr/reference/codeditr.html</loc>
