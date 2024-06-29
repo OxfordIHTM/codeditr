@@ -10,7 +10,15 @@ sex_value3 <- c("M", "M", "M", "F", "F", "M", NA_character_)
 sex_code3 <- c("M", "F")
 
 sex_check <- c(rep(0L, 6), 3L)
-sex_check_note <- c(rep("No issues with sex value", 6), "Missing sex value")
+sex_check_note <- factor(
+  x = c(rep("No issues with sex value", 6), "Missing sex value"),
+  levels = c(
+    "No issues with sex value",
+    "Sex value is not an integer",
+    "Sex value is not any of the expected values",
+    "Missing sex value"
+  )
+)
 
 
 testthat::test_that(
