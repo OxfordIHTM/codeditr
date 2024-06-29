@@ -18,7 +18,7 @@ cod_check_dod <- function(dod) {
   dod_check <- ifelse(is.na(dod), 1L, 0L)
 
   dod_check <- ifelse(
-    stringr::str_detect(string = dod, pattern = "[0-9]{4}", negate = TRUE),
+    nchar(dod) > 4 | stringr::str_detect(dod, pattern = "[a-zA-Z]"),
     1L, 0L
   )
 

@@ -19,7 +19,7 @@
 #'   record identifiers. Default to NULL. If NULL, unique record identifiers
 #'   will be generated.
 #'
-#' @returns A data.frame with 6 columns and number of rows equal to `df` with
+#' @returns A tibble with 6 columns and number of rows equal to `df` with
 #'   names `"FreeId"`, `"Sex"`, `"Age Value"`, `"Age Type"`, `"Code"`, and
 #'   `"Death Date"`.
 #'

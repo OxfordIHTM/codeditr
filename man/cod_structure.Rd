@@ -32,7 +32,7 @@ record identifiers. Default to NULL. If NULL, unique record identifiers
 will be generated.}
 }
 \value{
-A data.frame with 6 columns and number of rows equal to \code{df} with
+A tibble with 6 columns and number of rows equal to \code{df} with
 names \code{"FreeId"}, \code{"Sex"}, \code{"Age Value"}, \code{"Age Type"}, \code{"Code"}, and
 \code{"Death Date"}.
 }
