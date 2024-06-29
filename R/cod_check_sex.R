@@ -5,7 +5,8 @@
 #'   CoDEdit rules.
 #' @param sex_code A character or integer vector of 2 values that indicate
 #'   which values are to be considered pertaining to males (first value in the
-#'   vector) or to females (second value in the vector).
+#'   vector) or to females (second value in the vector). Default is 1 for male
+#'   and 2 for female.
 #'
 #' @returns A tibble with number of rows equal to length of `sex_value` and
 #'   two columns for sex_check and sex_check_note.
@@ -19,7 +20,7 @@
 #' @export
 #'
 
-cod_check_sex <- function(sex_value, sex_code) {
+cod_check_sex <- function(sex_value, sex_code = c(1, 2)) {
   ## Recode sex ----
   sex_value <- cod_recode_sex(sex_value = sex_value, sex_code = sex_code)
 
