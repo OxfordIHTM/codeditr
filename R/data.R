@@ -118,3 +118,23 @@
 #' @source https://icd.who.int/browse10/Content/statichtml/ICD10Volume2_en_2019.pdf
 #'
 "icd10_cod_by_sex"
+
+
+#'
+#' Example raw cause of death dataset
+#'
+#' @format A data frame with 6 columns and 20 rows:
+#'
+#' | **Variable** | **Description** |
+#' | :--- | :--- |
+#' | *id* | Unique identifier |
+#' | *sex* | Sex of deceased |
+#' | *age* | Age of diseased in years |
+#' | *code* | ICD 11 cause of death code |
+#' | *dod* | Date of death |
+#' | *dob* | Date of birth |
+#'
+#' @examples
+#' cod_data_raw_example
+#'
+"cod_data_raw_example"
