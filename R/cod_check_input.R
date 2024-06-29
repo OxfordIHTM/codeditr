@@ -53,7 +53,7 @@ cod_check_codedit_input <- function(df) {
   ## Return tibble of check results ----
   tibble::tibble(
     sex_check, age_check,
-    code_check = tibble::tibble(code_check, code_check_note),
+    code_check, code_check_note,
     dod_check
   )
 }
