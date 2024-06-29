@@ -11,4 +11,8 @@ testthat::test_that(
         "code_check", "code_check_note",
         "dod_check", "dod_check_note")
     )
+
+    expect_warning(
+      cod_check_codedit_input(icd10_example |> dplyr::select(-FreeId))
+    )
 })
