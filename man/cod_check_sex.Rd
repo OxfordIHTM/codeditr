@@ -4,7 +4,7 @@
 \alias{cod_check_sex}
 \title{Check sex values in cause of death data based on CoDEdit rules}
 \usage{
-cod_check_sex(sex_value, sex_code)
+cod_check_sex(sex_value, sex_code = c(1, 2))
 }
 \arguments{
 \item{sex_value}{An integer value or vector of values for age based on the
@@ -12,7 +12,8 @@ CoDEdit rules.}
 
 \item{sex_code}{A character or integer vector of 2 values that indicate
 which values are to be considered pertaining to males (first value in the
-vector) or to females (second value in the vector).}
+vector) or to females (second value in the vector). Default is 1 for male
+and 2 for female.}
 }
 \value{
 A tibble with number of rows equal to length of \code{sex_value} and

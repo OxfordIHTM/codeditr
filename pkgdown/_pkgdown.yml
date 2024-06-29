@@ -61,6 +61,8 @@ reference:
     contents:
     - cod_check_age
     - cod_check_sex
+    - cod_check_dod
+    - cod_check_codedit_input
     - cod_check_code
 
   - title: Structure
