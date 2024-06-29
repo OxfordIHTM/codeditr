@@ -9,13 +9,13 @@
 #'   and variable identified with the `FreeId` of `df`.
 #'
 #' @examples
-#' check_codedit_input(icd10_example)
+#' cod_check_codedit_input(icd10_example)
 #'
-#' @rdname check_codedit
+#' @rdname cod_check_input
 #' @export
 #'
 
-check_codedit_input <- function(df) {
+cod_check_codedit_input <- function(df) {
   ## Expected field names ----
   fields <- c("FreeId", "Sex", "Age Value", "Age Type", "Code", "Death Date")
 
