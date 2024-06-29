@@ -47,5 +47,16 @@ cod_check_sex <- function(sex_value, sex_code = c(1, 2)) {
 
 
   ## Return check ----
-  tibble::tibble(sex_check, sex_check_note)
+  tibble::tibble(sex_check, sex_check_note) |>
+    dplyr::mutate(
+      sex_check_note = factor(
+        x = sex_check_note,
+        levels = c(
+          "No issues with sex value",
+          "Sex value is not an integer",
+          "Sex value is not any of the expected values",
+          "Missing sex value"
+        )
+      )
+    )
 }
