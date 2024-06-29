@@ -10,10 +10,18 @@ df <- data.frame(
 
 
 testthat::test_that(
-  "cod_structure_input outputs appropriate results",
+  "cod_structure_input outputs appropriate results", {
+    expect_s3_class(
+      cod_structure_input(
+        df, sex = "sex", dob = "dob", dod = "dod", code = "code"
+      ),
+      "tbl"
+    )
 
-  expect_s3_class(
-    cod_structure_input(df, sex = "sex", dob = "dob", dod = "dod", code = "code"),
-    "tbl"
-  )
-)
+    expect_s3_class(
+      cod_structure_input(
+        df = df, sex = "sex", dob = "dob", dod = "dod", code = "code", id = "id"
+      ),
+      "tbl"
+    )
+})
