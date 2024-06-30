@@ -43,7 +43,7 @@ cod_structure_input <- function(df, sex, sex_code = c(1, 2),
   if (is.null(id)) {
     FreeId <- seq(from = 1, to = nrow(df))
   } else {
-    FreeId <- id
+    FreeId <- df[[id]]
   }
 
   Sex <- cod_recode_sex(sex_value = df[[sex]], sex_code = sex_code)

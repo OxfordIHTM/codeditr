@@ -50,7 +50,7 @@ cod_check_code <- function(cod, version = c("icd10", "icd11"), sex) {
     cod_check_code_unlikely, cod_check_code_sex
   ) |>
     dplyr::mutate(
-      cod_check = rowSums(
+      cod_check_code = rowSums(
         data.frame(
           .data$cod_check_structure,
           .data$cod_check_ill_defined,
@@ -59,7 +59,15 @@ cod_check_code <- function(cod, version = c("icd10", "icd11"), sex) {
         ),
         na.rm = TRUE
       ) |>
-        (\(x) ifelse(x == 0, 0, 1))()
+        (\(x) ifelse(x == 0, 0, 1))(),
+      cod_check_code_note = ifelse(
+        cod_check_code == 0,
+        "No issues found in CoD code",
+        "Issues found in CoD code"
+      ) |>
+        factor(
+          levels = c("No issues found in CoD code", "Issues found in CoD code")
+        )
     )
 }
 
@@ -239,20 +247,6 @@ cod_check_code_structure_icd11 <- function(cod) {
 #' @export
 #'
 cod_check_code_ill_defined_icd10 <- function(cod) {
-  # I46.1
-  # I46.9
-  # I50.-
-  #   I95.9
-  # I99
-  # J96.0
-  # J96.9
-  # P28.5
-  # R00-R57.1,
-  # R57.8-R64,
-  # R65.2-R65.3,
-  # R68.0-R94,
-  # R96-R99
-
   set1 <- ifelse(
     cod %in% c("I46.1", "I46.9", "I95.9", "I99", "J96.0", "P28.5"), 1L, 0L
   )
@@ -274,7 +268,16 @@ cod_check_code_ill_defined_icd10 <- function(cod) {
     "CoD code is an ill-defined code"
   )
 
-  tibble(cod_check, cod_check_note)
+  tibble(cod_check, cod_check_note) |>
+    dplyr::mutate(
+      cod_check_note = factor(
+        x = cod_check_note,
+        levels = c(
+          "No issues found in CoD code",
+          "CoD code is an ill-defined code"
+        )
+      )
+    )
 }
 
 
@@ -294,7 +297,16 @@ cod_check_code_ill_defined_icd11 <- function(cod) {
     "CoD code is an ill-defined code"
   )
 
-  tibble::tibble(cod_check, cod_check_note)
+  tibble(cod_check, cod_check_note) |>
+    dplyr::mutate(
+      cod_check_note = factor(
+        x = cod_check_note,
+        levels = c(
+          "No issues found in CoD code",
+          "CoD code is an ill-defined code"
+        )
+      )
+    )
 }
 
 
@@ -312,7 +324,16 @@ cod_check_code_unlikely_icd10 <- function(cod) {
     "CoD code is an unlikely cause-of-death"
   )
 
-  tibble(cod_check, cod_check_note)
+  tibble(cod_check, cod_check_note) |>
+    dplyr::mutate(
+      cod_check_note = factor(
+        x = cod_check_note,
+        levels = c(
+          "No issues found in CoD code",
+          "CoD code is an unlikely cause-of-death"
+        )
+      )
+    )
 }
 
 #'
@@ -331,7 +352,16 @@ cod_check_code_unlikely_icd11 <- function(cod) {
     "CoD code is an unlikely cause-of-death"
   )
 
-  tibble::tibble(cod_check, cod_check_note)
+  tibble(cod_check, cod_check_note) |>
+    dplyr::mutate(
+      cod_check_note = factor(
+        x = cod_check_note,
+        levels = c(
+          "No issues found in CoD code",
+          "CoD code is an unlikely cause-of-death"
+        )
+      )
+    )
 }
 
 #'
@@ -356,7 +386,16 @@ cod_check_code_sex_icd10_ <- function(cod, sex) {
     "CoD code is not appropriate for person's sex"
   )
 
-  tibble::tibble(cod_check, cod_check_note)
+  tibble::tibble(cod_check, cod_check_note) |>
+    dplyr::mutate(
+      cod_check_note = factor(
+        x = cod_check_note,
+        levels = c(
+          "No issues found in CoD code",
+          "CoD code is not appropriate for person's sex"
+        )
+      )
+    )
 }
 
 
@@ -397,7 +436,16 @@ cod_check_code_sex_icd11_ <- function(cod, sex) {
     "CoD code is not appropriate for person's sex"
   )
 
-  tibble::tibble(cod_check, cod_check_note)
+  tibble::tibble(cod_check, cod_check_note) |>
+    dplyr::mutate(
+      cod_check_note = factor(
+        x = cod_check_note,
+        levels = c(
+          "No issues found in CoD code",
+          "CoD code is not appropriate for person's sex"
+        )
+      )
+    )
 }
 
 

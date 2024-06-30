@@ -64,6 +64,7 @@ reference:
     - cod_check_dod
     - cod_check_codedit_input
     - cod_check_code
+    - cod_check_code_summary
 
   - title: Structure
     contents:

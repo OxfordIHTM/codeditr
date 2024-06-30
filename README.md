@@ -112,7 +112,7 @@ structure before using with the CoDEdit tool.
 cod_check_codedit_input(icd10_example)
 #> # A tibble: 3,613 × 8
 #>    sex_check sex_check_note  age_check age_check_note code_check code_check_note
-#>        <int> <chr>               <int> <fct>               <int> <chr>          
+#>        <int> <fct>               <int> <fct>               <int> <chr>          
 #>  1         0 No issues with…         0 No issues wit…          0 Cause of death…
 #>  2         0 No issues with…         0 No issues wit…          0 Cause of death…
 #>  3         0 No issues with…         0 No issues wit…          0 Cause of death…
@@ -124,10 +124,211 @@ cod_check_codedit_input(icd10_example)
 #>  9         0 No issues with…         0 No issues wit…          0 Cause of death…
 #> 10         0 No issues with…         0 No issues wit…          0 Cause of death…
 #> # ℹ 3,603 more rows
-#> # ℹ 2 more variables: dod_check <int>, dod_check_note <chr>
+#> # ℹ 2 more variables: dod_check <int>, dod_check_note <fct>
 ```
 
+2.  Structure raw cause-of-death data for input into CoDEdit tool
+
+Using the `cod_data_raw_example` dataset, we can format it into a
+compatible structure required by the CoDEdit tool.
+
+``` r
+cod_structure_input(
+  df = cod_data_raw_example, 
+  sex = "sex", dob = "dob", dod = "dod", code = "code", id = "id"
+)
+#> # A tibble: 20 × 6
+#>    FreeId   Sex `Age Value` `Age Type` Code          `Death Date`
+#>     <int> <int>       <int> <chr>      <chr>         <chr>       
+#>  1   4136     1        1318 Y          NE84&XA6KU8   2023        
+#>  2   4137     2        1318 Y          2B6D&XS9R     2023        
+#>  3   4138     1        1318 Y          2C82&XS9R     2023        
+#>  4   4139     1        1318 Y          CA40.Z&XK9J   2023        
+#>  5   4140     2        1318 Y          6C40.3&XS25   2023        
+#>  6   4141     1        1318 Y          6C40.3&XS25   2023        
+#>  7   4142     1        1318 Y          DB94.1&XT8W   2023        
+#>  8   4143     2        1318 Y          BD40.Z        2023        
+#>  9   4144     2        1318 Y          2C76.Z&XA8QA8 2023        
+#> 10   4145     1        1318 Y          6C40.3&XS25   2023        
+#> 11   4146     2        1318 Y          8B11.5Z       2023        
+#> 12   4147     1        1318 Y          2B90.Y&XH74S1 2023        
+#> 13   4148     1        1318 Y          BD10&XT5R     2023        
+#> 14   4149     1        1318 Y          1G41          2023        
+#> 15   4150     1        1318 Y          BD10&XT5R     2023        
+#> 16   4151     2        1318 Y          CA40.Z&XB25   2023        
+#> 17   4152     2        1318 Y          BA01          2023        
+#> 18   4153     1        1318 Y          1G41          2023        
+#> 19   4154     2        1318 Y          BB40          2023        
+#> 20   4155     1        1318 Y          1B91          2023
+```
+
+The output is a data.frame that can then be saved as an `.xlsx` file for
+use as input into the CoDEdit tool.
+
 ### CoDEdit tool replacement workflow
+
+1.  Perform all checks on cause-of-death data
+
+The `cod_check_code()` function performs all the checks implemented by
+the CoDEdit tool.
+
+``` r
+cod_check_code(cod_data_raw_example$code, version = "icd11", sex = "sex")
+#> # A tibble: 20 × 10
+#>    cod_check_structure cod_check_note_structure    cod_check_ill_defined
+#>                  <int> <fct>                                       <int>
+#>  1                   0 No issues found in CoD code                     0
+#>  2                   0 No issues found in CoD code                     0
+#>  3                   0 No issues found in CoD code                     0
+#>  4                   0 No issues found in CoD code                     0
+#>  5                   0 No issues found in CoD code                     0
+#>  6                   0 No issues found in CoD code                     0
+#>  7                   0 No issues found in CoD code                     0
+#>  8                   0 No issues found in CoD code                     0
+#>  9                   0 No issues found in CoD code                     0
+#> 10                   0 No issues found in CoD code                     0
+#> 11                   0 No issues found in CoD code                     0
+#> 12                   0 No issues found in CoD code                     0
+#> 13                   0 No issues found in CoD code                     0
+#> 14                   0 No issues found in CoD code                     0
+#> 15                   0 No issues found in CoD code                     0
+#> 16                   0 No issues found in CoD code                     0
+#> 17                   0 No issues found in CoD code                     0
+#> 18                   0 No issues found in CoD code                     0
+#> 19                   0 No issues found in CoD code                     0
+#> 20                   0 No issues found in CoD code                     0
+#> # ℹ 7 more variables: cod_check_note_ill_defined <fct>,
+#> #   cod_check_unlikely <int>, cod_check_note_unlikely <fct>,
+#> #   cod_check_sex <int>, cod_check_note_sex <fct>, cod_check_code <dbl>,
+#> #   cod_check_code_note <fct>
+```
+
+Results of the per row cause-of-death checks can also be summarised to
+give a count of issues found in the dataset.
+
+``` r
+cod_check_code(cod_data_raw_example$code, version = "icd11", sex = "sex") |>
+  cod_check_code_summary()
+#> $`Code structure`
+#> # A tibble: 65 × 2
+#>    cod_check_note                                                              n
+#>    <fct>                                                                   <int>
+#>  1 No issues found in CoD code                                                20
+#>  2 CoD code has a period (`.`) character in the wrong place                    0
+#>  3 CoD code starts with `O` or `I`                                             0
+#>  4 CoD code has a period (`.`) character in the wrong place; CoD code sta…     0
+#>  5 CoD code has a number as its second value                                   0
+#>  6 CoD code has a period (`.`) character in the wrong place; CoD code has…     0
+#>  7 CoD code starts with `O` or `I`; CoD code has a number as its second v…     0
+#>  8 CoD code has a period (`.`) character in the wrong place; CoD code sta…     0
+#>  9 CoD code has `O` or `I` as its second value                                 0
+#> 10 CoD code has a period (`.`) character in the wrong place; CoD code has…     0
+#> # ℹ 55 more rows
+#> 
+#> $`Ill-defined code`
+#> # A tibble: 2 × 2
+#>   cod_check_note                      n
+#>   <fct>                           <int>
+#> 1 No issues found in CoD code        20
+#> 2 CoD code is an ill-defined code     0
+#> 
+#> $`Unlikely cause-of-death code`
+#> # A tibble: 2 × 2
+#>   cod_check_note                             n
+#>   <fct>                                  <int>
+#> 1 No issues found in CoD code               20
+#> 2 CoD code is an unlikely cause-of-death     0
+#> 
+#> $`Code not appropriate for sex`
+#> # A tibble: 2 × 2
+#>   cod_check_note                                   n
+#>   <fct>                                        <int>
+#> 1 No issues found in CoD code                     20
+#> 2 CoD code is not appropriate for person's sex     0
+#> 
+#> $Overall
+#> # A tibble: 2 × 2
+#>   cod_check_note                  n
+#>   <fct>                       <int>
+#> 1 No issues found in CoD code    20
+#> 2 Issues found in CoD code        0
+```
+
+2.  Perform specific check types on cause-of-death data
+
+The family of `cod_check_code_*` functions can be used to perform
+specific check types on the cause-of-death data.
+
+``` r
+### Perform code structure check on cause-of-death data ----
+cod_check_code_structure_icd10(icd10_example$Code)
+#> # A tibble: 3,613 × 2
+#>    cod_check cod_check_note             
+#>        <int> <fct>                      
+#>  1         0 No issues found in CoD code
+#>  2         0 No issues found in CoD code
+#>  3         0 No issues found in CoD code
+#>  4         0 No issues found in CoD code
+#>  5         0 No issues found in CoD code
+#>  6         0 No issues found in CoD code
+#>  7         0 No issues found in CoD code
+#>  8         0 No issues found in CoD code
+#>  9         0 No issues found in CoD code
+#> 10         0 No issues found in CoD code
+#> # ℹ 3,603 more rows
+
+### Perform check for ill-defined codes on cause-of-death data ----
+cod_check_code_ill_defined_icd11(cod_data_raw_example$code)
+#> # A tibble: 20 × 2
+#>    cod_check cod_check_note             
+#>        <int> <fct>                      
+#>  1         0 No issues found in CoD code
+#>  2         0 No issues found in CoD code
+#>  3         0 No issues found in CoD code
+#>  4         0 No issues found in CoD code
+#>  5         0 No issues found in CoD code
+#>  6         0 No issues found in CoD code
+#>  7         0 No issues found in CoD code
+#>  8         0 No issues found in CoD code
+#>  9         0 No issues found in CoD code
+#> 10         0 No issues found in CoD code
+#> 11         0 No issues found in CoD code
+#> 12         0 No issues found in CoD code
+#> 13         0 No issues found in CoD code
+#> 14         0 No issues found in CoD code
+#> 15         0 No issues found in CoD code
+#> 16         0 No issues found in CoD code
+#> 17         0 No issues found in CoD code
+#> 18         0 No issues found in CoD code
+#> 19         0 No issues found in CoD code
+#> 20         0 No issues found in CoD code
+
+### Perform check for unlikely cause-of-death codes ----
+cod_check_code_unlikely_icd11(cod_data_raw_example$code)
+#> # A tibble: 20 × 2
+#>    cod_check cod_check_note             
+#>        <int> <fct>                      
+#>  1         0 No issues found in CoD code
+#>  2         0 No issues found in CoD code
+#>  3         0 No issues found in CoD code
+#>  4         0 No issues found in CoD code
+#>  5         0 No issues found in CoD code
+#>  6         0 No issues found in CoD code
+#>  7         0 No issues found in CoD code
+#>  8         0 No issues found in CoD code
+#>  9         0 No issues found in CoD code
+#> 10         0 No issues found in CoD code
+#> 11         0 No issues found in CoD code
+#> 12         0 No issues found in CoD code
+#> 13         0 No issues found in CoD code
+#> 14         0 No issues found in CoD code
+#> 15         0 No issues found in CoD code
+#> 16         0 No issues found in CoD code
+#> 17         0 No issues found in CoD code
+#> 18         0 No issues found in CoD code
+#> 19         0 No issues found in CoD code
+#> 20         0 No issues found in CoD code
+```
 
 ## Citation
 

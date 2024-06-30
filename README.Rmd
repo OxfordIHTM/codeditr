@@ -74,13 +74,54 @@ library(codeditr)
 
 Using the `icd10_example` dataset which is a dataset already formatted into a compatible structure required by the CoDEdit tool, we can perform a check on this dataset to see possible issues in its formatting and structure before using with the CoDEdit tool.
 
-```{r use-case-1}
+```{r use-case-1a}
 cod_check_codedit_input(icd10_example)
 ```
 
+2. Structure raw cause-of-death data for input into CoDEdit tool
 
+Using the `cod_data_raw_example` dataset, we can format it into a compatible structure required by the CoDEdit tool.
+
+```{r use-case-2a}
+cod_structure_input(
+  df = cod_data_raw_example, 
+  sex = "sex", dob = "dob", dod = "dod", code = "code", id = "id"
+)
+```
+
+The output is a data.frame that can then be saved as an `.xlsx` file for use as input into the CoDEdit tool.
 
 ### CoDEdit tool replacement workflow
+
+1. Perform all checks on cause-of-death data
+
+The `cod_check_code()` function performs all the checks implemented by the CoDEdit tool.
+
+```{r use-case-3}
+cod_check_code(cod_data_raw_example$code, version = "icd11", sex = "sex")
+```
+
+Results of the per row cause-of-death checks can also be summarised to give a count of issues found in the dataset.
+
+```{r use-case-4}
+cod_check_code(cod_data_raw_example$code, version = "icd11", sex = "sex") |>
+  cod_check_code_summary()
+```
+
+2. Perform specific check types on cause-of-death data
+
+The family of `cod_check_code_*` functions can be used to perform specific check types on the cause-of-death data.
+
+```{r use-case-5}
+### Perform code structure check on cause-of-death data ----
+cod_check_code_structure_icd10(icd10_example$Code)
+
+### Perform check for ill-defined codes on cause-of-death data ----
+cod_check_code_ill_defined_icd11(cod_data_raw_example$code)
+
+### Perform check for unlikely cause-of-death codes ----
+cod_check_code_unlikely_icd11(cod_data_raw_example$code)
+```
 
 ## Citation
 
