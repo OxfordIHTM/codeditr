@@ -117,21 +117,23 @@ to a potential code entry mistake and/or and issue of code completeness.</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">cod_check_code</span><span class="op">(</span><span class="st">"U100"</span>, sex <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 9</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 10</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   cod_check_structure cod_check_note_structure             cod_check_ill_defined</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>                                                <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>                   8 CoD code contains the character val…                     0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 6 more variables: cod_check_note_ill_defined &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   cod_check_unlikely &lt;int&gt;, cod_check_note_unlikely &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   cod_check_sex &lt;int&gt;, cod_check_note_sex &lt;chr&gt;, cod_check &lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 7 more variables: cod_check_note_ill_defined &lt;fct&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   cod_check_unlikely &lt;int&gt;, cod_check_note_unlikely &lt;fct&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   cod_check_sex &lt;int&gt;, cod_check_note_sex &lt;fct&gt;, cod_check_code &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   cod_check_code_note &lt;fct&gt;</span></span>
 <span class="r-in"><span><span class="fu">cod_check_code</span><span class="op">(</span><span class="st">"2C6Z"</span>, version <span class="op">=</span> <span class="st">"icd11"</span>, sex <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 9</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 10</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   cod_check_structure cod_check_note_structure    cod_check_ill_defined</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>                                       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>                   0 No issues found in CoD code                     0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 6 more variables: cod_check_note_ill_defined &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   cod_check_unlikely &lt;int&gt;, cod_check_note_unlikely &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   cod_check_sex &lt;int&gt;, cod_check_note_sex &lt;chr&gt;, cod_check &lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 7 more variables: cod_check_note_ill_defined &lt;fct&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   cod_check_unlikely &lt;int&gt;, cod_check_note_unlikely &lt;fct&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   cod_check_sex &lt;int&gt;, cod_check_note_sex &lt;fct&gt;, cod_check_code &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   cod_check_code_note &lt;fct&gt;</span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

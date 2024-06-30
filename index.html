@@ -136,7 +136,7 @@
 <code class="sourceCode R"><span><span class="fu"><a href="reference/cod_check_input.html">cod_check_codedit_input</a></span><span class="op">(</span><span class="va">icd10_example</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 3,613 × 8</span></span>
 <span><span class="co">#&gt;    sex_check sex_check_note  age_check age_check_note code_check code_check_note</span></span>
-<span><span class="co">#&gt;        &lt;int&gt; &lt;chr&gt;               &lt;int&gt; &lt;fct&gt;               &lt;int&gt; &lt;chr&gt;          </span></span>
+<span><span class="co">#&gt;        &lt;int&gt; &lt;fct&gt;               &lt;int&gt; &lt;fct&gt;               &lt;int&gt; &lt;chr&gt;          </span></span>
 <span><span class="co">#&gt;  1         0 No issues with…         0 No issues wit…          0 Cause of death…</span></span>
 <span><span class="co">#&gt;  2         0 No issues with…         0 No issues wit…          0 Cause of death…</span></span>
 <span><span class="co">#&gt;  3         0 No issues with…         0 No issues wit…          0 Cause of death…</span></span>
@@ -148,18 +148,204 @@
 <span><span class="co">#&gt;  9         0 No issues with…         0 No issues wit…          0 Cause of death…</span></span>
 <span><span class="co">#&gt; 10         0 No issues with…         0 No issues wit…          0 Cause of death…</span></span>
 <span><span class="co">#&gt; # ℹ 3,603 more rows</span></span>
-<span><span class="co">#&gt; # ℹ 2 more variables: dod_check &lt;int&gt;, dod_check_note &lt;chr&gt;</span></span></code></pre></div>
+<span><span class="co">#&gt; # ℹ 2 more variables: dod_check &lt;int&gt;, dod_check_note &lt;fct&gt;</span></span></code></pre></div>
+<ol start="2" style="list-style-type: decimal">
+<li>Structure raw cause-of-death data for input into CoDEdit tool</li>
+</ol>
+<p>Using the <code>cod_data_raw_example</code> dataset, we can format it into a compatible structure required by the CoDEdit tool.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/cod_structure.html">cod_structure_input</a></span><span class="op">(</span></span>
+<span>  df <span class="op">=</span> <span class="va">cod_data_raw_example</span>, </span>
+<span>  sex <span class="op">=</span> <span class="st">"sex"</span>, dob <span class="op">=</span> <span class="st">"dob"</span>, dod <span class="op">=</span> <span class="st">"dod"</span>, code <span class="op">=</span> <span class="st">"code"</span>, id <span class="op">=</span> <span class="st">"id"</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 20 × 6</span></span>
+<span><span class="co">#&gt;    FreeId   Sex `Age Value` `Age Type` Code          `Death Date`</span></span>
+<span><span class="co">#&gt;     &lt;int&gt; &lt;int&gt;       &lt;int&gt; &lt;chr&gt;      &lt;chr&gt;         &lt;chr&gt;       </span></span>
+<span><span class="co">#&gt;  1   4136     1        1318 Y          NE84&amp;XA6KU8   2023        </span></span>
+<span><span class="co">#&gt;  2   4137     2        1318 Y          2B6D&amp;XS9R     2023        </span></span>
+<span><span class="co">#&gt;  3   4138     1        1318 Y          2C82&amp;XS9R     2023        </span></span>
+<span><span class="co">#&gt;  4   4139     1        1318 Y          CA40.Z&amp;XK9J   2023        </span></span>
+<span><span class="co">#&gt;  5   4140     2        1318 Y          6C40.3&amp;XS25   2023        </span></span>
+<span><span class="co">#&gt;  6   4141     1        1318 Y          6C40.3&amp;XS25   2023        </span></span>
+<span><span class="co">#&gt;  7   4142     1        1318 Y          DB94.1&amp;XT8W   2023        </span></span>
+<span><span class="co">#&gt;  8   4143     2        1318 Y          BD40.Z        2023        </span></span>
+<span><span class="co">#&gt;  9   4144     2        1318 Y          2C76.Z&amp;XA8QA8 2023        </span></span>
+<span><span class="co">#&gt; 10   4145     1        1318 Y          6C40.3&amp;XS25   2023        </span></span>
+<span><span class="co">#&gt; 11   4146     2        1318 Y          8B11.5Z       2023        </span></span>
+<span><span class="co">#&gt; 12   4147     1        1318 Y          2B90.Y&amp;XH74S1 2023        </span></span>
+<span><span class="co">#&gt; 13   4148     1        1318 Y          BD10&amp;XT5R     2023        </span></span>
+<span><span class="co">#&gt; 14   4149     1        1318 Y          1G41          2023        </span></span>
+<span><span class="co">#&gt; 15   4150     1        1318 Y          BD10&amp;XT5R     2023        </span></span>
+<span><span class="co">#&gt; 16   4151     2        1318 Y          CA40.Z&amp;XB25   2023        </span></span>
+<span><span class="co">#&gt; 17   4152     2        1318 Y          BA01          2023        </span></span>
+<span><span class="co">#&gt; 18   4153     1        1318 Y          1G41          2023        </span></span>
+<span><span class="co">#&gt; 19   4154     2        1318 Y          BB40          2023        </span></span>
+<span><span class="co">#&gt; 20   4155     1        1318 Y          1B91          2023</span></span></code></pre></div>
+<p>The output is a data.frame that can then be saved as an <code>.xlsx</code> file for use as input into the CoDEdit tool.</p>
 </div>
 <div class="section level3">
 <h3 id="codedit-tool-replacement-workflow">CoDEdit tool replacement workflow<a class="anchor" aria-label="anchor" href="#codedit-tool-replacement-workflow"></a>
 </h3>
+<ol style="list-style-type: decimal">
+<li>Perform all checks on cause-of-death data</li>
+</ol>
+<p>The <code><a href="reference/cod_check_code.html">cod_check_code()</a></code> function performs all the checks implemented by the CoDEdit tool.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/cod_check_code.html">cod_check_code</a></span><span class="op">(</span><span class="va">cod_data_raw_example</span><span class="op">$</span><span class="va">code</span>, version <span class="op">=</span> <span class="st">"icd11"</span>, sex <span class="op">=</span> <span class="st">"sex"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 20 × 10</span></span>
+<span><span class="co">#&gt;    cod_check_structure cod_check_note_structure    cod_check_ill_defined</span></span>
+<span><span class="co">#&gt;                  &lt;int&gt; &lt;fct&gt;                                       &lt;int&gt;</span></span>
+<span><span class="co">#&gt;  1                   0 No issues found in CoD code                     0</span></span>
+<span><span class="co">#&gt;  2                   0 No issues found in CoD code                     0</span></span>
+<span><span class="co">#&gt;  3                   0 No issues found in CoD code                     0</span></span>
+<span><span class="co">#&gt;  4                   0 No issues found in CoD code                     0</span></span>
+<span><span class="co">#&gt;  5                   0 No issues found in CoD code                     0</span></span>
+<span><span class="co">#&gt;  6                   0 No issues found in CoD code                     0</span></span>
+<span><span class="co">#&gt;  7                   0 No issues found in CoD code                     0</span></span>
+<span><span class="co">#&gt;  8                   0 No issues found in CoD code                     0</span></span>
+<span><span class="co">#&gt;  9                   0 No issues found in CoD code                     0</span></span>
+<span><span class="co">#&gt; 10                   0 No issues found in CoD code                     0</span></span>
+<span><span class="co">#&gt; 11                   0 No issues found in CoD code                     0</span></span>
+<span><span class="co">#&gt; 12                   0 No issues found in CoD code                     0</span></span>
+<span><span class="co">#&gt; 13                   0 No issues found in CoD code                     0</span></span>
+<span><span class="co">#&gt; 14                   0 No issues found in CoD code                     0</span></span>
+<span><span class="co">#&gt; 15                   0 No issues found in CoD code                     0</span></span>
+<span><span class="co">#&gt; 16                   0 No issues found in CoD code                     0</span></span>
+<span><span class="co">#&gt; 17                   0 No issues found in CoD code                     0</span></span>
+<span><span class="co">#&gt; 18                   0 No issues found in CoD code                     0</span></span>
+<span><span class="co">#&gt; 19                   0 No issues found in CoD code                     0</span></span>
+<span><span class="co">#&gt; 20                   0 No issues found in CoD code                     0</span></span>
+<span><span class="co">#&gt; # ℹ 7 more variables: cod_check_note_ill_defined &lt;fct&gt;,</span></span>
+<span><span class="co">#&gt; #   cod_check_unlikely &lt;int&gt;, cod_check_note_unlikely &lt;fct&gt;,</span></span>
+<span><span class="co">#&gt; #   cod_check_sex &lt;int&gt;, cod_check_note_sex &lt;fct&gt;, cod_check_code &lt;dbl&gt;,</span></span>
+<span><span class="co">#&gt; #   cod_check_code_note &lt;fct&gt;</span></span></code></pre></div>
+<p>Results of the per row cause-of-death checks can also be summarised to give a count of issues found in the dataset.</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/cod_check_code.html">cod_check_code</a></span><span class="op">(</span><span class="va">cod_data_raw_example</span><span class="op">$</span><span class="va">code</span>, version <span class="op">=</span> <span class="st">"icd11"</span>, sex <span class="op">=</span> <span class="st">"sex"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="reference/cod_check_code_summary.html">cod_check_code_summary</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; $`Code structure`</span></span>
+<span><span class="co">#&gt; # A tibble: 65 × 2</span></span>
+<span><span class="co">#&gt;    cod_check_note                                                              n</span></span>
+<span><span class="co">#&gt;    &lt;fct&gt;                                                                   &lt;int&gt;</span></span>
+<span><span class="co">#&gt;  1 No issues found in CoD code                                                20</span></span>
+<span><span class="co">#&gt;  2 CoD code has a period (`.`) character in the wrong place                    0</span></span>
+<span><span class="co">#&gt;  3 CoD code starts with `O` or `I`                                             0</span></span>
+<span><span class="co">#&gt;  4 CoD code has a period (`.`) character in the wrong place; CoD code sta…     0</span></span>
+<span><span class="co">#&gt;  5 CoD code has a number as its second value                                   0</span></span>
+<span><span class="co">#&gt;  6 CoD code has a period (`.`) character in the wrong place; CoD code has…     0</span></span>
+<span><span class="co">#&gt;  7 CoD code starts with `O` or `I`; CoD code has a number as its second v…     0</span></span>
+<span><span class="co">#&gt;  8 CoD code has a period (`.`) character in the wrong place; CoD code sta…     0</span></span>
+<span><span class="co">#&gt;  9 CoD code has `O` or `I` as its second value                                 0</span></span>
+<span><span class="co">#&gt; 10 CoD code has a period (`.`) character in the wrong place; CoD code has…     0</span></span>
+<span><span class="co">#&gt; # ℹ 55 more rows</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $`Ill-defined code`</span></span>
+<span><span class="co">#&gt; # A tibble: 2 × 2</span></span>
+<span><span class="co">#&gt;   cod_check_note                      n</span></span>
+<span><span class="co">#&gt;   &lt;fct&gt;                           &lt;int&gt;</span></span>
+<span><span class="co">#&gt; 1 No issues found in CoD code        20</span></span>
+<span><span class="co">#&gt; 2 CoD code is an ill-defined code     0</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $`Unlikely cause-of-death code`</span></span>
+<span><span class="co">#&gt; # A tibble: 2 × 2</span></span>
+<span><span class="co">#&gt;   cod_check_note                             n</span></span>
+<span><span class="co">#&gt;   &lt;fct&gt;                                  &lt;int&gt;</span></span>
+<span><span class="co">#&gt; 1 No issues found in CoD code               20</span></span>
+<span><span class="co">#&gt; 2 CoD code is an unlikely cause-of-death     0</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $`Code not appropriate for sex`</span></span>
+<span><span class="co">#&gt; # A tibble: 2 × 2</span></span>
+<span><span class="co">#&gt;   cod_check_note                                   n</span></span>
+<span><span class="co">#&gt;   &lt;fct&gt;                                        &lt;int&gt;</span></span>
+<span><span class="co">#&gt; 1 No issues found in CoD code                     20</span></span>
+<span><span class="co">#&gt; 2 CoD code is not appropriate for person's sex     0</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $Overall</span></span>
+<span><span class="co">#&gt; # A tibble: 2 × 2</span></span>
+<span><span class="co">#&gt;   cod_check_note                  n</span></span>
+<span><span class="co">#&gt;   &lt;fct&gt;                       &lt;int&gt;</span></span>
+<span><span class="co">#&gt; 1 No issues found in CoD code    20</span></span>
+<span><span class="co">#&gt; 2 Issues found in CoD code        0</span></span></code></pre></div>
+<ol start="2" style="list-style-type: decimal">
+<li>Perform specific check types on cause-of-death data</li>
+</ol>
+<p>The family of <code>cod_check_code_*</code> functions can be used to perform specific check types on the cause-of-death data.</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">### Perform code structure check on cause-of-death data ----</span></span>
+<span><span class="fu"><a href="reference/cod_check_code.html">cod_check_code_structure_icd10</a></span><span class="op">(</span><span class="va">icd10_example</span><span class="op">$</span><span class="va">Code</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 3,613 × 2</span></span>
+<span><span class="co">#&gt;    cod_check cod_check_note             </span></span>
+<span><span class="co">#&gt;        &lt;int&gt; &lt;fct&gt;                      </span></span>
+<span><span class="co">#&gt;  1         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt;  2         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt;  3         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt;  4         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt;  5         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt;  6         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt;  7         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt;  8         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt;  9         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; 10         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; # ℹ 3,603 more rows</span></span>
+<span></span>
+<span><span class="co">### Perform check for ill-defined codes on cause-of-death data ----</span></span>
+<span><span class="fu"><a href="reference/cod_check_code.html">cod_check_code_ill_defined_icd11</a></span><span class="op">(</span><span class="va">cod_data_raw_example</span><span class="op">$</span><span class="va">code</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 20 × 2</span></span>
+<span><span class="co">#&gt;    cod_check cod_check_note             </span></span>
+<span><span class="co">#&gt;        &lt;int&gt; &lt;fct&gt;                      </span></span>
+<span><span class="co">#&gt;  1         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt;  2         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt;  3         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt;  4         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt;  5         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt;  6         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt;  7         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt;  8         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt;  9         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; 10         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; 11         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; 12         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; 13         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; 14         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; 15         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; 16         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; 17         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; 18         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; 19         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; 20         0 No issues found in CoD code</span></span>
+<span></span>
+<span><span class="co">### Perform check for unlikely cause-of-death codes ----</span></span>
+<span><span class="fu"><a href="reference/cod_check_code.html">cod_check_code_unlikely_icd11</a></span><span class="op">(</span><span class="va">cod_data_raw_example</span><span class="op">$</span><span class="va">code</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 20 × 2</span></span>
+<span><span class="co">#&gt;    cod_check cod_check_note             </span></span>
+<span><span class="co">#&gt;        &lt;int&gt; &lt;fct&gt;                      </span></span>
+<span><span class="co">#&gt;  1         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt;  2         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt;  3         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt;  4         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt;  5         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt;  6         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt;  7         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt;  8         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt;  9         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; 10         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; 11         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; 12         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; 13         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; 14         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; 15         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; 16         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; 17         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; 18         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; 19         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; 20         0 No issues found in CoD code</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
 <h2 id="citation">Citation<a class="anchor" aria-label="anchor" href="#citation"></a>
 </h2>
 <p>If you find the <code>codeditr</code> package useful please cite using the suggested citation provided by a call to the <code><a href="https://rdrr.io/r/utils/citation.html" class="external-link">citation()</a></code> function as follows:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/citation.html" class="external-link">citation</a></span><span class="op">(</span><span class="st">"codeditr"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; To cite codeditr in publications use:</span></span>
 <span><span class="co">#&gt; </span></span>
