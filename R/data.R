@@ -138,3 +138,77 @@
 #' cod_data_raw_example
 #'
 "cod_data_raw_example"
+
+
+#'
+#' Neonate-specific cause of death for ICD 10
+#'
+#' @format A data frame with 2 columns and 42 rows:
+#'
+#' | **Variable** | **Description** |
+#' | :--- | :--- |
+#' | *code* | ICD 10 Cause of Death code |
+#' | *title* | Cause of death title |
+#'
+#'
+#' @examples
+#' icd10_cod_neonate
+#'
+#' @source https://www.icd10data.com/ICD10CM/Codes/Rules/Newborn_Codes
+#'
+"icd10_cod_neonate"
+
+
+#'
+#' Neonate-specific cause of death for ICD 11
+#'
+#' @format A data frame with 2 columns and 50 rows:
+#'
+#' | **Variable** | **Description** |
+#' | :--- | :--- |
+#' | *code* | ICD 11 Cause of Death code |
+#' | *title* | Cause of death title |
+#'
+#'
+#' @examples
+#' icd11_cod_neonate
+#'
+#'
+"icd11_cod_neonate"
+
+
+#'
+#' Child-specific cause of death for ICD 10
+#'
+#' @format A data frame with 2 columns and 122 rows:
+#'
+#' | **Variable** | **Description** |
+#' | :--- | :--- |
+#' | *code* | ICD 10 Cause of Death code |
+#' | *title* | Cause of death title |
+#'
+#'
+#' @examples
+#' icd10_cod_child
+#'
+#' @source https://www.icd10data.com/ICD10CM/Codes/Rules/Pediatric_Codes
+#'
+"icd10_cod_child"
+
+
+#'
+#' Child-specific cause of death for ICD 11
+#'
+#' @format A data frame with 2 columns and 149 rows:
+#'
+#' | **Variable** | **Description** |
+#' | :--- | :--- |
+#' | *code* | ICD 11 Cause of Death code |
+#' | *title* | Cause of death title |
+#'
+#'
+#' @examples
+#' icd11_cod_child
+#'
+#'
+"icd11_cod_child"

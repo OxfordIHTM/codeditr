@@ -17,6 +17,7 @@ usethis::use_data(icd10_example, overwrite = TRUE, compress = "xz")
 icd11_example <- openxlsx2::read_xlsx(
   file = "data-raw/data_example_icd11.xlsx"
 ) |>
-  tibble::tibble()
+  tibble::tibble() |>
+  dplyr::rename(Sex = sex)
 
 usethis::use_data(icd11_example, overwrite = TRUE, compress = "xz")
