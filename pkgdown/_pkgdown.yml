@@ -84,4 +84,8 @@ reference:
     - icd11_unlikely_cod
     - icd10_cod_by_sex
     - icd11_cod_by_sex
+    - icd10_cod_neonate
+    - icd11_cod_neonate
+    - icd10_cod_child
+    - icd11_cod_child
     - cod_data_raw_example

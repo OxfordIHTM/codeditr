@@ -10,7 +10,10 @@
 #'   Otherwise, a tabulated summary of check outputs.
 #'
 #' @examples
-#' cod_check_code(cod_data_raw_example$code, version = "icd11", sex = "sex") |>
+#' cod_check_code(
+#'   cod_data_raw_example$code, version = "icd11",
+#'   sex = cod_data_raw_example$sex", age = cod_data_raw_example$age
+#' ) |>
 #'   cod_check_code_summary()
 #'
 #' @rdname cod_check_code_summary
@@ -23,6 +26,7 @@ cod_check_code_summary <- function(cod_check, simplify = FALSE) {
     cod_check |> dplyr::select(dplyr::contains("note_ill")),
     cod_check |> dplyr::select(dplyr::contains("note_unlikely")),
     cod_check |> dplyr::select(dplyr::contains("note_sex")),
+    cod_check |> dplyr::select(dplyr::contains("note_age")),
     cod_check |> dplyr::select(dplyr::all_of("cod_check_code_note"))
   ) |>
     (\(x)
@@ -30,6 +34,7 @@ cod_check_code_summary <- function(cod_check, simplify = FALSE) {
         names(x) <- c(
           "Code structure", "Ill-defined code",
           "Unlikely cause-of-death code", "Code not appropriate for sex",
+          "Code not appropriate for age",
           "Overall"
         )
         x

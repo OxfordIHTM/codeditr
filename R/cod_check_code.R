@@ -6,20 +6,22 @@
 #'   *"icd10"* or *"icd11"*. Default is *"icd10"*.
 #' @param sex A character value or vector of values for sex of individual
 #'   associated with the specified `cod`.
+#' @param age An integer value or vector of values for age (in years) of
+#'   individual.
 #'
 #' @returns A tibble with 2 columns/fields. First is an integer value indicating
 #'   whether there is an issue with the cause of death code provided in relation
 #'   to a potential code entry mistake and/or and issue of code completeness.
 #'
 #' @examples
-#' cod_check_code("U100", sex = 1)
-#' cod_check_code("2C6Z", version = "icd11", sex = 1)
+#' cod_check_code("U100", sex = 1, age = 10)
+#' cod_check_code("2C6Z", version = "icd11", sex = 1, age = 65)
 #'
 #' @rdname cod_check_code
 #' @export
 #'
 
-cod_check_code <- function(cod, version = c("icd10", "icd11"), sex) {
+cod_check_code <- function(cod, version = c("icd10", "icd11"), sex, age) {
   ## Determine value for version ----
   version <- match.arg(version)
 
@@ -45,9 +47,18 @@ cod_check_code <- function(cod, version = c("icd10", "icd11"), sex) {
   ) |>
     dplyr::rename_with(.fn = function(x) paste0(x, "_sex"))
 
+  cod_check_code_age <- eval(
+    parse(
+      text = paste0(
+        "cod_check_code_age_", version, "(cod = cod, age = age)"
+      )
+    )
+  ) |>
+    dplyr::rename_with(.fn = function(x) paste0(x, "_age"))
+
   tibble::tibble(
     cod_check_code_structure, cod_check_code_ill_defined,
-    cod_check_code_unlikely, cod_check_code_sex
+    cod_check_code_unlikely, cod_check_code_sex, cod_check_code_age
   ) |>
     dplyr::mutate(
       cod_check_code = rowSums(
@@ -55,7 +66,8 @@ cod_check_code <- function(cod, version = c("icd10", "icd11"), sex) {
           .data$cod_check_structure,
           .data$cod_check_ill_defined,
           .data$cod_check_unlikely,
-          .data$cod_check_sex
+          .data$cod_check_sex,
+          .data$cod_check_age
         ),
         na.rm = TRUE
       ) |>
@@ -463,3 +475,101 @@ cod_check_code_sex_icd11 <- function(cod, sex) {
     dplyr::bind_rows()
 }
 
+
+#'
+#' @rdname cod_check_code
+#' @export
+#'
+
+cod_check_code_age_icd10_ <- function(cod, age) {
+  if (cod %in% codeditr::icd10_cod_neonate$code) {
+    cod_check <- ifelse(age < 1, 0L, 1L)
+  } else {
+    if (cod %in% codeditr::icd10_cod_child$code) {
+      cod_check <- ifelse(age < 18, 0L, 1L)
+    } else {
+      cod_check <- 0L
+    }
+  }
+
+  cod_check_note <- ifelse(
+    cod_check == 0L,
+    "No issues found in CoD code",
+    "CoD code is not appropriate for person's age"
+  )
+
+  tibble::tibble(cod_check, cod_check_note) |>
+    dplyr::mutate(
+      cod_check_note = factor(
+        x = cod_check_note,
+        levels = c(
+          "No issues found in CoD code",
+          "CoD code is not appropriate for person's age"
+        )
+      )
+    )
+}
+
+
+#'
+#' @rdname cod_check_code
+#' @export
+#'
+
+cod_check_code_age_icd10 <- function(cod, age) {
+  Map(
+    f = cod_check_code_age_icd10_,
+    cod = cod,
+    age = age
+  ) |>
+    dplyr::bind_rows()
+}
+
+#'
+#' @rdname cod_check_code
+#' @export
+#'
+
+cod_check_code_age_icd11_ <- function(cod, age) {
+  if (cod %in% codeditr::icd11_cod_neonate$code) {
+    cod_check <- ifelse(age < 1, 0L, 1L)
+  } else {
+    if (cod %in% codeditr::icd11_cod_child$code) {
+      cod_check <- ifelse(age < 18, 0L, 1L)
+    } else {
+      cod_check <- 0L
+    }
+  }
+
+  cod_check_note <- ifelse(
+    cod_check == 0L,
+    "No issues found in CoD code",
+    "CoD code is not appropriate for person's age"
+  )
+
+  tibble::tibble(cod_check, cod_check_note) |>
+    dplyr::mutate(
+      cod_check_note = factor(
+        x = cod_check_note,
+        levels = c(
+          "No issues found in CoD code",
+          "CoD code is not appropriate for person's age"
+        )
+      )
+    )
+}
+
+
+#'
+#' @rdname cod_check_code
+#' @export
+#'
+
+cod_check_code_age_icd11 <- function(cod, age) {
+  Map(
+    f = cod_check_code_age_icd11_,
+    cod = cod,
+    age = age
+  ) |>
+    dplyr::bind_rows()
+}
