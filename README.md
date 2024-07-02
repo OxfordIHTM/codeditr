@@ -81,7 +81,7 @@ potentially large scale cause-of-death data quality checks.
 ## Installation
 
 `coeditr` is not yet on CRAN but can be installed through the [Oxford
-IHTM R-universe](https://oxfordihtm.r-universe.dev) with:
+IHTM R Universe](https://oxfordihtm.r-universe.dev) with:
 
 ``` r
 install.packages(
@@ -173,8 +173,11 @@ The `cod_check_code()` function performs all the checks implemented by
 the CoDEdit tool.
 
 ``` r
-cod_check_code(cod_data_raw_example$code, version = "icd11", sex = "sex")
-#> # A tibble: 20 × 10
+cod_check_code(
+  cod_data_raw_example$code, version = "icd11", 
+  sex = cod_data_raw_example$sex, age = cod_data_raw_example$age
+)
+#> # A tibble: 20 × 12
 #>    cod_check_structure cod_check_note_structure    cod_check_ill_defined
 #>                  <int> <fct>                                       <int>
 #>  1                   0 No issues found in CoD code                     0
@@ -197,17 +200,20 @@ cod_check_code(cod_data_raw_example$code, version = "icd11", sex = "sex")
 #> 18                   0 No issues found in CoD code                     0
 #> 19                   0 No issues found in CoD code                     0
 #> 20                   0 No issues found in CoD code                     0
-#> # ℹ 7 more variables: cod_check_note_ill_defined <fct>,
+#> # ℹ 9 more variables: cod_check_note_ill_defined <fct>,
 #> #   cod_check_unlikely <int>, cod_check_note_unlikely <fct>,
-#> #   cod_check_sex <int>, cod_check_note_sex <fct>, cod_check_code <dbl>,
-#> #   cod_check_code_note <fct>
+#> #   cod_check_sex <int>, cod_check_note_sex <fct>, cod_check_age <int>,
+#> #   cod_check_note_age <fct>, cod_check_code <dbl>, cod_check_code_note <fct>
 ```
 
 Results of the per row cause-of-death checks can also be summarised to
 give a count of issues found in the dataset.
 
 ``` r
-cod_check_code(cod_data_raw_example$code, version = "icd11", sex = "sex") |>
+cod_check_code(
+  cod_data_raw_example$code, version = "icd11", 
+  sex = cod_data_raw_example$sex, age = cod_data_raw_example$age
+) |>
   cod_check_code_summary()
 #> $`Code structure`
 #> # A tibble: 65 × 2
@@ -245,6 +251,13 @@ cod_check_code(cod_data_raw_example$code, version = "icd11", sex = "sex") |>
 #>   <fct>                                        <int>
 #> 1 No issues found in CoD code                     20
 #> 2 CoD code is not appropriate for person's sex     0
+#> 
+#> $`Code not appropriate for age`
+#> # A tibble: 2 × 2
+#>   cod_check_note                                   n
+#>   <fct>                                        <int>
+#> 1 No issues found in CoD code                     20
+#> 2 CoD code is not appropriate for person's age     0
 #> 
 #> $Overall
 #> # A tibble: 2 × 2
@@ -305,6 +318,58 @@ cod_check_code_ill_defined_icd11(cod_data_raw_example$code)
 
 ### Perform check for unlikely cause-of-death codes ----
 cod_check_code_unlikely_icd11(cod_data_raw_example$code)
+#> # A tibble: 20 × 2
+#>    cod_check cod_check_note             
+#>        <int> <fct>                      
+#>  1         0 No issues found in CoD code
+#>  2         0 No issues found in CoD code
+#>  3         0 No issues found in CoD code
+#>  4         0 No issues found in CoD code
+#>  5         0 No issues found in CoD code
+#>  6         0 No issues found in CoD code
+#>  7         0 No issues found in CoD code
+#>  8         0 No issues found in CoD code
+#>  9         0 No issues found in CoD code
+#> 10         0 No issues found in CoD code
+#> 11         0 No issues found in CoD code
+#> 12         0 No issues found in CoD code
+#> 13         0 No issues found in CoD code
+#> 14         0 No issues found in CoD code
+#> 15         0 No issues found in CoD code
+#> 16         0 No issues found in CoD code
+#> 17         0 No issues found in CoD code
+#> 18         0 No issues found in CoD code
+#> 19         0 No issues found in CoD code
+#> 20         0 No issues found in CoD code
+
+### Perform check for cause-of-death codes inappropriate for specific sex ----
+cod_check_code_sex_icd11(cod_data_raw_example$code, cod_data_raw_example$sex)
+#> # A tibble: 20 × 2
+#>    cod_check cod_check_note             
+#>        <int> <fct>                      
+#>  1         0 No issues found in CoD code
+#>  2         0 No issues found in CoD code
+#>  3         0 No issues found in CoD code
+#>  4         0 No issues found in CoD code
+#>  5         0 No issues found in CoD code
+#>  6         0 No issues found in CoD code
+#>  7         0 No issues found in CoD code
+#>  8         0 No issues found in CoD code
+#>  9         0 No issues found in CoD code
+#> 10         0 No issues found in CoD code
+#> 11         0 No issues found in CoD code
+#> 12         0 No issues found in CoD code
+#> 13         0 No issues found in CoD code
+#> 14         0 No issues found in CoD code
+#> 15         0 No issues found in CoD code
+#> 16         0 No issues found in CoD code
+#> 17         0 No issues found in CoD code
+#> 18         0 No issues found in CoD code
+#> 19         0 No issues found in CoD code
+#> 20         0 No issues found in CoD code
+
+### Perform check for cause-of-death codes inappropriate for specific age ----
+cod_check_code_age_icd11(cod_data_raw_example$code, cod_data_raw_example$age)
 #> # A tibble: 20 × 2
 #>    cod_check cod_check_note             
 #>        <int> <fct>                      

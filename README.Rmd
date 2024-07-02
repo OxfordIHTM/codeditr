@@ -50,7 +50,7 @@ This use case are for those that prefer not to use Microsoft Access (either beca
 
 ## Installation
 
-`coeditr` is not yet on CRAN but can be installed through the [Oxford IHTM R-universe](https://oxfordihtm.r-universe.dev) with:
+`coeditr` is not yet on CRAN but can be installed through the [Oxford IHTM R Universe](https://oxfordihtm.r-universe.dev) with:
 
 ```{r install, eval = FALSE}
 install.packages(
@@ -98,13 +98,19 @@ The output is a data.frame that can then be saved as an `.xlsx` file for use as 
 The `cod_check_code()` function performs all the checks implemented by the CoDEdit tool.
 
 ```{r use-case-3}
-cod_check_code(cod_data_raw_example$code, version = "icd11", sex = "sex")
+cod_check_code(
+  cod_data_raw_example$code, version = "icd11", 
+  sex = cod_data_raw_example$sex, age = cod_data_raw_example$age
+)
 ```
 
 Results of the per row cause-of-death checks can also be summarised to give a count of issues found in the dataset.
 
 ```{r use-case-4}
-cod_check_code(cod_data_raw_example$code, version = "icd11", sex = "sex") |>
+cod_check_code(
+  cod_data_raw_example$code, version = "icd11", 
+  sex = cod_data_raw_example$sex, age = cod_data_raw_example$age
+) |>
   cod_check_code_summary()
 ```
 
@@ -121,6 +127,12 @@ cod_check_code_ill_defined_icd11(cod_data_raw_example$code)
 
 ### Perform check for unlikely cause-of-death codes ----
 cod_check_code_unlikely_icd11(cod_data_raw_example$code)
+
+### Perform check for cause-of-death codes inappropriate for specific sex ----
+cod_check_code_sex_icd11(cod_data_raw_example$code, cod_data_raw_example$sex)
+
+### Perform check for cause-of-death codes inappropriate for specific age ----
+cod_check_code_age_icd11(cod_data_raw_example$code, cod_data_raw_example$age)
 ```
 
 ## Citation
