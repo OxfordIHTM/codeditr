@@ -1,0 +1,43 @@
+code,title
+A33,(https://www.icd10data.com/ICD10CM/Codes/A00-B99/A30-A49/A33-/A33)  Tetanus neonatorum
+E84.11,(https://www.icd10data.com/ICD10CM/Codes/E00-E89/E70-E88/E84-/E84.11)  Meconium ileus in cystic fibrosis
+H04.531,(https://www.icd10data.com/ICD10CM/Codes/H00-H59/H00-H05/H04-/H04.531)  Neonatal obstruction of right nasolacrimal duct
+H04.532,(https://www.icd10data.com/ICD10CM/Codes/H00-H59/H00-H05/H04-/H04.532)  Neonatal obstruction of left nasolacrimal duct
+H04.533,(https://www.icd10data.com/ICD10CM/Codes/H00-H59/H00-H05/H04-/H04.533)  Neonatal obstruction of bilateral nasolacrimal duct
+H04.539,(https://www.icd10data.com/ICD10CM/Codes/H00-H59/H00-H05/H04-/H04.539)  Neonatal obstruction of unspecified nasolacrimal duct
+N47.0,"(https://www.icd10data.com/ICD10CM/Codes/N00-N99/N40-N53/N47-/N47.0)  Adherent prepuce, newborn"
+Z00.110,(https://www.icd10data.com/ICD10CM/Codes/Z00-Z99/Z00-Z13/Z00-/Z00.110)  Health examination for newborn under 8 days old
+Z00.111,(https://www.icd10data.com/ICD10CM/Codes/Z00-Z99/Z00-Z13/Z00-/Z00.111)  Health examination for newborn 8 to 28 days old
+Z05.0,(https://www.icd10data.com/ICD10CM/Codes/Z00-Z99/Z00-Z13/Z05-/Z05.0)  Observation and evaluation of newborn for suspected cardiac condition ruled out
+Z05.1,(https://www.icd10data.com/ICD10CM/Codes/Z00-Z99/Z00-Z13/Z05-/Z05.1)  Observation and evaluation of newborn for suspected infectious condition ruled out
+Z05.2,(https://www.icd10data.com/ICD10CM/Codes/Z00-Z99/Z00-Z13/Z05-/Z05.2)  Observation and evaluation of newborn for suspected neurological condition ruled out
+Z05.3,(https://www.icd10data.com/ICD10CM/Codes/Z00-Z99/Z00-Z13/Z05-/Z05.3)  Observation and evaluation of newborn for suspected respiratory condition ruled out
+Z05.41,(https://www.icd10data.com/ICD10CM/Codes/Z00-Z99/Z00-Z13/Z05-/Z05.41)  Observation and evaluation of newborn for suspected genetic condition ruled out
+Z05.42,(https://www.icd10data.com/ICD10CM/Codes/Z00-Z99/Z00-Z13/Z05-/Z05.42)  Observation and evaluation of newborn for suspected metabolic condition ruled out
+Z05.43,(https://www.icd10data.com/ICD10CM/Codes/Z00-Z99/Z00-Z13/Z05-/Z05.43)  Observation and evaluation of newborn for suspected immunologic condition ruled out
+Z05.5,(https://www.icd10data.com/ICD10CM/Codes/Z00-Z99/Z00-Z13/Z05-/Z05.5)  Observation and evaluation of newborn for suspected gastrointestinal condition ruled out
+Z05.6,(https://www.icd10data.com/ICD10CM/Codes/Z00-Z99/Z00-Z13/Z05-/Z05.6)  Observation and evaluation of newborn for suspected genitourinary condition ruled out
+Z05.71,(https://www.icd10data.com/ICD10CM/Codes/Z00-Z99/Z00-Z13/Z05-/Z05.71)  Observation and evaluation of newborn for suspected skin and subcutaneous tissue condition ruled out
+Z05.72,(https://www.icd10data.com/ICD10CM/Codes/Z00-Z99/Z00-Z13/Z05-/Z05.72)  Observation and evaluation of newborn for suspected musculoskeletal condition ruled out
+Z05.73,(https://www.icd10data.com/ICD10CM/Codes/Z00-Z99/Z00-Z13/Z05-/Z05.73)  Observation and evaluation of newborn for suspected connective tissue condition ruled out
+Z05.81,(https://www.icd10data.com/ICD10CM/Codes/Z00-Z99/Z00-Z13/Z05-/Z05.81)  Observation and evaluation of newborn for suspected condition related to home physiologic monitoring device ruled out
+Z05.89,(https://www.icd10data.com/ICD10CM/Codes/Z00-Z99/Z00-Z13/Z05-/Z05.89)  Observation and evaluation of newborn for other specified suspected condition ruled out
+Z05.9,(https://www.icd10data.com/ICD10CM/Codes/Z00-Z99/Z00-Z13/Z05-/Z05.9)  Observation and evaluation of newborn for unspecified suspected condition ruled out
+Z38.00,"(https://www.icd10data.com/ICD10CM/Codes/Z00-Z99/Z30-Z39/Z38-/Z38.00)  Single liveborn infant, delivered vaginally"
+Z38.01,"(https://www.icd10data.com/ICD10CM/Codes/Z00-Z99/Z30-Z39/Z38-/Z38.01)  Single liveborn infant, delivered by cesarean"
+Z38.1,"(https://www.icd10data.com/ICD10CM/Codes/Z00-Z99/Z30-Z39/Z38-/Z38.1)  Single liveborn infant, born outside hospital"
+Z38.2,"(https://www.icd10data.com/ICD10CM/Codes/Z00-Z99/Z30-Z39/Z38-/Z38.2)  Single liveborn infant, unspecified as to place of birth"
+Z38.30,"(https://www.icd10data.com/ICD10CM/Codes/Z00-Z99/Z30-Z39/Z38-/Z38.30)  Twin liveborn infant, delivered vaginally"
+Z38.31,"(https://www.icd10data.com/ICD10CM/Codes/Z00-Z99/Z30-Z39/Z38-/Z38.31)  Twin liveborn infant, delivered by cesarean"
+Z38.4,"(https://www.icd10data.com/ICD10CM/Codes/Z00-Z99/Z30-Z39/Z38-/Z38.4)  Twin liveborn infant, born outside hospital"
+Z38.5,"(https://www.icd10data.com/ICD10CM/Codes/Z00-Z99/Z30-Z39/Z38-/Z38.5)  Twin liveborn infant, unspecified as to place of birth"
+Z38.61,"(https://www.icd10data.com/ICD10CM/Codes/Z00-Z99/Z30-Z39/Z38-/Z38.61)  Triplet liveborn infant, delivered vaginally"
+Z38.62,"(https://www.icd10data.com/ICD10CM/Codes/Z00-Z99/Z30-Z39/Z38-/Z38.62)  Triplet liveborn infant, delivered by cesarean"
+Z38.63,"(https://www.icd10data.com/ICD10CM/Codes/Z00-Z99/Z30-Z39/Z38-/Z38.63)  Quadruplet liveborn infant, delivered vaginally"
+Z38.64,"(https://www.icd10data.com/ICD10CM/Codes/Z00-Z99/Z30-Z39/Z38-/Z38.64)  Quadruplet liveborn infant, delivered by cesarean"
+Z38.65,"(https://www.icd10data.com/ICD10CM/Codes/Z00-Z99/Z30-Z39/Z38-/Z38.65)  Quintuplet liveborn infant, delivered vaginally"
+Z38.66,"(https://www.icd10data.com/ICD10CM/Codes/Z00-Z99/Z30-Z39/Z38-/Z38.66)  Quintuplet liveborn infant, delivered by cesarean"
+Z38.68,"(https://www.icd10data.com/ICD10CM/Codes/Z00-Z99/Z30-Z39/Z38-/Z38.68)  Other multiple liveborn infant, delivered vaginally"
+Z38.69,"(https://www.icd10data.com/ICD10CM/Codes/Z00-Z99/Z30-Z39/Z38-/Z38.69)  Other multiple liveborn infant, delivered by cesarean"
+Z38.7,"(https://www.icd10data.com/ICD10CM/Codes/Z00-Z99/Z30-Z39/Z38-/Z38.7)  Other multiple liveborn infant, born outside hospital"
+Z38.8,"(https://www.icd10data.com/ICD10CM/Codes/Z00-Z99/Z30-Z39/Z38-/Z38.8)  Other multiple liveborn infant, unspecified as to place of birth"

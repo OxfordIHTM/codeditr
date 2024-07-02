@@ -12,9 +12,13 @@
 \alias{cod_check_code_sex_icd10}
 \alias{cod_check_code_sex_icd11_}
 \alias{cod_check_code_sex_icd11}
+\alias{cod_check_code_age_icd10_}
+\alias{cod_check_code_age_icd10}
+\alias{cod_check_code_age_icd11_}
+\alias{cod_check_code_age_icd11}
 \title{Check cause of death code for code entry mistakes and/or code completeness}
 \usage{
-cod_check_code(cod, version = c("icd10", "icd11"), sex)
+cod_check_code(cod, version = c("icd10", "icd11"), sex, age)
 
 cod_check_code_structure_icd10(cod)
 
@@ -35,6 +39,14 @@ cod_check_code_sex_icd10(cod, sex)
 cod_check_code_sex_icd11_(cod, sex)
 
 cod_check_code_sex_icd11(cod, sex)
+
+cod_check_code_age_icd10_(cod, age)
+
+cod_check_code_age_icd10(cod, age)
+
+cod_check_code_age_icd11_(cod, age)
+
+cod_check_code_age_icd11(cod, age)
 }
 \arguments{
 \item{cod}{A character value or vector of values for cause of death code/s.}
@@ -44,6 +56,9 @@ cod_check_code_sex_icd11(cod, sex)
 
 \item{sex}{A character value or vector of values for sex of individual
 associated with the specified \code{cod}.}
+
+\item{age}{An integer value or vector of values for age (in years) of
+individual.}
 }
 \value{
 A tibble with 2 columns/fields. First is an integer value indicating
@@ -54,7 +69,7 @@ to a potential code entry mistake and/or and issue of code completeness.
 Check cause of death code for code entry mistakes and/or code completeness
 }
 \examples{
-cod_check_code("U100", sex = 1)
-cod_check_code("2C6Z", version = "icd11", sex = 1)
+cod_check_code("U100", sex = 1, age = 10)
+cod_check_code("2C6Z", version = "icd11", sex = 1, age = 65)
 
 }
