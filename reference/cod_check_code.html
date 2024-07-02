@@ -66,7 +66,7 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">cod_check_code</span><span class="op">(</span><span class="va">cod</span>, version <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"icd10"</span>, <span class="st">"icd11"</span><span class="op">)</span>, <span class="va">sex</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">cod_check_code</span><span class="op">(</span><span class="va">cod</span>, version <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"icd10"</span>, <span class="st">"icd11"</span><span class="op">)</span>, <span class="va">sex</span>, <span class="va">age</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">cod_check_code_structure_icd10</span><span class="op">(</span><span class="va">cod</span><span class="op">)</span></span>
 <span></span>
@@ -86,7 +86,15 @@
 <span></span>
 <span><span class="fu">cod_check_code_sex_icd11_</span><span class="op">(</span><span class="va">cod</span>, <span class="va">sex</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">cod_check_code_sex_icd11</span><span class="op">(</span><span class="va">cod</span>, <span class="va">sex</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">cod_check_code_sex_icd11</span><span class="op">(</span><span class="va">cod</span>, <span class="va">sex</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">cod_check_code_age_icd10_</span><span class="op">(</span><span class="va">cod</span>, <span class="va">age</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">cod_check_code_age_icd10</span><span class="op">(</span><span class="va">cod</span>, <span class="va">age</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">cod_check_code_age_icd11_</span><span class="op">(</span><span class="va">cod</span>, <span class="va">age</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">cod_check_code_age_icd11</span><span class="op">(</span><span class="va">cod</span>, <span class="va">age</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -104,6 +112,11 @@
 <dd><p>A character value or vector of values for sex of individual
 associated with the specified <code>cod</code>.</p></dd>
 
+
+<dt>age</dt>
+<dd><p>An integer value or vector of values for age (in years) of
+individual.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -116,24 +129,24 @@ to a potential code entry mistake and/or and issue of code completeness.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">cod_check_code</span><span class="op">(</span><span class="st">"U100"</span>, sex <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 10</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">cod_check_code</span><span class="op">(</span><span class="st">"U100"</span>, sex <span class="op">=</span> <span class="fl">1</span>, age <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 12</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   cod_check_structure cod_check_note_structure             cod_check_ill_defined</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>                                                <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>                   8 CoD code contains the character val…                     0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 7 more variables: cod_check_note_ill_defined &lt;fct&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 9 more variables: cod_check_note_ill_defined &lt;fct&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   cod_check_unlikely &lt;int&gt;, cod_check_note_unlikely &lt;fct&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   cod_check_sex &lt;int&gt;, cod_check_note_sex &lt;fct&gt;, cod_check_code &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   cod_check_code_note &lt;fct&gt;</span></span>
-<span class="r-in"><span><span class="fu">cod_check_code</span><span class="op">(</span><span class="st">"2C6Z"</span>, version <span class="op">=</span> <span class="st">"icd11"</span>, sex <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 10</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   cod_check_sex &lt;int&gt;, cod_check_note_sex &lt;fct&gt;, cod_check_age &lt;int&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   cod_check_note_age &lt;fct&gt;, cod_check_code &lt;dbl&gt;, cod_check_code_note &lt;fct&gt;</span></span>
+<span class="r-in"><span><span class="fu">cod_check_code</span><span class="op">(</span><span class="st">"2C6Z"</span>, version <span class="op">=</span> <span class="st">"icd11"</span>, sex <span class="op">=</span> <span class="fl">1</span>, age <span class="op">=</span> <span class="fl">65</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 12</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   cod_check_structure cod_check_note_structure    cod_check_ill_defined</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>                                       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>                   0 No issues found in CoD code                     0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 7 more variables: cod_check_note_ill_defined &lt;fct&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 9 more variables: cod_check_note_ill_defined &lt;fct&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   cod_check_unlikely &lt;int&gt;, cod_check_note_unlikely &lt;fct&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   cod_check_sex &lt;int&gt;, cod_check_note_sex &lt;fct&gt;, cod_check_code &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   cod_check_code_note &lt;fct&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   cod_check_sex &lt;int&gt;, cod_check_note_sex &lt;fct&gt;, cod_check_age &lt;int&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   cod_check_note_age &lt;fct&gt;, cod_check_code &lt;dbl&gt;, cod_check_code_note &lt;fct&gt;</span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
