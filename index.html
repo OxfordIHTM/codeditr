@@ -111,7 +111,7 @@
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p><code>coeditr</code> is not yet on CRAN but can be installed through the <a href="https://oxfordihtm.r-universe.dev" class="external-link">Oxford IHTM R-universe</a> with:</p>
+<p><code>coeditr</code> is not yet on CRAN but can be installed through the <a href="https://oxfordihtm.r-universe.dev" class="external-link">Oxford IHTM R Universe</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span></span>
 <span>  <span class="st">"codeditr"</span>,</span>
@@ -191,8 +191,11 @@
 </ol>
 <p>The <code><a href="reference/cod_check_code.html">cod_check_code()</a></code> function performs all the checks implemented by the CoDEdit tool.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/cod_check_code.html">cod_check_code</a></span><span class="op">(</span><span class="va">cod_data_raw_example</span><span class="op">$</span><span class="va">code</span>, version <span class="op">=</span> <span class="st">"icd11"</span>, sex <span class="op">=</span> <span class="st">"sex"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 20 × 10</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/cod_check_code.html">cod_check_code</a></span><span class="op">(</span></span>
+<span>  <span class="va">cod_data_raw_example</span><span class="op">$</span><span class="va">code</span>, version <span class="op">=</span> <span class="st">"icd11"</span>, </span>
+<span>  sex <span class="op">=</span> <span class="va">cod_data_raw_example</span><span class="op">$</span><span class="va">sex</span>, age <span class="op">=</span> <span class="va">cod_data_raw_example</span><span class="op">$</span><span class="va">age</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 20 × 12</span></span>
 <span><span class="co">#&gt;    cod_check_structure cod_check_note_structure    cod_check_ill_defined</span></span>
 <span><span class="co">#&gt;                  &lt;int&gt; &lt;fct&gt;                                       &lt;int&gt;</span></span>
 <span><span class="co">#&gt;  1                   0 No issues found in CoD code                     0</span></span>
@@ -215,13 +218,16 @@
 <span><span class="co">#&gt; 18                   0 No issues found in CoD code                     0</span></span>
 <span><span class="co">#&gt; 19                   0 No issues found in CoD code                     0</span></span>
 <span><span class="co">#&gt; 20                   0 No issues found in CoD code                     0</span></span>
-<span><span class="co">#&gt; # ℹ 7 more variables: cod_check_note_ill_defined &lt;fct&gt;,</span></span>
+<span><span class="co">#&gt; # ℹ 9 more variables: cod_check_note_ill_defined &lt;fct&gt;,</span></span>
 <span><span class="co">#&gt; #   cod_check_unlikely &lt;int&gt;, cod_check_note_unlikely &lt;fct&gt;,</span></span>
-<span><span class="co">#&gt; #   cod_check_sex &lt;int&gt;, cod_check_note_sex &lt;fct&gt;, cod_check_code &lt;dbl&gt;,</span></span>
-<span><span class="co">#&gt; #   cod_check_code_note &lt;fct&gt;</span></span></code></pre></div>
+<span><span class="co">#&gt; #   cod_check_sex &lt;int&gt;, cod_check_note_sex &lt;fct&gt;, cod_check_age &lt;int&gt;,</span></span>
+<span><span class="co">#&gt; #   cod_check_note_age &lt;fct&gt;, cod_check_code &lt;dbl&gt;, cod_check_code_note &lt;fct&gt;</span></span></code></pre></div>
 <p>Results of the per row cause-of-death checks can also be summarised to give a count of issues found in the dataset.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/cod_check_code.html">cod_check_code</a></span><span class="op">(</span><span class="va">cod_data_raw_example</span><span class="op">$</span><span class="va">code</span>, version <span class="op">=</span> <span class="st">"icd11"</span>, sex <span class="op">=</span> <span class="st">"sex"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/cod_check_code.html">cod_check_code</a></span><span class="op">(</span></span>
+<span>  <span class="va">cod_data_raw_example</span><span class="op">$</span><span class="va">code</span>, version <span class="op">=</span> <span class="st">"icd11"</span>, </span>
+<span>  sex <span class="op">=</span> <span class="va">cod_data_raw_example</span><span class="op">$</span><span class="va">sex</span>, age <span class="op">=</span> <span class="va">cod_data_raw_example</span><span class="op">$</span><span class="va">age</span></span>
+<span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="reference/cod_check_code_summary.html">cod_check_code_summary</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; $`Code structure`</span></span>
 <span><span class="co">#&gt; # A tibble: 65 × 2</span></span>
@@ -259,6 +265,13 @@
 <span><span class="co">#&gt;   &lt;fct&gt;                                        &lt;int&gt;</span></span>
 <span><span class="co">#&gt; 1 No issues found in CoD code                     20</span></span>
 <span><span class="co">#&gt; 2 CoD code is not appropriate for person's sex     0</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $`Code not appropriate for age`</span></span>
+<span><span class="co">#&gt; # A tibble: 2 × 2</span></span>
+<span><span class="co">#&gt;   cod_check_note                                   n</span></span>
+<span><span class="co">#&gt;   &lt;fct&gt;                                        &lt;int&gt;</span></span>
+<span><span class="co">#&gt; 1 No issues found in CoD code                     20</span></span>
+<span><span class="co">#&gt; 2 CoD code is not appropriate for person's age     0</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $Overall</span></span>
 <span><span class="co">#&gt; # A tibble: 2 × 2</span></span>
@@ -316,6 +329,58 @@
 <span></span>
 <span><span class="co">### Perform check for unlikely cause-of-death codes ----</span></span>
 <span><span class="fu"><a href="reference/cod_check_code.html">cod_check_code_unlikely_icd11</a></span><span class="op">(</span><span class="va">cod_data_raw_example</span><span class="op">$</span><span class="va">code</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 20 × 2</span></span>
+<span><span class="co">#&gt;    cod_check cod_check_note             </span></span>
+<span><span class="co">#&gt;        &lt;int&gt; &lt;fct&gt;                      </span></span>
+<span><span class="co">#&gt;  1         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt;  2         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt;  3         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt;  4         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt;  5         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt;  6         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt;  7         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt;  8         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt;  9         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; 10         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; 11         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; 12         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; 13         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; 14         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; 15         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; 16         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; 17         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; 18         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; 19         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; 20         0 No issues found in CoD code</span></span>
+<span></span>
+<span><span class="co">### Perform check for cause-of-death codes inappropriate for specific sex ----</span></span>
+<span><span class="fu"><a href="reference/cod_check_code.html">cod_check_code_sex_icd11</a></span><span class="op">(</span><span class="va">cod_data_raw_example</span><span class="op">$</span><span class="va">code</span>, <span class="va">cod_data_raw_example</span><span class="op">$</span><span class="va">sex</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 20 × 2</span></span>
+<span><span class="co">#&gt;    cod_check cod_check_note             </span></span>
+<span><span class="co">#&gt;        &lt;int&gt; &lt;fct&gt;                      </span></span>
+<span><span class="co">#&gt;  1         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt;  2         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt;  3         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt;  4         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt;  5         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt;  6         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt;  7         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt;  8         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt;  9         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; 10         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; 11         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; 12         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; 13         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; 14         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; 15         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; 16         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; 17         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; 18         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; 19         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; 20         0 No issues found in CoD code</span></span>
+<span></span>
+<span><span class="co">### Perform check for cause-of-death codes inappropriate for specific age ----</span></span>
+<span><span class="fu"><a href="reference/cod_check_code.html">cod_check_code_age_icd11</a></span><span class="op">(</span><span class="va">cod_data_raw_example</span><span class="op">$</span><span class="va">code</span>, <span class="va">cod_data_raw_example</span><span class="op">$</span><span class="va">age</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 20 × 2</span></span>
 <span><span class="co">#&gt;    cod_check cod_check_note             </span></span>
 <span><span class="co">#&gt;        &lt;int&gt; &lt;fct&gt;                      </span></span>
