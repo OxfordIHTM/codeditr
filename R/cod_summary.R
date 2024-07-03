@@ -60,3 +60,4 @@ cod_check_code_summary <- function(cod_check, simplify = FALSE) {
 
   cod_check_summary
 }
+

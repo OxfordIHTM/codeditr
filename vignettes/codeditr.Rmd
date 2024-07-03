@@ -18,4 +18,119 @@ knitr::opts_chunk$set(
 library(codeditr)
 ```
 
-The [World Health Organization](https://www.who.int/)'s [CoDEdit electronic tool](https://www.who.int/standards/classifications/classification-of-diseases/services/codedit-tool) is intended to help producers of cause-of-death statistics in strengthening their capacity to perform routine checks on their data. This package ports the original tool built using Microsoft Access into R. The aim is to leverage the utility and function of the original tool into a usable application program interface (API) that can be used for building more universal tools or for creating programmatic scientific workflows aimed at routine, automated, and large-scale monitoring of cause-of-death data.
+The [World Health Organization](https://www.who.int/)'s [CoDEdit electronic tool](https://www.who.int/standards/classifications/classification-of-diseases/services/codedit-tool) is intended to help producers of cause-of-death statistics in strengthening their capacity to perform routine checks on their data. This package ports the original tool built using Microsoft Access into R. The aim is to leverage the utility and function of the original tool into a usable application program interface (API) that can be used for building more universal applications or for creating programmatic scientific workflows aimed at routine, automated, and large-scale monitoring of cause-of-death data.
+
+## Workflows for cause-of-death data processing and data quality checks using `codeditr`
+
+### Perform checks on existing input data for CoDEdit tool
+
+Using the `icd10_example` dataset which is a dataset already formatted into a compatible structure required by the CoDEdit tool, we can perform a check on this dataset to see possible issues in its formatting and structure before using with the CoDEdit tool.
+
+```{r use-case-1a}
+cod_check_codedit_input(icd10_example)
+```
+
+The result is a data.frame the columns of which are the check codes and check notes for each of the four types of check performed on the data.
+
+1. Check input sex
+
+The CoDEdit tool requires sex to be provided as a value of 1 for males and a value of 2 for females. If the input value for sex does not use this format, the check will output a note saying that the sex value is missing.
+
+2. Check input age
+
+The CoDEdit tool requires age to be recorded as two values - age value and age type. Age value is the integer value for age based on age type which can either be in days (D), months (M), or years (Y).
+
+Age value | Age type
+:--- | :---
+0 - 27 | D (days)
+1 - 11 | M (months)
+1 - 125 | Y (years)
+
+The check uses this heuristic in determining if the age value and age type combination provided in the input data is appropriate for input into CoDEdit.
+
+3. Check code
+
+A low level check for cause-of-death code is performed which basically checks whether the values for the cause-of-death code are missing or not.
+
+4. Date of death code
+
+A low level check for date of death is performed which basically checks whether the values for the date of death are missing or not.
+
+### Structure raw cause-of-death data for input into CoDEdit tool
+
+Given a raw cause of death dataset that contains information on sex, date of birth, date of death, and cause-of-death code, we can format this into a compatible structure required by the CoDEdit tool.
+
+```{r use-case-2a}
+cod_structure_input(
+  df = cod_data_raw_example, 
+  sex = "sex", dob = "dob", dod = "dod", code = "code", id = "id"
+)
+```
+
+This output can then be stored as an `.xlsx` file and then uploaded into the CoDEdit tool.
+
+### Perform all checks on cause-of-death data
+
+The `cod_check_code()` function performs all the checks implemented by the CoDEdit tool.
+
+```{r use-case-3}
+cod_check_code(
+  cod_data_raw_example$code, version = "icd11", 
+  sex = cod_data_raw_example$sex, age = cod_data_raw_example$age
+)
+```
+
+Results of the per row cause-of-death checks can also be summarised to give a count of issues found in the dataset.
+
+```{r use-case-4}
+cod_check_code(
+  cod_data_raw_example$code, version = "icd11", 
+  sex = cod_data_raw_example$sex, age = cod_data_raw_example$age
+) |>
+  cod_check_code_summary()
+```
+
+### Perform specific check types on cause-of-death data
+
+The family of `cod_check_code_*` functions can be used to perform specific check types on the cause-of-death data.
+
+1. Check code structure
+
+```{r use-case-check-structure}
+### Perform code structure check on cause-of-death data ----
+cod_check_code_structure_icd11(cod_data_raw_example$code)
+```
+
+2. Check for ill-defined codes
+
+```{r use-case-check-ill}
+### Perform check for ill-defined codes on cause-of-death data ----
+cod_check_code_ill_defined_icd11(cod_data_raw_example$code)
+```
+
+3. Check for unlikely cause-of-death codes
+
+```{r use-case-check-unlikely}
+### Perform check for unlikely cause-of-death codes ----
+cod_check_code_unlikely_icd11(cod_data_raw_example$code)
+```
+
+4. Check for cause-of-death codes inappropriate for given sex
+
+```{r use-case-check-code-sex}
+### Perform check for cause-of-death codes inappropriate for specific sex ----
+cod_check_code_sex_icd11(cod_data_raw_example$code, cod_data_raw_example$sex)
+```
+
+5. Check for cause-of-death codes inappropriate for given age
+
+```{r use-case-check-code-age}
+### Perform check for cause-of-death codes inappropriate for specific age ----
+cod_check_code_age_icd11(cod_data_raw_example$code, cod_data_raw_example$age)
+```
+
+For more detailed discussion of the checks performed, see **[LINK TO THE CHECK CODE VIGNETTE]**
+
+
+
+

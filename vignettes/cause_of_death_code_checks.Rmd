@@ -1,0 +1,19 @@
+---
+title: "Cause-of-death code checks"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Cause-of-death code checks}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(codeditr)
+```
