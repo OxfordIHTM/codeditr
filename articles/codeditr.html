@@ -48,6 +48,12 @@
 <li class="nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="../articles/cause_of_death_code_checks.html">Cause-of-death code checks</a>
+  </div>
+</li>
       </ul>
 <form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off">
@@ -107,10 +113,377 @@ statistics in strengthening their capacity to perform routine checks on
 their data. This package ports the original tool built using Microsoft
 Access into R. The aim is to leverage the utility and function of the
 original tool into a usable application program interface (API) that can
-be used for building more universal tools or for creating programmatic
-scientific workflows aimed at routine, automated, and large-scale
-monitoring of cause-of-death data.</p>
-  </main>
+be used for building more universal applications or for creating
+programmatic scientific workflows aimed at routine, automated, and
+large-scale monitoring of cause-of-death data.</p>
+<div class="section level2">
+<h2 id="workflows-for-cause-of-death-data-processing-and-data-quality-checks-using-codeditr">Workflows for cause-of-death data processing and data quality checks
+using <code>codeditr</code><a class="anchor" aria-label="anchor" href="#workflows-for-cause-of-death-data-processing-and-data-quality-checks-using-codeditr"></a>
+</h2>
+<div class="section level3">
+<h3 id="perform-checks-on-existing-input-data-for-codedit-tool">Perform checks on existing input data for CoDEdit tool<a class="anchor" aria-label="anchor" href="#perform-checks-on-existing-input-data-for-codedit-tool"></a>
+</h3>
+<p>Using the <code>icd10_example</code> dataset which is a dataset
+already formatted into a compatible structure required by the CoDEdit
+tool, we can perform a check on this dataset to see possible issues in
+its formatting and structure before using with the CoDEdit tool.</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/cod_check_input.html">cod_check_codedit_input</a></span><span class="op">(</span><span class="va">icd10_example</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 3,613 × 8</span></span></span>
+<span><span class="co">#&gt;    sex_check sex_check_note  age_check age_check_note code_check code_check_note</span></span>
+<span><span class="co">#&gt;        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>         0 No issues with…         0 No issues wit…          0 Cause of death…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>         0 No issues with…         0 No issues wit…          0 Cause of death…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>         0 No issues with…         0 No issues wit…          0 Cause of death…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>         0 No issues with…         0 No issues wit…          0 Cause of death…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>         0 No issues with…         0 No issues wit…          0 Cause of death…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>         0 No issues with…         0 No issues wit…          0 Cause of death…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>         0 No issues with…         0 No issues wit…          0 Cause of death…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>         0 No issues with…         0 No issues wit…          0 Cause of death…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>         0 No issues with…         0 No issues wit…          0 Cause of death…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>         0 No issues with…         0 No issues wit…          0 Cause of death…</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 3,603 more rows</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 2 more variables: dod_check &lt;int&gt;, dod_check_note &lt;fct&gt;</span></span></span></code></pre></div>
+<p>The result is a data.frame the columns of which are the check codes
+and check notes for each of the four types of check performed on the
+data.</p>
+<ol style="list-style-type: decimal">
+<li>Check input sex</li>
+</ol>
+<p>The CoDEdit tool requires sex to be provided as a value of 1 for
+males and a value of 2 for females. If the input value for sex does not
+use this format, the check will output a note saying that the sex value
+is missing.</p>
+<ol start="2" style="list-style-type: decimal">
+<li>Check input age</li>
+</ol>
+<p>The CoDEdit tool requires age to be recorded as two values - age
+value and age type. Age value is the integer value for age based on age
+type which can either be in days (D), months (M), or years (Y).</p>
+<table class="table">
+<thead><tr class="header">
+<th align="left">Age value</th>
+<th align="left">Age type</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">0 - 27</td>
+<td align="left">D (days)</td>
+</tr>
+<tr class="even">
+<td align="left">1 - 11</td>
+<td align="left">M (months)</td>
+</tr>
+<tr class="odd">
+<td align="left">1 - 125</td>
+<td align="left">Y (years)</td>
+</tr>
+</tbody>
+</table>
+<p>The check uses this heuristic in determining if the age value and age
+type combination provided in the input data is appropriate for input
+into CoDEdit.</p>
+<ol start="3" style="list-style-type: decimal">
+<li>Check code</li>
+</ol>
+<p>A low level check for cause-of-death code is performed which
+basically checks whether the values for the cause-of-death code are
+missing or not.</p>
+<ol start="4" style="list-style-type: decimal">
+<li>Date of death code</li>
+</ol>
+<p>A low level check for date of death is performed which basically
+checks whether the values for the date of death are missing or not.</p>
+</div>
+<div class="section level3">
+<h3 id="structure-raw-cause-of-death-data-for-input-into-codedit-tool">Structure raw cause-of-death data for input into CoDEdit tool<a class="anchor" aria-label="anchor" href="#structure-raw-cause-of-death-data-for-input-into-codedit-tool"></a>
+</h3>
+<p>Given a raw cause of death dataset that contains information on sex,
+date of birth, date of death, and cause-of-death code, we can format
+this into a compatible structure required by the CoDEdit tool.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/cod_structure.html">cod_structure_input</a></span><span class="op">(</span></span>
+<span>  df <span class="op">=</span> <span class="va">cod_data_raw_example</span>, </span>
+<span>  sex <span class="op">=</span> <span class="st">"sex"</span>, dob <span class="op">=</span> <span class="st">"dob"</span>, dod <span class="op">=</span> <span class="st">"dod"</span>, code <span class="op">=</span> <span class="st">"code"</span>, id <span class="op">=</span> <span class="st">"id"</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 20 × 6</span></span></span>
+<span><span class="co">#&gt;    FreeId   Sex `Age Value` `Age Type` Code          `Death Date`</span></span>
+<span><span class="co">#&gt;     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>   <span style="text-decoration: underline;">4</span>136     1        <span style="text-decoration: underline;">1</span>318 Y          NE84&amp;XA6KU8   2023        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>   <span style="text-decoration: underline;">4</span>137     2        <span style="text-decoration: underline;">1</span>318 Y          2B6D&amp;XS9R     2023        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>   <span style="text-decoration: underline;">4</span>138     1        <span style="text-decoration: underline;">1</span>318 Y          2C82&amp;XS9R     2023        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>   <span style="text-decoration: underline;">4</span>139     1        <span style="text-decoration: underline;">1</span>318 Y          CA40.Z&amp;XK9J   2023        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>   <span style="text-decoration: underline;">4</span>140     2        <span style="text-decoration: underline;">1</span>318 Y          6C40.3&amp;XS25   2023        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>   <span style="text-decoration: underline;">4</span>141     1        <span style="text-decoration: underline;">1</span>318 Y          6C40.3&amp;XS25   2023        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>   <span style="text-decoration: underline;">4</span>142     1        <span style="text-decoration: underline;">1</span>318 Y          DB94.1&amp;XT8W   2023        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>   <span style="text-decoration: underline;">4</span>143     2        <span style="text-decoration: underline;">1</span>318 Y          BD40.Z        2023        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>   <span style="text-decoration: underline;">4</span>144     2        <span style="text-decoration: underline;">1</span>318 Y          2C76.Z&amp;XA8QA8 2023        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>   <span style="text-decoration: underline;">4</span>145     1        <span style="text-decoration: underline;">1</span>318 Y          6C40.3&amp;XS25   2023        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span>   <span style="text-decoration: underline;">4</span>146     2        <span style="text-decoration: underline;">1</span>318 Y          8B11.5Z       2023        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span>   <span style="text-decoration: underline;">4</span>147     1        <span style="text-decoration: underline;">1</span>318 Y          2B90.Y&amp;XH74S1 2023        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span>   <span style="text-decoration: underline;">4</span>148     1        <span style="text-decoration: underline;">1</span>318 Y          BD10&amp;XT5R     2023        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">14</span>   <span style="text-decoration: underline;">4</span>149     1        <span style="text-decoration: underline;">1</span>318 Y          1G41          2023        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span>   <span style="text-decoration: underline;">4</span>150     1        <span style="text-decoration: underline;">1</span>318 Y          BD10&amp;XT5R     2023        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">16</span>   <span style="text-decoration: underline;">4</span>151     2        <span style="text-decoration: underline;">1</span>318 Y          CA40.Z&amp;XB25   2023        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">17</span>   <span style="text-decoration: underline;">4</span>152     2        <span style="text-decoration: underline;">1</span>318 Y          BA01          2023        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">18</span>   <span style="text-decoration: underline;">4</span>153     1        <span style="text-decoration: underline;">1</span>318 Y          1G41          2023        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">19</span>   <span style="text-decoration: underline;">4</span>154     2        <span style="text-decoration: underline;">1</span>318 Y          BB40          2023        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">20</span>   <span style="text-decoration: underline;">4</span>155     1        <span style="text-decoration: underline;">1</span>318 Y          1B91          2023</span></span></code></pre></div>
+<p>This output can then be stored as an <code>.xlsx</code> file and then
+uploaded into the CoDEdit tool.</p>
+</div>
+<div class="section level3">
+<h3 id="perform-all-checks-on-cause-of-death-data">Perform all checks on cause-of-death data<a class="anchor" aria-label="anchor" href="#perform-all-checks-on-cause-of-death-data"></a>
+</h3>
+<p>The <code><a href="../reference/cod_check_code.html">cod_check_code()</a></code> function performs all the checks
+implemented by the CoDEdit tool.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/cod_check_code.html">cod_check_code</a></span><span class="op">(</span></span>
+<span>  <span class="va">cod_data_raw_example</span><span class="op">$</span><span class="va">code</span>, version <span class="op">=</span> <span class="st">"icd11"</span>, </span>
+<span>  sex <span class="op">=</span> <span class="va">cod_data_raw_example</span><span class="op">$</span><span class="va">sex</span>, age <span class="op">=</span> <span class="va">cod_data_raw_example</span><span class="op">$</span><span class="va">age</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 20 × 12</span></span></span>
+<span><span class="co">#&gt;    cod_check_structure cod_check_note_structure    cod_check_ill_defined</span></span>
+<span><span class="co">#&gt;                  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>                                       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>                   0 No issues found in CoD code                     0</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>                   0 No issues found in CoD code                     0</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>                   0 No issues found in CoD code                     0</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>                   0 No issues found in CoD code                     0</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>                   0 No issues found in CoD code                     0</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>                   0 No issues found in CoD code                     0</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>                   0 No issues found in CoD code                     0</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>                   0 No issues found in CoD code                     0</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>                   0 No issues found in CoD code                     0</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>                   0 No issues found in CoD code                     0</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span>                   0 No issues found in CoD code                     0</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span>                   0 No issues found in CoD code                     0</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span>                   0 No issues found in CoD code                     0</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">14</span>                   0 No issues found in CoD code                     0</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span>                   0 No issues found in CoD code                     0</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">16</span>                   0 No issues found in CoD code                     0</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">17</span>                   0 No issues found in CoD code                     0</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">18</span>                   0 No issues found in CoD code                     0</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">19</span>                   0 No issues found in CoD code                     0</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">20</span>                   0 No issues found in CoD code                     0</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 9 more variables: cod_check_note_ill_defined &lt;fct&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   cod_check_unlikely &lt;int&gt;, cod_check_note_unlikely &lt;fct&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   cod_check_sex &lt;int&gt;, cod_check_note_sex &lt;fct&gt;, cod_check_age &lt;int&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   cod_check_note_age &lt;fct&gt;, cod_check_code &lt;dbl&gt;, cod_check_code_note &lt;fct&gt;</span></span></span></code></pre></div>
+<p>Results of the per row cause-of-death checks can also be summarised
+to give a count of issues found in the dataset.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/cod_check_code.html">cod_check_code</a></span><span class="op">(</span></span>
+<span>  <span class="va">cod_data_raw_example</span><span class="op">$</span><span class="va">code</span>, version <span class="op">=</span> <span class="st">"icd11"</span>, </span>
+<span>  sex <span class="op">=</span> <span class="va">cod_data_raw_example</span><span class="op">$</span><span class="va">sex</span>, age <span class="op">=</span> <span class="va">cod_data_raw_example</span><span class="op">$</span><span class="va">age</span></span>
+<span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/cod_check_code_summary.html">cod_check_code_summary</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; $`Code structure`</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 65 × 2</span></span></span>
+<span><span class="co">#&gt;    cod_check_note                                                              n</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>                                                                   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> No issues found in CoD code                                                20</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> CoD code has a period (`.`) character in the wrong place                    0</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> CoD code starts with `O` or `I`                                             0</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> CoD code has a period (`.`) character in the wrong place; CoD code sta…     0</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> CoD code has a number as its second value                                   0</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> CoD code has a period (`.`) character in the wrong place; CoD code has…     0</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> CoD code starts with `O` or `I`; CoD code has a number as its second v…     0</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> CoD code has a period (`.`) character in the wrong place; CoD code sta…     0</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> CoD code has `O` or `I` as its second value                                 0</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> CoD code has a period (`.`) character in the wrong place; CoD code has…     0</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 55 more rows</span></span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $`Ill-defined code`</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 2</span></span></span>
+<span><span class="co">#&gt;   cod_check_note                      n</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>                           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> No issues found in CoD code        20</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> CoD code is an ill-defined code     0</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $`Unlikely cause-of-death code`</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 2</span></span></span>
+<span><span class="co">#&gt;   cod_check_note                             n</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>                                  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> No issues found in CoD code               20</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> CoD code is an unlikely cause-of-death     0</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $`Code not appropriate for sex`</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 2</span></span></span>
+<span><span class="co">#&gt;   cod_check_note                                   n</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>                                        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> No issues found in CoD code                     20</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> CoD code is not appropriate for person's sex     0</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $`Code not appropriate for age`</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 2</span></span></span>
+<span><span class="co">#&gt;   cod_check_note                                   n</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>                                        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> No issues found in CoD code                     20</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> CoD code is not appropriate for person's age     0</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $Overall</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 2</span></span></span>
+<span><span class="co">#&gt;   cod_check_note                  n</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>                       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> No issues found in CoD code    20</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> Issues found in CoD code        0</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="perform-specific-check-types-on-cause-of-death-data">Perform specific check types on cause-of-death data<a class="anchor" aria-label="anchor" href="#perform-specific-check-types-on-cause-of-death-data"></a>
+</h3>
+<p>The family of <code>cod_check_code_*</code> functions can be used to
+perform specific check types on the cause-of-death data.</p>
+<ol style="list-style-type: decimal">
+<li>Check code structure</li>
+</ol>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">### Perform code structure check on cause-of-death data ----</span></span>
+<span><span class="fu"><a href="../reference/cod_check_code.html">cod_check_code_structure_icd11</a></span><span class="op">(</span><span class="va">cod_data_raw_example</span><span class="op">$</span><span class="va">code</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 20 × 2</span></span></span>
+<span><span class="co">#&gt;    cod_check cod_check_note             </span></span>
+<span><span class="co">#&gt;        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>                      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">14</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">16</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">17</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">18</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">19</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">20</span>         0 No issues found in CoD code</span></span></code></pre></div>
+<ol start="2" style="list-style-type: decimal">
+<li>Check for ill-defined codes</li>
+</ol>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">### Perform check for ill-defined codes on cause-of-death data ----</span></span>
+<span><span class="fu"><a href="../reference/cod_check_code.html">cod_check_code_ill_defined_icd11</a></span><span class="op">(</span><span class="va">cod_data_raw_example</span><span class="op">$</span><span class="va">code</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 20 × 2</span></span></span>
+<span><span class="co">#&gt;    cod_check cod_check_note             </span></span>
+<span><span class="co">#&gt;        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>                      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">14</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">16</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">17</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">18</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">19</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">20</span>         0 No issues found in CoD code</span></span></code></pre></div>
+<ol start="3" style="list-style-type: decimal">
+<li>Check for unlikely cause-of-death codes</li>
+</ol>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">### Perform check for unlikely cause-of-death codes ----</span></span>
+<span><span class="fu"><a href="../reference/cod_check_code.html">cod_check_code_unlikely_icd11</a></span><span class="op">(</span><span class="va">cod_data_raw_example</span><span class="op">$</span><span class="va">code</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 20 × 2</span></span></span>
+<span><span class="co">#&gt;    cod_check cod_check_note             </span></span>
+<span><span class="co">#&gt;        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>                      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">14</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">16</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">17</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">18</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">19</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">20</span>         0 No issues found in CoD code</span></span></code></pre></div>
+<ol start="4" style="list-style-type: decimal">
+<li>Check for cause-of-death codes inappropriate for given sex</li>
+</ol>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">### Perform check for cause-of-death codes inappropriate for specific sex ----</span></span>
+<span><span class="fu"><a href="../reference/cod_check_code.html">cod_check_code_sex_icd11</a></span><span class="op">(</span><span class="va">cod_data_raw_example</span><span class="op">$</span><span class="va">code</span>, <span class="va">cod_data_raw_example</span><span class="op">$</span><span class="va">sex</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 20 × 2</span></span></span>
+<span><span class="co">#&gt;    cod_check cod_check_note             </span></span>
+<span><span class="co">#&gt;        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>                      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">14</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">16</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">17</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">18</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">19</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">20</span>         0 No issues found in CoD code</span></span></code></pre></div>
+<ol start="5" style="list-style-type: decimal">
+<li>Check for cause-of-death codes inappropriate for given age</li>
+</ol>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">### Perform check for cause-of-death codes inappropriate for specific age ----</span></span>
+<span><span class="fu"><a href="../reference/cod_check_code.html">cod_check_code_age_icd11</a></span><span class="op">(</span><span class="va">cod_data_raw_example</span><span class="op">$</span><span class="va">code</span>, <span class="va">cod_data_raw_example</span><span class="op">$</span><span class="va">age</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 20 × 2</span></span></span>
+<span><span class="co">#&gt;    cod_check cod_check_note             </span></span>
+<span><span class="co">#&gt;        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>                      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">14</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">16</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">17</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">18</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">19</span>         0 No issues found in CoD code</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">20</span>         0 No issues found in CoD code</span></span></code></pre></div>
+<p>For more detailed discussion of the checks performed, see
+<strong>[LINK TO THE CHECK CODE VIGNETTE]</strong></p>
+</div>
+</div>
+  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+    </nav></aside>
 </div>
 
 
