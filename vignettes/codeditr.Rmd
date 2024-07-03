@@ -1,0 +1,21 @@
+---
+title: "Implementing Cause-of-Death Data Checks with codeditr"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Implementing Cause-of-Death Data Checks with codeditr}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(codeditr)
+```
+
+The [World Health Organization](https://www.who.int/)'s [CoDEdit electronic tool](https://www.who.int/standards/classifications/classification-of-diseases/services/codedit-tool) is intended to help producers of cause-of-death statistics in strengthening their capacity to perform routine checks on their data. This package ports the original tool built using Microsoft Access into R. The aim is to leverage the utility and function of the original tool into a usable application program interface (API) that can be used for building more universal tools or for creating programmatic scientific workflows aimed at routine, automated, and large-scale monitoring of cause-of-death data.
