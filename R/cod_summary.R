@@ -12,7 +12,7 @@
 #' @examples
 #' cod_check_code(
 #'   cod_data_raw_example$code, version = "icd11",
-#'   sex = cod_data_raw_example$sex", age = cod_data_raw_example$age
+#'   sex = cod_data_raw_example$sex, age = cod_data_raw_example$age
 #' ) |>
 #'   cod_check_code_summary()
 #'
