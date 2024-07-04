@@ -14,6 +14,278 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
+```{r setup, echo = FALSE}
 library(codeditr)
+
+get_score_combo <- function(scores, labels) {
+  ## Check that length(scores) == length(labels) ----
+  if (length(scores) != length(labels))
+    stop("Scores should have the same lenght as labels.")
+
+  ## Initialize a list to store all combinations ----
+  all_combinations_scores <- list()
+  all_combinations_labels <- list()
+
+  ## Loop over the length of combinations ----
+  for (len in seq_len(length(scores))) {
+    ### Get all combinations of length 'len' ----
+    combs_scores <- utils::combn(x = scores, m = len)
+    combs_labels <- utils::combn(x = labels, m = len)
+
+    ### Convert matrix to list of vectors ----
+    combs_scores_list <- lapply(
+      X = seq_len(ncol(combs_scores)),
+      FUN = function(i) combs_scores[ , i]
+    )
+
+    combs_labels_list <- lapply(
+      X = seq_len(ncol(combs_labels)),
+      FUN = function(i) combs_labels[ , i]
+    )
+
+    ### Append to the list of all combinations ----
+    all_combinations_scores <- c(all_combinations_scores, combs_scores_list)
+    all_combinations_labels <- c(all_combinations_labels, combs_labels_list)
+  }
+
+  df <- tibble::tibble(
+    score_combos = lapply(all_combinations_scores, paste0, collapse = ",") |>
+        unlist(),
+    cod_check = lapply(all_combinations_scores, sum) |>
+      unlist() |> as.integer(),
+    cod_check_note = lapply(all_combinations_labels, paste0, collapse = "; ") |>
+        unlist()
+  ) |>
+    dplyr::arrange(.data$cod_check)
+
+  df
+}
 ```
+
+The `codeditr` package performs 5 types of cause-of-death code checks: 1) check on code structure; 2) check for ill-defined codes; 3) check for unlikely cause-of-death codes; 4) check for cause-of-death appropriate for sex; and 5) check for cause-of-death appropriate for age.
+
+## Code structure
+
+The codes used for cause-of-death have a specific coding structure which depends on the ICD version used. For ICD-10, codes have the following structure:
+
+1. Alphanumeric 3 - 5 characters
+2. Character 1 is alpha (all letters except U are used)
+3. Character 2 is numeric
+4. The remaining 5 characters may be any combination of alpha/numeric
+5. Use of decimal after 3 characters
+6. Alpha characters are not case-sensitive
+
+For ICD-11, codes have the following structure:
+
+1. Alphanumeric characters
+2. Character 1 range from characters 1 - 9 and A to X except for the letters I and O which are not used to prevent confusion with the numbers 1 and 0
+3. Character 2 is alpha
+4. Character 3 is numeric
+5. Character 4 is alphanumeric ranging from 0-9 and then A-Z execpt for the letters I and O which are not used to prevent confusion with the numbers 1 and 0
+
+The functions `cod_check_code_structure_icd10()` and `cod_check_code_structure_icd11()` performs the appropriate heuristics for checking the structure of cause-of-death codes based on their ICD version and outputs a data.frame with a numeric check code field and a character string check code note field. Given that mulitple structural errors/issues with cause-of-death code structure can simultaneously exist, each check code represents a combination of possible errors. Following are the different check codes and their check code notes:
+
+### Cause-of-death code structure checks for ICD-10 version
+
+```{r cod-check-code-icd10, echo = FALSE}
+check_values <- get_score_combo(
+  scores = c(1, 2, 4, 8, 16),
+  labels = c(
+    "CoD code has a period (`.`) character in the wrong place",
+    "CoD code is 2 or less characters long",
+    "CoD code does not start with a character value",
+    "CoD code contains the character value `U`",
+    "CoD code uses asterisk"
+  )
+)
+
+rbind(
+  tibble::tibble(
+    score_combos = "0", cod_check = 0L, 
+    cod_check_note = "No issues found in CoD code"
+  ),
+  check_values,
+  tibble::tibble(
+    score_combos = "32", cod_check = 32L, 
+    cod_check_note = "CoD code is missing"
+  )
+) |>
+  knitr::kable(
+    col.names = c("Score Combinations", "CoD Check Score", "CoD Check Note"))
+```
+
+### Cause-of-death code structure checks for ICD-11 version
+
+```{r cod-check-code-icd11, echo = FALSE}
+check_values <- get_score_combo(
+  scores = c(1, 2, 4, 8, 16, 32),
+  labels = c(
+    "CoD code has a period (`.`) character in the wrong place",
+    "CoD code starts with `O` or `I`",
+    "CoD code has a number as its second value",
+    "CoD code has `O` or `I` as its second value",
+    "CoD code has a letter as its third value",
+    "CoD code has `O` or `I` as its fourth value"
+  )
+)
+
+rbind(
+  tibble::tibble(
+    score_combos = "0", cod_check = 0L, 
+    cod_check_note = "No issues found in CoD code"
+  ),
+  check_values,
+  tibble::tibble(
+    score_combos = "64", cod_check = 64L, 
+    cod_check_note = "CoD code is missing"
+  )
+) |>
+  knitr::kable(
+    col.names = c("Score Combinations", "CoD Check Score", "CoD Check Note"))
+```
+
+These cause-of-death code structure checks are meant to detect writing/typing/encoding issues and gives feedback as to what potentially needs correction by the person performing the coding. Hence, these checks are most useful during routine cause-of-death code data quality checks prior to finalisation of cause-of-death data for reporting and/or statistical analysis use.
+
+## Ill-defined cause-of-death codes
+
+Ill-defined cause-of-death codes include codes for symptoms, signs, abnormal results of clinical or other investigative procedures, and ill-defined conditions regarding which no diagnosis classifiable elsewhere is recorded.
+
+The cause-of-death coding steps/process for both ICD-10 and ICD-11 gives clear guidance on how to handle ill-defined codes during the coding process and for the most part, ill-defined codes are considered unreportable. Compared to issues with cause-of-death code structure, ill-defined codes are primarily issues with the actual death certification by the certifying individual rather than a issues with the coding process. The only way to rectify an ill-defined cause-of-death code is to go back to the actual patient record to see if there are any information that can support providing more detail for the coder and/or go back to the certifying individual for them to provide the additional information. These rectifying steps are likely infeasible for most contexts.
+
+Following are the ill-defined codes for the ICD-10[^1] and ICD-11[^2] versions.
+
+```{r ill-defined-codes, echo = FALSE}
+data.frame(
+  icd_version = c("ICD-10", "ICD-11"),
+  ill_defined_codes = c(
+    "R00-R94, R96-R99, Y10-Y34, Y87.2, C76, C80, C97, I47.2, I49.0, I46, I50, I51.4, I51.5, I51.6, I51.9, I70.9",
+    "BD10-BD1Z, BA2Z, BE2Y, BE2Z, CB41.0, CB41.2, KB2D, KB2E, Chapter 21 codes"
+  )
+) |>
+  knitr::kable(col.names = c("ICD Version", "Ill-defined Codes"))
+```
+
+Presence of ill-defined codes in the cause-of-death registry is critical as this can impact reported mortality statistics. This is the reason why one of the standard indicators for cause-of-death data quality is the proportion of ill-defined causes in cause-of-death registration[^3].
+
+The functions `cod_check_code_ill_defined_icd10()` and `cod_check_code_ill_defined_icd11()` classifies a cause-of-death code as follows:
+
+```{r ill-defined-coding, echo = FALSE}
+data.frame(
+  cod_check <- c(0L, 1L),
+  cod_check_note <- ifelse(
+    cod_check == 0L,
+    "No issues found in CoD code",
+    "CoD code is an ill-defined code"
+  )
+) |>
+  knitr::kable(col.names = c("CoD Check Score", "CoD Check Note"))
+```
+
+## Unlikely cause-of-death codes
+
+An unlikely cause-of-death code is anything that is marked as a cause-of-death on a death certificate that cannot officially kill someone.
+
+Similar to issues with ill-defined codes, unlikely cause-of-death codes are primarily issues with the actual death certification by the certifying individual rather than a issues with the coding process. The only way to rectify an unlikely cause-of-death code is to go back to the actual patient record to see if there are any information that can support providing more detail for the coder and/or go back to the certifying individual for them to provide the additional information. These rectifying steps are likely infeasible for most contexts.
+
+Following are the unlikely cause-of-death codes for the ICD-10[^4] and ICD-11[^5] versions.
+
+```{r sex-specific-cod-codes, echo = FALSE}
+data.frame(
+  icd_version = c("ICD-10", "ICD-11"),
+  ill_defined_codes = c(
+    paste(icd10_unlikely_cod$code, collapse = ", "),
+    paste(icd11_unlikely_cod$code, collapse = ", ")
+  )
+) |>
+  knitr::kable(col.names = c("ICD Version", "Unlikely Cause-of-Death Codes"))
+```
+
+The `codeditr` package comes with datasets for ICD-10 (`icd10_unlikely_cod`) and ICD-11 (`icd11_unlikely_cod`) unlikely codes as reference.
+
+Presence of unlikely causes-of-death codes in the cause-of-death registry is critical as this can impact reported mortality statistics. Unlikely causes-of-death codes have also been termed as *garbage codes*[^6].
+
+The functions `cod_check_code_unlikely_icd10()` and `cod_check_code_unlikely_icd11()` classifies a cause-of-death code as follows:
+
+```{r sex-specific-coding, echo = FALSE}
+data.frame(
+  cod_check <- c(0L, 1L),
+  cod_check_note <- ifelse(
+    cod_check == 0L,
+    "No issues found in CoD code",
+    "CoD code is an unlikely cause-of-death"
+  )
+) |>
+  knitr::kable(col.names = c("CoD Check Score", "CoD Check Note"))
+```
+
+## Cause-of-death code not appropriate for sex
+
+Certain cause-of-death codes are limited to or more likely to occur only to a specific sex. This type of cause-of-death issue is most likely due to a recording or coding issue and can potentially be corrected if identified early in the coding process.
+
+Following are cause-of-death codes for the ICD-10[^7] and ICD-11[^8] versions specific to males and females.
+
+```{r male-specific-codes, echo = FALSE}
+data.frame(
+  icd_version = c("ICD-10", "ICD-11"),
+  male_specific = c(
+    paste(icd10_cod_by_sex$code[icd10_cod_by_sex$sex == 1], collapse = ", "),
+    paste(icd11_cod_by_sex$code[icd11_cod_by_sex$sex == 1], collapse = ", ")
+  )
+) |>
+  knitr::kable(
+    col.names = c(
+      "ICD Version", 
+      "Male-Specific Cause-of-Death Codes"
+    )
+  )
+```
+
+```{r female-specific-codes, echo = FALSE}
+data.frame(
+  icd_version = c("ICD-10", "ICD-11"),
+  female_specific = c(
+    paste(icd10_cod_by_sex$code[icd10_cod_by_sex$sex == 2], collapse = ", "),
+    paste(icd11_cod_by_sex$code[icd11_cod_by_sex$sex == 2], collapse = ", ")
+  )
+) |>
+  knitr::kable(
+    col.names = c(
+      "ICD Version", 
+      "Female-Specific Cause-of-Death Codes"
+    )
+  )
+```
+
+The functions `cod_check_code_sex_icd10()` and `cod_check_code_sex_icd11()` classifies a cause-of-death code as follows:
+
+```{r unlikely-coding, echo = FALSE}
+data.frame(
+  cod_check <- c(0L, 1L),
+  cod_check_note <- ifelse(
+    cod_check == 0L,
+    "No issues found in CoD code",
+    "CoD code is not appropriate for person's sex"
+  )
+) |>
+  knitr::kable(col.names = c("CoD Check Score", "CoD Check Note"))
+```
+
+## Bibliogrpahy
+
+[^1]: World Health Organization. International Classification of Diseases Tenth Revision (ICD-10). Sixth Edition. Vol. 2 Instruction Manual. Geneva: World Health Organization, 2019. https://icd.who.int/browse10/Content/statichtml/ICD10Volume2_en_2019.pdf.
+
+
+[^2]: World Health Organization. International Classification of Disease Eleventh Revision (ICD-11). Geneva: World Health Organization, 2022. https://icdcdn.who.int/icd11referenceguide/en/html/index.html.
+
+
+[^3]: https://www.who.int/data/gho/indicator-metadata-registry/imr-details/3057#:~:text=The%20following%20ICD%2D10%20codes,2%2C%20I49.
+
+[^4]: World Health Organization. International Classification of Diseases Tenth Revision (ICD-10). Sixth Edition. Vol. 2 Instruction Manual. Geneva: World Health Organization, 2019. https://icd.who.int/browse10/Content/statichtml/ICD10Volume2_en_2019.pdf.
+
+[^5]: https://icd.who.int/valuesets/viewer/582/en
+
+[^6]: Ellingsen, Christian Lycke, G. Cecilie Alfsen, Marta Ebbing, Anne Gro Pedersen, Gerhard Sulo, Stein Emil Vollset, and Geir Sverre Braut. ‘Garbage Codes in the Norwegian Cause of Death Registry 1996–2019’. BMC Public Health 22, no. 1 (December 2022): 1301. https://doi.org/10.1186/s12889-022-13693-w.
+
+[^7]: World Health Organization. International Classification of Diseases Tenth Revision (ICD-10). Sixth Edition. Vol. 2 Instruction Manual. Geneva: World Health Organization, 2019. https://icd.who.int/browse10/Content/statichtml/ICD10Volume2_en_2019.pdf.
+
+[^8]: https://icdcdn.who.int/icd11referenceguide/en/html/index.html#list-of-categories-limited-to-or-more-likely-to-occur-in-female-persons; https://icdcdn.who.int/icd11referenceguide/en/html/index.html#list-of-categories-limited-to-or-more-likely-to-occur-in-male-persons
