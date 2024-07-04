@@ -31,7 +31,7 @@ The International Classification of Diseases (ICD) is a globally recognized syst
 
 **Usage:** It is used for various purposes, including clinical documentation, epidemiology, health management, and allocation of healthcare resources.
 
-**Classification:** The ICD is organized into chapters that group diseases and conditions by system, etiology, and other relevant criteria. Each disease or condition is assigned a unique alphanumeric code.
+**Classification:** The ICD is organized into chapters that group diseases and conditions by system, aetiology, and other relevant criteria. Each disease or condition is assigned a unique alphanumeric code.
 
 ## ICD and Cause-of-Death reporting
 
@@ -51,7 +51,7 @@ The International Classification of Diseases (ICD) is instrumental in cause-of-d
 
 ### Data Aggregation and Analysis
 
-**Epidemiological Research:** Researchers can aggregate and analyze data on causes of death to identify risk factors, develop public health strategies, and prioritize health interventions.
+**Epidemiological Research:** Researchers can aggregate and analyse data on causes of death to identify risk factors, develop public health strategies, and prioritize health interventions.
 
 **Public Health Surveillance:** Public health authorities use ICD-coded cause-of-death data to monitor and respond to epidemics, pandemics, and other public health emergencies.
 
@@ -61,7 +61,7 @@ The International Classification of Diseases (ICD) is instrumental in cause-of-d
 
 ### Quality of Healthcare
 
-**Healthcare Improvement:** By analyzing causes of death, healthcare providers can identify areas where medical care can be improved, leading to better patient outcomes.
+**Healthcare Improvement:** By analysing causes of death, healthcare providers can identify areas where medical care can be improved, leading to better patient outcomes.
 
 **Performance Measurement:** Hospitals and healthcare systems can use mortality data to measure the effectiveness of interventions and improve the quality of care.
 
@@ -77,8 +77,8 @@ The International Classification of Diseases (ICD) is instrumental in cause-of-d
 
 **Data Collection:** National health departments collect these coded data to compile mortality statistics.
 
-**Analysis:** Public health officials analyze these statistics to understand the prevalence of heart disease and plan appropriate public health interventions.
+**Analysis:** Public health officials analyse these statistics to understand the prevalence of heart disease and plan appropriate public health interventions.
 
 
-In summary, the ICD is a vital tool in cause-of-death reporting, providing a standardized and systematic approach to recording, analyzing, and utilizing mortality data. This facilitates better understanding, prevention, and management of diseases globally.
+In summary, the ICD is a vital tool in cause-of-death reporting, providing a standardized and systematic approach to recording, analysing, and utilizing mortality data. This facilitates better understanding, prevention, and management of diseases globally.
 
