@@ -23,7 +23,7 @@ navbar:
   type: light
   structure:
     left:  [home, intro, reference, articles, news]
-    right: [twitter, facebook, linkedin, github]
+    #right: [twitter, facebook, linkedin, github]
 
   components:
     articles:
@@ -31,15 +31,15 @@ navbar:
       menu:
       - text: "Cause-of-Death Code Checks"
         href: articles/cause_of_death_code_checks.html
-    twitter:
-      icon: "fab fa-x-twitter fa-lg"
-      href: http://twitter.com/OxIHTM
-    facebook:
-      icon: "fab fa-facebook fa-lg"
-      href: https://www.facebook.com/MSc-in-International-Health-and-Tropical-Medicine-University-of-Oxford-433056700228246/
-    linkedin:
-      icon: "fab fa-linkedin fa-lg"
-      href: https://www.linkedin.com/company/international-health-and-tropical-medicine
+    # twitter:
+    #   icon: "fab fa-x-twitter fa-lg"
+    #   href: http://twitter.com/OxIHTM
+    # facebook:
+    #   icon: "fab fa-facebook fa-lg"
+    #   href: https://www.facebook.com/MSc-in-International-Health-and-Tropical-Medicine-University-of-Oxford-433056700228246/
+    # linkedin:
+    #   icon: "fab fa-linkedin fa-lg"
+    #   href: https://www.linkedin.com/company/international-health-and-tropical-medicine
 
 
 reference:
