@@ -29,6 +29,8 @@ navbar:
     articles:
       text: Articles
       menu:
+      - text: "Introduction to ICD and cause-of-death reporting"
+        href: articles/introduction_to_icd.html
       - text: "Cause-of-Death Code Checks"
         href: articles/cause_of_death_code_checks.html
     # twitter:

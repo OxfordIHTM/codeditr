@@ -1,0 +1,84 @@
+---
+title: "Introduction to ICD and cause-of-death reporting"
+author: Ernest Guevarra
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction to ICD and cause-of-death reporting}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup, echo = FALSE}
+library(codeditr)
+```
+
+The International Classification of Diseases (ICD) is a globally recognized system for coding and classifying diseases and a wide range of signs, symptoms, abnormal findings, complaints, social circumstances, and external causes of injury or disease. Developed by the World Health Organization (WHO), the ICD provides a standardized language that allows healthcare providers to compare and share health information across various countries and settings.
+
+## Key Features of the ICD
+
+**Standardized System:** It offers a universal system for classifying and coding health conditions and diseases, facilitating international comparability in the collection, processing, and analysis of health data.
+
+**Comprehensive Coverage:** The ICD includes a wide range of health conditions and diseases, including rare and common diseases, injuries, and external causes of injury or disease.
+
+**Multiple Versions:** The ICD has gone through several revisions to reflect advances in health and medical knowledge. The current version is ICD-11, which was officially adopted by WHO member states in May 2019 and came into effect on January 1, 2022.
+
+**Usage:** It is used for various purposes, including clinical documentation, epidemiology, health management, and allocation of healthcare resources.
+
+**Classification:** The ICD is organized into chapters that group diseases and conditions by system, etiology, and other relevant criteria. Each disease or condition is assigned a unique alphanumeric code.
+
+## ICD and Cause-of-Death reporting
+
+The International Classification of Diseases (ICD) is instrumental in cause-of-death reporting for several key reasons:
+
+### Standardisation
+
+**Consistent Terminology:** ICD provides a standardized language for coding and reporting causes of death. This ensures that terms and definitions are consistent across different regions and time periods.
+
+**Uniform Codes:** Each cause of death is assigned a unique alphanumeric code, which eliminates ambiguities and improves the precision of data.
+
+### Comparability
+
+**International Comparability:** Because the ICD is used worldwide, it allows for the comparison of mortality data between countries and regions. This helps in identifying global health trends and disparities.
+
+**Temporal Comparability:** Consistent use of ICD codes over time enables the tracking of changes in mortality patterns, helping to identify trends and emerging health threats.
+
+### Data Aggregation and Analysis
+
+**Epidemiological Research:** Researchers can aggregate and analyze data on causes of death to identify risk factors, develop public health strategies, and prioritize health interventions.
+
+**Public Health Surveillance:** Public health authorities use ICD-coded cause-of-death data to monitor and respond to epidemics, pandemics, and other public health emergencies.
+
+**Policy and Planning:** Health Policy Development: Governments and health organizations use mortality data to develop and implement health policies and programs aimed at reducing preventable deaths.
+
+**Resource Allocation:** Accurate cause-of-death reporting helps in the allocation of resources for healthcare services, research funding, and preventive measures.
+
+### Quality of Healthcare
+
+**Healthcare Improvement:** By analyzing causes of death, healthcare providers can identify areas where medical care can be improved, leading to better patient outcomes.
+
+**Performance Measurement:** Hospitals and healthcare systems can use mortality data to measure the effectiveness of interventions and improve the quality of care.
+
+### Legal and Administrative Use
+
+**Vital Statistics:** Accurate cause-of-death information is essential for maintaining vital statistics, which are used for various administrative and legal purposes.
+
+**Insurance and Benefits:** Insurance companies and social security systems use cause-of-death data to process claims and determine benefits.
+
+### Example of ICD in Cause-of-Death Reporting
+
+**Documentation:** When a person dies, the cause of death is recorded on a death certificate using ICD codes. For instance, if the primary cause of death is a myocardial infarction (heart attack), it would be coded as I21 in ICD-10.
+
+**Data Collection:** National health departments collect these coded data to compile mortality statistics.
+
+**Analysis:** Public health officials analyze these statistics to understand the prevalence of heart disease and plan appropriate public health interventions.
+
+
+In summary, the ICD is a vital tool in cause-of-death reporting, providing a standardized and systematic approach to recording, analyzing, and utilizing mortality data. This facilitates better understanding, prevention, and management of diseases globally.
+
