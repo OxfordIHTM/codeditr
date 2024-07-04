@@ -18,6 +18,7 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![codeditr status badge](https://oxfordihtm.r-universe.dev/badges/codeditr)](https://oxfordihtm.r-universe.dev/codeditr)
 [![R-CMD-check](https://github.com/OxfordIHTM/codeditr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/OxfordIHTM/codeditr/actions/workflows/R-CMD-check.yaml)
 [![test-coverage](https://github.com/OxfordIHTM/codeditr/actions/workflows/test-coverage.yaml/badge.svg)](https://github.com/OxfordIHTM/codeditr/actions/workflows/test-coverage.yaml)
 [![Codecov test coverage](https://codecov.io/gh/OxfordIHTM/codeditr/branch/main/graph/badge.svg)](https://app.codecov.io/gh/OxfordIHTM/codeditr?branch=main)
