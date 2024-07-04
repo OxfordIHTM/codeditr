@@ -129,7 +129,7 @@ cod_check_code_sex_icd11(cod_data_raw_example$code, cod_data_raw_example$sex)
 cod_check_code_age_icd11(cod_data_raw_example$code, cod_data_raw_example$age)
 ```
 
-For more detailed discussion of the checks performed, see **[LINK TO THE CHECK CODE VIGNETTE]**
+This [vignette](http://oxford-ihtm.io/codeditr/articles/codeditr.html) gives a more detailed discussion of all the checks performed by the `codeditr` package.
 
 
 

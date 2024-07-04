@@ -22,6 +22,7 @@ knitr::opts_chunk$set(
 [![test-coverage](https://github.com/OxfordIHTM/codeditr/actions/workflows/test-coverage.yaml/badge.svg)](https://github.com/OxfordIHTM/codeditr/actions/workflows/test-coverage.yaml)
 [![Codecov test coverage](https://codecov.io/gh/OxfordIHTM/codeditr/branch/main/graph/badge.svg)](https://app.codecov.io/gh/OxfordIHTM/codeditr?branch=main)
 [![CodeFactor](https://www.codefactor.io/repository/github/OxfordIHTM/codeditr/badge)](https://www.codefactor.io/repository/github/OxfordIHTM/codeditr)
+[![DOI](https://zenodo.org/badge/752255505.svg)](https://zenodo.org/badge/latestdoi/752255505)
 <!-- badges: end -->
 
 The [World Health Organization](https://www.who.int/)'s [CoDEdit electronic tool](https://www.who.int/standards/classifications/classification-of-diseases/services/codedit-tool) is intended to help producers of cause-of-death statistics in strengthening their capacity to perform routine checks on their data. This package ports the original tool built using Microsoft Access into R. The aim is to leverage the utility and function of the original tool into a usable application program interface (API) that can be used for building more universal tools or for creating programmatic scientific workflows aimed at routine, automated, and large-scale monitoring of cause-of-death data.
