@@ -256,6 +256,8 @@ data.frame(
   )
 ```
 
+The `codeditr` package comes with datasets for ICD-10 (`icd10_cod_by_sex`) and ICD-11 (`icd11_cod_by_sex`) for sex-specific cause-of-death codes as reference.
+
 The functions `cod_check_code_sex_icd10()` and `cod_check_code_sex_icd11()` classifies a cause-of-death code as follows:
 
 ```{r unlikely-coding, echo = FALSE}
@@ -265,6 +267,60 @@ data.frame(
     cod_check == 0L,
     "No issues found in CoD code",
     "CoD code is not appropriate for person's sex"
+  )
+) |>
+  knitr::kable(col.names = c("CoD Check Score", "CoD Check Note"))
+```
+
+## Cause-of-death codes not appropriate for age
+
+Certain cause-of-death codes are limited to or more likely to occur only to a specific age group. This type of cause-of-death issue is most likely due to a recording or coding issue and can potentially be corrected if identified early in the coding process.
+
+Following are cause-of-death codes for the ICD-10[^7] and ICD-11[^8] versions specific to neonates (less than 1 year old) and to children (less than 18 years old).
+
+```{r neonate-specific-codes, echo = FALSE}
+data.frame(
+  icd_version = c("ICD-10", "ICD-11"),
+  neonate_specific = c(
+    paste(icd10_cod_neonate$code, collapse = ", "),
+    paste(icd11_cod_neonate$code, collapse = ", ")
+  )
+) |>
+  knitr::kable(
+    col.names = c(
+      "ICD Version", 
+      "Neonate-Specific Cause-of-Death Codes"
+    )
+  )
+```
+
+```{r child-specific-codes, echo = FALSE}
+data.frame(
+  icd_version = c("ICD-10", "ICD-11"),
+  neonate_specific = c(
+    paste(icd10_cod_child$code, collapse = ", "),
+    paste(icd11_cod_child$code, collapse = ", ")
+  )
+) |>
+  knitr::kable(
+    col.names = c(
+      "ICD Version", 
+      "Child-Specific Cause-of-Death Codes"
+    )
+  )
+```
+
+The `codeditr` package comes with datasets for ICD-10 (`icd10_cod_neonate` and `icd10_cod_child`) and ICD-11 (`icd11_cod_neonate` and `icd_cod_child`) for age-specific cause-of-death codes as reference.
+
+The functions `cod_check_code_age_icd10()` and `cod_check_code_age_icd11()` classifies a cause-of-death code as follows:
+
+```{r age-specific-coding, echo = FALSE}
+data.frame(
+  cod_check <- c(0L, 1L),
+  cod_check_note <- ifelse(
+    cod_check == 0L,
+    "No issues found in CoD code",
+    "CoD code is not appropriate for person's age"
   )
 ) |>
   knitr::kable(col.names = c("CoD Check Score", "CoD Check Note"))
