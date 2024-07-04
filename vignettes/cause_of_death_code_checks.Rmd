@@ -165,7 +165,7 @@ data.frame(
   knitr::kable(col.names = c("ICD Version", "Ill-defined Codes"))
 ```
 
-Presence of ill-defined codes in the cause-of-death registry is critical as this can impact reported mortality statistics. This is the reason why one of the standard indicators for cause-of-death data quality is the proportion of ill-defined causes in cause-of-death registration[^3].
+Presence of ill-defined codes in the cause-of-death registry is critical as this can impact reported mortality statistics. This is the reason why one of the standard indicators for cause-of-death data quality is the proportion of ill-defined causes in cause-of-death registration^[https://www.who.int/data/gho/indicator-metadata-registry/imr-details/3057#:~:text=The%20following%20ICD%2D10%20codes,2%2C%20I49.].
 
 The functions `cod_check_code_ill_defined_icd10()` and `cod_check_code_ill_defined_icd11()` classifies a cause-of-death code as follows:
 
@@ -325,5 +325,3 @@ data.frame(
 ) |>
   knitr::kable(col.names = c("CoD Check Score", "CoD Check Note"))
 ```
-
-## References
