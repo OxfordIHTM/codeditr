@@ -26,13 +26,13 @@ navbar:
     right: [twitter, facebook, linkedin, github]
 
   components:
-    # articles:
-    #   text: Articles
-    #   menu:
-    #   - text: "ICD-11 Foundation"
-    #     href: articles/icd11_foundation.html
+    articles:
+      text: Articles
+      menu:
+      - text: "Cause-of-Death Code Checks"
+        href: articles/cause_of_death_code_checks.html
     twitter:
-      icon: "fab fa-twitter fa-lg"
+      icon: "fab fa-x-twitter fa-lg"
       href: http://twitter.com/OxIHTM
     facebook:
       icon: "fab fa-facebook fa-lg"

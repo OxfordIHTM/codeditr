@@ -15,6 +15,7 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 [![Codecov test
 coverage](https://codecov.io/gh/OxfordIHTM/codeditr/branch/main/graph/badge.svg)](https://app.codecov.io/gh/OxfordIHTM/codeditr?branch=main)
 [![CodeFactor](https://www.codefactor.io/repository/github/OxfordIHTM/codeditr/badge)](https://www.codefactor.io/repository/github/OxfordIHTM/codeditr)
+[![DOI](https://zenodo.org/badge/752255505.svg)](https://zenodo.org/badge/latestdoi/752255505)
 <!-- badges: end -->
 
 The [World Health Organization](https://www.who.int/)’s [CoDEdit

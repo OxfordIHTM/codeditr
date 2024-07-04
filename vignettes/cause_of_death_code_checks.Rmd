@@ -152,7 +152,7 @@ Ill-defined cause-of-death codes include codes for symptoms, signs, abnormal res
 
 The cause-of-death coding steps/process for both ICD-10 and ICD-11 gives clear guidance on how to handle ill-defined codes during the coding process and for the most part, ill-defined codes are considered unreportable. Compared to issues with cause-of-death code structure, ill-defined codes are primarily issues with the actual death certification by the certifying individual rather than a issues with the coding process. The only way to rectify an ill-defined cause-of-death code is to go back to the actual patient record to see if there are any information that can support providing more detail for the coder and/or go back to the certifying individual for them to provide the additional information. These rectifying steps are likely infeasible for most contexts.
 
-Following are the ill-defined codes for the ICD-10[^1] and ICD-11[^2] versions.
+Following are the ill-defined codes for the ICD-10^[World Health Organization. International Classification of Diseases Tenth Revision (ICD-10). Sixth Edition. Vol. 2 Instruction Manual. Geneva: World Health Organization, 2019. https://icd.who.int/browse10/Content/statichtml/ICD10Volume2_en_2019.pdf.] and ICD-11^[World Health Organization. International Classification of Disease Eleventh Revision (ICD-11). Geneva: World Health Organization, 2022. https://icdcdn.who.int/icd11referenceguide/en/html/index.html.] versions.
 
 ```{r ill-defined-codes, echo = FALSE}
 data.frame(
@@ -165,7 +165,7 @@ data.frame(
   knitr::kable(col.names = c("ICD Version", "Ill-defined Codes"))
 ```
 
-Presence of ill-defined codes in the cause-of-death registry is critical as this can impact reported mortality statistics. This is the reason why one of the standard indicators for cause-of-death data quality is the proportion of ill-defined causes in cause-of-death registration[^3].
+Presence of ill-defined codes in the cause-of-death registry is critical as this can impact reported mortality statistics. This is the reason why one of the standard indicators for cause-of-death data quality is the proportion of ill-defined causes in cause-of-death registration^[https://www.who.int/data/gho/indicator-metadata-registry/imr-details/3057#:~:text=The%20following%20ICD%2D10%20codes,2%2C%20I49.].
 
 The functions `cod_check_code_ill_defined_icd10()` and `cod_check_code_ill_defined_icd11()` classifies a cause-of-death code as follows:
 
@@ -187,7 +187,7 @@ An unlikely cause-of-death code is anything that is marked as a cause-of-death o
 
 Similar to issues with ill-defined codes, unlikely cause-of-death codes are primarily issues with the actual death certification by the certifying individual rather than a issues with the coding process. The only way to rectify an unlikely cause-of-death code is to go back to the actual patient record to see if there are any information that can support providing more detail for the coder and/or go back to the certifying individual for them to provide the additional information. These rectifying steps are likely infeasible for most contexts.
 
-Following are the unlikely cause-of-death codes for the ICD-10[^4] and ICD-11[^5] versions.
+Following are the unlikely cause-of-death codes for the ICD-10^[World Health Organization. International Classification of Diseases Tenth Revision (ICD-10). Sixth Edition. Vol. 2 Instruction Manual. Geneva: World Health Organization, 2019. https://icd.who.int/browse10/Content/statichtml/ICD10Volume2_en_2019.pdf.] and ICD-11^[https://icd.who.int/valuesets/viewer/582/en] versions.
 
 ```{r sex-specific-cod-codes, echo = FALSE}
 data.frame(
@@ -202,7 +202,7 @@ data.frame(
 
 The `codeditr` package comes with datasets for ICD-10 (`icd10_unlikely_cod`) and ICD-11 (`icd11_unlikely_cod`) unlikely codes as reference.
 
-Presence of unlikely causes-of-death codes in the cause-of-death registry is critical as this can impact reported mortality statistics. Unlikely causes-of-death codes have also been termed as *garbage codes*[^6].
+Presence of unlikely causes-of-death codes in the cause-of-death registry is critical as this can impact reported mortality statistics. Unlikely causes-of-death codes have also been termed as *garbage codes*^[Ellingsen, Christian Lycke, G. Cecilie Alfsen, Marta Ebbing, Anne Gro Pedersen, Gerhard Sulo, Stein Emil Vollset, and Geir Sverre Braut. 'Garbage Codes in the Norwegian Cause of Death Registry 1996–2019'. BMC Public Health 22, no. 1 (December 2022): 1301. https://doi.org/10.1186/s12889-022-13693-w.].
 
 The functions `cod_check_code_unlikely_icd10()` and `cod_check_code_unlikely_icd11()` classifies a cause-of-death code as follows:
 
@@ -222,7 +222,7 @@ data.frame(
 
 Certain cause-of-death codes are limited to or more likely to occur only to a specific sex. This type of cause-of-death issue is most likely due to a recording or coding issue and can potentially be corrected if identified early in the coding process.
 
-Following are cause-of-death codes for the ICD-10[^7] and ICD-11[^8] versions specific to males and females.
+Following are cause-of-death codes for the ICD-10^[World Health Organization. International Classification of Diseases Tenth Revision (ICD-10). Sixth Edition. Vol. 2 Instruction Manual. Geneva: World Health Organization, 2019. https://icd.who.int/browse10/Content/statichtml/ICD10Volume2_en_2019.pdf.] and ICD-11^[https://icdcdn.who.int/icd11referenceguide/en/html/index.html#list-of-categories-limited-to-or-more-likely-to-occur-in-female-persons; https://icdcdn.who.int/icd11referenceguide/en/html/index.html#list-of-categories-limited-to-or-more-likely-to-occur-in-male-persons] versions specific to males and females.
 
 ```{r male-specific-codes, echo = FALSE}
 data.frame(
@@ -276,7 +276,7 @@ data.frame(
 
 Certain cause-of-death codes are limited to or more likely to occur only to a specific age group. This type of cause-of-death issue is most likely due to a recording or coding issue and can potentially be corrected if identified early in the coding process.
 
-Following are cause-of-death codes for the ICD-10[^7] and ICD-11[^8] versions specific to neonates (less than 1 year old) and to children (less than 18 years old).
+Following are cause-of-death codes for the ICD-10 and ICD-11 versions specific to neonates (less than 1 year old) and to children (less than 18 years old).
 
 ```{r neonate-specific-codes, echo = FALSE}
 data.frame(
@@ -325,23 +325,3 @@ data.frame(
 ) |>
   knitr::kable(col.names = c("CoD Check Score", "CoD Check Note"))
 ```
-
-## References
-
-[^1]: World Health Organization. International Classification of Diseases Tenth Revision (ICD-10). Sixth Edition. Vol. 2 Instruction Manual. Geneva: World Health Organization, 2019. https://icd.who.int/browse10/Content/statichtml/ICD10Volume2_en_2019.pdf.
-
-
-[^2]: World Health Organization. International Classification of Disease Eleventh Revision (ICD-11). Geneva: World Health Organization, 2022. https://icdcdn.who.int/icd11referenceguide/en/html/index.html.
-
-
-[^3]: https://www.who.int/data/gho/indicator-metadata-registry/imr-details/3057#:~:text=The%20following%20ICD%2D10%20codes,2%2C%20I49.
-
-[^4]: World Health Organization. International Classification of Diseases Tenth Revision (ICD-10). Sixth Edition. Vol. 2 Instruction Manual. Geneva: World Health Organization, 2019. https://icd.who.int/browse10/Content/statichtml/ICD10Volume2_en_2019.pdf.
-
-[^5]: https://icd.who.int/valuesets/viewer/582/en
-
-[^6]: Ellingsen, Christian Lycke, G. Cecilie Alfsen, Marta Ebbing, Anne Gro Pedersen, Gerhard Sulo, Stein Emil Vollset, and Geir Sverre Braut. 'Garbage Codes in the Norwegian Cause of Death Registry 1996–2019'. BMC Public Health 22, no. 1 (December 2022): 1301. https://doi.org/10.1186/s12889-022-13693-w.
-
-[^7]: World Health Organization. International Classification of Diseases Tenth Revision (ICD-10). Sixth Edition. Vol. 2 Instruction Manual. Geneva: World Health Organization, 2019. https://icd.who.int/browse10/Content/statichtml/ICD10Volume2_en_2019.pdf.
-
-[^8]: https://icdcdn.who.int/icd11referenceguide/en/html/index.html#list-of-categories-limited-to-or-more-likely-to-occur-in-female-persons; https://icdcdn.who.int/icd11referenceguide/en/html/index.html#list-of-categories-limited-to-or-more-likely-to-occur-in-male-persons
