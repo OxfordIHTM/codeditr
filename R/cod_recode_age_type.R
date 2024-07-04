@@ -1,5 +1,5 @@
 #'
-#' Recode age type of cause of death data based on CoDEdit rules
+#' Recode age type of cause-of-death data based on CoDEdit rules
 #'
 #' @param age_type A vector of values for age type based on the CoDEdit rules.
 #'   This should either be "D" for age in days, "M" for age

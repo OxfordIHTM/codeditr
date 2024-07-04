@@ -102,7 +102,7 @@ get_score_combo <- function(scores, labels) {
 #' List ill-defined ICD 11 codes
 #'
 #' @returns An character vector of ICD 11 codes classified as ill-defined for
-#'   cause of death
+#'   cause-of-death
 #'
 #' @examples
 #' list_ill_defined_icd11()

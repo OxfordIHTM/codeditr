@@ -1,5 +1,5 @@
 #'
-#' Check age values in cause of death data based on CoDEdit rules
+#' Check age values in cause-of-death data based on CoDEdit rules
 #'
 #' @param age_value An integer value or vector of values for age based on the
 #'   CoDEdit rules.

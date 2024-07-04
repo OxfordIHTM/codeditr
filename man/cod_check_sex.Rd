@@ -2,7 +2,7 @@
 % Please edit documentation in R/cod_check_sex.R
 \name{cod_check_sex}
 \alias{cod_check_sex}
-\title{Check sex values in cause of death data based on CoDEdit rules}
+\title{Check sex values in cause-of-death data based on CoDEdit rules}
 \usage{
 cod_check_sex(sex_value, sex_code = c(1, 2))
 }
@@ -20,7 +20,7 @@ A tibble with number of rows equal to length of \code{sex_value} and
 two columns for sex_check and sex_check_note.
 }
 \description{
-Check sex values in cause of death data based on CoDEdit rules
+Check sex values in cause-of-death data based on CoDEdit rules
 }
 \examples{
 cod_check_sex("m", c("m", "f"))

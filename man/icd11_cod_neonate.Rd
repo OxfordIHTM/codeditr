@@ -3,7 +3,7 @@
 \docType{data}
 \name{icd11_cod_neonate}
 \alias{icd11_cod_neonate}
-\title{Neonate-specific cause of death for ICD 11}
+\title{Neonate-specific cause-of-death for ICD 11}
 \format{
 A data frame with 2 columns and 50 rows:\tabular{ll}{
    \strong{Variable} \tab \strong{Description} \cr
@@ -15,7 +15,7 @@ A data frame with 2 columns and 50 rows:\tabular{ll}{
 icd11_cod_neonate
 }
 \description{
-Neonate-specific cause of death for ICD 11
+Neonate-specific cause-of-death for ICD 11
 }
 \examples{
 icd11_cod_neonate

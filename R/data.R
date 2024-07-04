@@ -121,7 +121,7 @@
 
 
 #'
-#' Example raw cause of death dataset
+#' Example raw cause-of-death dataset
 #'
 #' @format A data frame with 6 columns and 20 rows:
 #'
@@ -130,7 +130,7 @@
 #' | *id* | Unique identifier |
 #' | *sex* | Sex of deceased |
 #' | *age* | Age of diseased in years |
-#' | *code* | ICD 11 cause of death code |
+#' | *code* | ICD 11 cause-of-death code |
 #' | *dod* | Date of death |
 #' | *dob* | Date of birth |
 #'
@@ -141,7 +141,7 @@
 
 
 #'
-#' Neonate-specific cause of death for ICD 10
+#' Neonate-specific cause-of-death for ICD 10
 #'
 #' @format A data frame with 2 columns and 42 rows:
 #'
@@ -160,7 +160,7 @@
 
 
 #'
-#' Neonate-specific cause of death for ICD 11
+#' Neonate-specific cause-of-death for ICD 11
 #'
 #' @format A data frame with 2 columns and 50 rows:
 #'
@@ -178,7 +178,7 @@
 
 
 #'
-#' Child-specific cause of death for ICD 10
+#' Child-specific cause-of-death for ICD 10
 #'
 #' @format A data frame with 2 columns and 122 rows:
 #'
@@ -197,7 +197,7 @@
 
 
 #'
-#' Child-specific cause of death for ICD 11
+#' Child-specific cause-of-death for ICD 11
 #'
 #' @format A data frame with 2 columns and 149 rows:
 #'

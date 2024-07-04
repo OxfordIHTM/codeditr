@@ -1,7 +1,7 @@
 #'
-#' Check cause of death code for code entry mistakes and/or code completeness
+#' Check cause-of-death code for code entry mistakes and/or code completeness
 #'
-#' @param cod A character value or vector of values for cause of death code/s.
+#' @param cod A character value or vector of values for cause-of-death code/s.
 #' @param version A character value for ICD version used. This should be either
 #'   *"icd10"* or *"icd11"*. Default is *"icd10"*.
 #' @param sex A character value or vector of values for sex of individual
@@ -10,7 +10,7 @@
 #'   individual.
 #'
 #' @returns A tibble with 2 columns/fields. First is an integer value indicating
-#'   whether there is an issue with the cause of death code provided in relation
+#'   whether there is an issue with the cause-of-death code provided in relation
 #'   to a potential code entry mistake and/or and issue of code completeness.
 #'
 #' @examples

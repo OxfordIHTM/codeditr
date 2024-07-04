@@ -16,7 +16,7 @@
 \alias{cod_check_code_age_icd10}
 \alias{cod_check_code_age_icd11_}
 \alias{cod_check_code_age_icd11}
-\title{Check cause of death code for code entry mistakes and/or code completeness}
+\title{Check cause-of-death code for code entry mistakes and/or code completeness}
 \usage{
 cod_check_code(cod, version = c("icd10", "icd11"), sex, age)
 
@@ -49,7 +49,7 @@ cod_check_code_age_icd11_(cod, age)
 cod_check_code_age_icd11(cod, age)
 }
 \arguments{
-\item{cod}{A character value or vector of values for cause of death code/s.}
+\item{cod}{A character value or vector of values for cause-of-death code/s.}
 
 \item{version}{A character value for ICD version used. This should be either
 \emph{"icd10"} or \emph{"icd11"}. Default is \emph{"icd10"}.}
@@ -62,11 +62,11 @@ individual.}
 }
 \value{
 A tibble with 2 columns/fields. First is an integer value indicating
-whether there is an issue with the cause of death code provided in relation
+whether there is an issue with the cause-of-death code provided in relation
 to a potential code entry mistake and/or and issue of code completeness.
 }
 \description{
-Check cause of death code for code entry mistakes and/or code completeness
+Check cause-of-death code for code entry mistakes and/or code completeness
 }
 \examples{
 cod_check_code("U100", sex = 1, age = 10)

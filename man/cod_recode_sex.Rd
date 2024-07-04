@@ -2,7 +2,7 @@
 % Please edit documentation in R/cod_recode_sex.R
 \name{cod_recode_sex}
 \alias{cod_recode_sex}
-\title{Recode sex value of cause of death data based on CoDEdit rules}
+\title{Recode sex value of cause-of-death data based on CoDEdit rules}
 \usage{
 cod_recode_sex(sex_value, sex_code = c(1L, 2L), codedit = TRUE)
 }
@@ -23,7 +23,7 @@ or 2 for females. If \code{codedit = TRUE}, values not equal to the \code{sex_co
 values are coded as 9 (integer). Otherwise, it is coded as NA_integer_.
 }
 \description{
-Recode sex value of cause of death data based on CoDEdit rules
+Recode sex value of cause-of-death data based on CoDEdit rules
 }
 \examples{
 cod_recode_sex(

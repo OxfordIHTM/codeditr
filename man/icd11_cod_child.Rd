@@ -3,7 +3,7 @@
 \docType{data}
 \name{icd11_cod_child}
 \alias{icd11_cod_child}
-\title{Child-specific cause of death for ICD 11}
+\title{Child-specific cause-of-death for ICD 11}
 \format{
 A data frame with 2 columns and 149 rows:\tabular{ll}{
    \strong{Variable} \tab \strong{Description} \cr
@@ -15,7 +15,7 @@ A data frame with 2 columns and 149 rows:\tabular{ll}{
 icd11_cod_child
 }
 \description{
-Child-specific cause of death for ICD 11
+Child-specific cause-of-death for ICD 11
 }
 \examples{
 icd11_cod_child

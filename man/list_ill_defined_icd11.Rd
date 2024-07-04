@@ -8,7 +8,7 @@ list_ill_defined_icd11()
 }
 \value{
 An character vector of ICD 11 codes classified as ill-defined for
-cause of death
+cause-of-death
 }
 \description{
 List ill-defined ICD 11 codes
