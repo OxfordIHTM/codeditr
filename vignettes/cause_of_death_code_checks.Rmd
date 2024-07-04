@@ -81,9 +81,9 @@ For ICD-11, codes have the following structure:
 2. Character 1 range from characters 1 - 9 and A to X except for the letters I and O which are not used to prevent confusion with the numbers 1 and 0
 3. Character 2 is alpha
 4. Character 3 is numeric
-5. Character 4 is alphanumeric ranging from 0-9 and then A-Z execpt for the letters I and O which are not used to prevent confusion with the numbers 1 and 0
+5. Character 4 is alphanumeric ranging from 0-9 and then A-Z except for the letters I and O which are not used to prevent confusion with the numbers 1 and 0
 
-The functions `cod_check_code_structure_icd10()` and `cod_check_code_structure_icd11()` performs the appropriate heuristics for checking the structure of cause-of-death codes based on their ICD version and outputs a data.frame with a numeric check code field and a character string check code note field. Given that mulitple structural errors/issues with cause-of-death code structure can simultaneously exist, each check code represents a combination of possible errors. Following are the different check codes and their check code notes:
+The functions `cod_check_code_structure_icd10()` and `cod_check_code_structure_icd11()` performs the appropriate heuristics for checking the structure of cause-of-death codes based on their ICD version and outputs a data.frame with a numeric check code field and a character string check code note field. Given that multiple structural errors/issues with cause-of-death code structure can simultaneously exist, each check code represents a combination of possible errors. Following are the different check codes and their check code notes:
 
 ### Cause-of-death code structure checks for ICD-10 version
 
@@ -326,7 +326,7 @@ data.frame(
   knitr::kable(col.names = c("CoD Check Score", "CoD Check Note"))
 ```
 
-## Bibliogrpahy
+## References
 
 [^1]: World Health Organization. International Classification of Diseases Tenth Revision (ICD-10). Sixth Edition. Vol. 2 Instruction Manual. Geneva: World Health Organization, 2019. https://icd.who.int/browse10/Content/statichtml/ICD10Volume2_en_2019.pdf.
 
@@ -340,7 +340,7 @@ data.frame(
 
 [^5]: https://icd.who.int/valuesets/viewer/582/en
 
-[^6]: Ellingsen, Christian Lycke, G. Cecilie Alfsen, Marta Ebbing, Anne Gro Pedersen, Gerhard Sulo, Stein Emil Vollset, and Geir Sverre Braut. ‘Garbage Codes in the Norwegian Cause of Death Registry 1996–2019’. BMC Public Health 22, no. 1 (December 2022): 1301. https://doi.org/10.1186/s12889-022-13693-w.
+[^6]: Ellingsen, Christian Lycke, G. Cecilie Alfsen, Marta Ebbing, Anne Gro Pedersen, Gerhard Sulo, Stein Emil Vollset, and Geir Sverre Braut. 'Garbage Codes in the Norwegian Cause of Death Registry 1996–2019'. BMC Public Health 22, no. 1 (December 2022): 1301. https://doi.org/10.1186/s12889-022-13693-w.
 
 [^7]: World Health Organization. International Classification of Diseases Tenth Revision (ICD-10). Sixth Edition. Vol. 2 Instruction Manual. Geneva: World Health Organization, 2019. https://icd.who.int/browse10/Content/statichtml/ICD10Volume2_en_2019.pdf.
 

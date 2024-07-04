@@ -45,9 +45,7 @@ cod_check_code_summary <- function(cod_check, simplify = FALSE) {
     X = cod_check_list,
     FUN = function(x) dplyr::count(
       x,
-      dplyr::across(
-        dplyr::everything()
-      ),
+      dplyr::across(dplyr::everything()),
       .drop = FALSE
     ) |>
       dplyr::rename_with(.fn = function(x) c("cod_check_note", "n"))
