@@ -1276,6 +1276,10 @@ XM5GC4</td>
 </tr>
 </tbody>
 </table>
+<p>The <code>codeditr</code> package comes with datasets for ICD-10
+(<code>icd10_cod_by_sex</code>) and ICD-11
+(<code>icd11_cod_by_sex</code>) for sex-specific cause-of-death codes as
+reference.</p>
 <p>The functions <code><a href="../reference/cod_check_code.html">cod_check_code_sex_icd10()</a></code> and
 <code><a href="../reference/cod_check_code.html">cod_check_code_sex_icd11()</a></code> classifies a cause-of-death code
 as follows:</p>
@@ -1292,6 +1296,124 @@ as follows:</p>
 <tr class="even">
 <td align="right">1</td>
 <td align="left">CoD code is not appropriate for person’s sex</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section level2">
+<h2 id="cause-of-death-codes-not-appropriate-for-age">Cause-of-death codes not appropriate for age<a class="anchor" aria-label="anchor" href="#cause-of-death-codes-not-appropriate-for-age"></a>
+</h2>
+<p>Certain cause-of-death codes are limited to or more likely to occur
+only to a specific age group. This type of cause-of-death issue is most
+likely due to a recording or coding issue and can potentially be
+corrected if identified early in the coding process.</p>
+<p>Following are cause-of-death codes for the ICD-10<a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content='&lt;p&gt;World Health Organization. International Classification
+of Diseases Tenth Revision (ICD-10). Sixth Edition. Vol. 2 Instruction
+Manual. Geneva: World Health Organization, 2019. &lt;a href="https://icd.who.int/browse10/Content/statichtml/ICD10Volume2_en_2019.pdf" class="external-link uri"&gt;https://icd.who.int/browse10/Content/statichtml/ICD10Volume2_en_2019.pdf&lt;/a&gt;.&lt;/p&gt;'><sup>9</sup></a> and ICD-11<a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content='&lt;p&gt;&lt;a href="https://icdcdn.who.int/icd11referenceguide/en/html/index.html#list-of-categories-limited-to-or-more-likely-to-occur-in-female-persons" class="external-link uri"&gt;https://icdcdn.who.int/icd11referenceguide/en/html/index.html#list-of-categories-limited-to-or-more-likely-to-occur-in-female-persons&lt;/a&gt;;
+&lt;a href="https://icdcdn.who.int/icd11referenceguide/en/html/index.html#list-of-categories-limited-to-or-more-likely-to-occur-in-male-persons" class="external-link uri"&gt;https://icdcdn.who.int/icd11referenceguide/en/html/index.html#list-of-categories-limited-to-or-more-likely-to-occur-in-male-persons&lt;/a&gt;&lt;/p&gt;'><sup>10</sup></a>
+versions specific to neonates (less than 1 year old) and to children
+(less than 18 years old).</p>
+<table class="table">
+<colgroup>
+<col width="3%">
+<col width="96%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">ICD Version</th>
+<th align="left">Neonate-Specific Cause-of-Death Codes</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">ICD-10</td>
+<td align="left">A33, E84.11, H04.531, H04.532, H04.533, H04.539, N47.0,
+Z00.110, Z00.111, Z05.0, Z05.1, Z05.2, Z05.3, Z05.41, Z05.42, Z05.43,
+Z05.5, Z05.6, Z05.71, Z05.72, Z05.73, Z05.81, Z05.89, Z05.9, Z38.00,
+Z38.01, Z38.1, Z38.2, Z38.30, Z38.31, Z38.4, Z38.5, Z38.61, Z38.62,
+Z38.63, Z38.64, Z38.65, Z38.66, Z38.68, Z38.69, Z38.7, Z38.8</td>
+</tr>
+<tr class="even">
+<td align="left">ICD-11</td>
+<td align="left">QA47.2, QA47.8, QA47.5, KB2Z, QA47.0Z, KB87.Z, KA84.Z,
+KD5Z, KC22.2, KB2D, KD32.Z, KA6Z, KD34, KA65.1, KA86, KB23.Z, KB87.Y,
+KB8Y, QA47.6Z, KA81, KA8A.Z, KD32.4, KC20.2, KB2Y, KD35, KA44.00, KA83,
+1B7Z, KB23.Y, KD32.0, KB29.Y, KA83.8, KB08.Z, KB23.0Z, QA47.1, KB40.Z,
+KD32.Y, KD11, KC41.0, KD3Y, KA8Y, QA47.3Z, EH1Z, KA8F.0, KA21.2Z,
+5C51.50, KA22.0, KA84.0, KB63.2Z, KB08.Y</td>
+</tr>
+</tbody>
+</table>
+<table class="table">
+<colgroup>
+<col width="0%">
+<col width="99%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">ICD Version</th>
+<th align="left">Child-Specific Cause-of-Death Codes</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">ICD-10</td>
+<td align="left">A48.51, B08.20, B08.21, B08.22, C93.30, C93.31, C93.32,
+E30.1, E30.8, F64.2, F84.3, G93.7, H26.001, H26.002, H26.003, H26.009,
+H26.011, H26.012, H26.013, H26.019, H26.031, H26.032, H26.033, H26.039,
+H26.041, H26.042, H26.043, H26.049, H26.051, H26.052, H26.053, H26.059,
+H26.061, H26.062, H26.063, H26.069, H26.09, L12.2, L20.83, L21.1, L44.4,
+L70.4, N92.2, R04.81, R10.83, R62.0, R62.51, R63.31, R63.32, R68.11,
+R68.12, R68.13, R68.19, T74.02XA, T74.02XD, T74.02XS, T74.12XA,
+T74.12XD, T74.12XS, T74.22XA, T74.22XD, T74.22XS, T74.32XA, T74.32XD,
+T74.32XS, T74.4XXA, T74.4XXD, T74.4XXS, T74.52XA, T74.52XD, T74.52XS,
+T74.62XA, T74.62XD, T74.62XS, T74.92XA, T74.92XD, T74.92XS, T74.A2XA,
+T74.A2XD, T74.A2XS, T76.02XA, T76.02XD, T76.02XS, T76.12XA, T76.12XD,
+T76.12XS, T76.22XA, T76.22XD, T76.22XS, T76.32XA, T76.32XD, T76.32XS,
+T76.52XA, T76.52XD, T76.52XS, T76.62XA, T76.62XD, T76.62XS, T76.92XA,
+T76.92XD, T76.92XS, T76.A2XA, T76.A2XD, T76.A2XS, Z00.121, Z00.129,
+Z00.2, Z00.3, Z00.70, Z00.71, Z04.42, Z04.72, Z62.21, Z62.3, Z69.010,
+Z69.020, Z72.810, Z73.810, Z73.811, Z73.812, Z73.819, Z76.2</td>
+</tr>
+<tr class="even">
+<td align="left">ICD-11</td>
+<td align="left">FB82.1, FB85.0, 5C56.0Y, 5C56.00, 2B90.Y, 4A44.Y,
+2E90.6, EJ30.0, 8A44.2, 9B70, FA24.4, 5B57.0, 8A44.3, 4A41.01, 9C61.4Z,
+9B10.1Z, 9A70.Y, 2C60, 1A60.3, LD27.0Y, FA24.Z, 5C56.1, DA0C.1, DB35.3,
+FA24.2, 8A61.31, 9C61.41, FA24.Y, 8C71.0, 2E81.0Z, 5C55.0Y, FB83.1Y,
+8A61.30, 9B10.1Y, 5A61.0, EB90.1Y, EA94, EH92.Y, 4A60.Y, 2A00.0Y, 5A10,
+CB05.1/FA24, FA24.3, 9B73.11, 9C60, EE6Y, 8B61.2, GB83, LC2Y, FA24.0Z,
+QE61.0, QC2Y, QA00.1, MG43.31, MG44.12, QE82.0, MG43.Y, PJ20, QE82.2,
+6A04, QE94, QE70.Z, MD11.3, 2F01, MG44.11, QE52.0, QE31.0, QE90, QE92,
+QE82.3, MB23.1, QC20.1, 5B55.2, MG44.10, MB23.A, QE91, EA80.1, QA04.50,
+QE4Y, QA15.2, LD24.04, 5B51&amp;XS25, 5B51, 5B7Z, 5B53, DD93.Y,
+5B50&amp;XS25, 5B51&amp;XS0T, 5B50&amp;XS0T, QA03.Y, 5B53&amp;XS25,
+5B81.00, 5B53&amp;XS0T, DD93.Z, 2A3Z, 5B80.00, 5B50, 5B52, QA01.0, RA03,
+5B52&amp;XS25, NE61, 5B52&amp;XS0T, HA61, 8D42, DD93.0, KB08.2, DA95,
+QA47.2, DD93.2, MG43.30, MG44.0, 3A60.Z, KA22.0, DD93.1, QA47.5, 1A40.Z,
+QA47.0Z, KA22.2, 5C51.3, KA21.4Z, KA21.0Z, KB60.1, 5B51&amp;XS25,
+MH12.Y, KD35, QA47.1, MG44.Y, QA47.3Z, MH11.Z, 1A11.1, KB60.0, QA47.Z,
+JA86.5, QA47.01, KB21.Z, QA47.4, QA47.31, EA80.0, QA00.Y, 6C91.1,
+6C91.1Y, HA60, 8A6Y, 8A61.3Z, 8A61.3Y, 3A00.3, 6C91.11, 6C91.10</td>
+</tr>
+</tbody>
+</table>
+<p>The <code>codeditr</code> package comes with datasets for ICD-10
+(<code>icd10_cod_neonate</code> and <code>icd10_cod_child</code>) and
+ICD-11 (<code>icd11_cod_neonate</code> and <code>icd_cod_child</code>)
+for age-specific cause-of-death codes as reference.</p>
+<p>The functions <code><a href="../reference/cod_check_code.html">cod_check_code_age_icd10()</a></code> and
+<code><a href="../reference/cod_check_code.html">cod_check_code_age_icd11()</a></code> classifies a cause-of-death code
+as follows:</p>
+<table class="table">
+<thead><tr class="header">
+<th align="right">CoD Check Score</th>
+<th align="left">CoD Check Note</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="right">0</td>
+<td align="left">No issues found in CoD code</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="left">CoD code is not appropriate for person’s age</td>
 </tr>
 </tbody>
 </table>
