@@ -105,9 +105,1204 @@
 
     
     
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/OxfordIHTM/codeditr" class="external-link">codeditr</a></span><span class="op">)</span></span></code></pre></div>
-  </main>
+<p>The <code>codeditr</code> package performs 5 types of cause-of-death
+code checks: 1) check on code structure; 2) check for ill-defined codes;
+3) check for unlikely cause-of-death codes; 4) check for cause-of-death
+appropriate for sex; and 5) check for cause-of-death appropriate for
+age.</p>
+<div class="section level2">
+<h2 id="code-structure">Code structure<a class="anchor" aria-label="anchor" href="#code-structure"></a>
+</h2>
+<p>The codes used for cause-of-death have a specific coding structure
+which depends on the ICD version used. For ICD-10, codes have the
+following structure:</p>
+<ol style="list-style-type: decimal">
+<li>Alphanumeric 3 - 5 characters</li>
+<li>Character 1 is alpha (all letters except U are used)</li>
+<li>Character 2 is numeric</li>
+<li>The remaining 5 characters may be any combination of
+alpha/numeric</li>
+<li>Use of decimal after 3 characters</li>
+<li>Alpha characters are not case-sensitive</li>
+</ol>
+<p>For ICD-11, codes have the following structure:</p>
+<ol style="list-style-type: decimal">
+<li>Alphanumeric characters</li>
+<li>Character 1 range from characters 1 - 9 and A to X except for the
+letters I and O which are not used to prevent confusion with the numbers
+1 and 0</li>
+<li>Character 2 is alpha</li>
+<li>Character 3 is numeric</li>
+<li>Character 4 is alphanumeric ranging from 0-9 and then A-Z execpt for
+the letters I and O which are not used to prevent confusion with the
+numbers 1 and 0</li>
+</ol>
+<p>The functions <code><a href="../reference/cod_check_code.html">cod_check_code_structure_icd10()</a></code> and
+<code><a href="../reference/cod_check_code.html">cod_check_code_structure_icd11()</a></code> performs the appropriate
+heuristics for checking the structure of cause-of-death codes based on
+their ICD version and outputs a data.frame with a numeric check code
+field and a character string check code note field. Given that mulitple
+structural errors/issues with cause-of-death code structure can
+simultaneously exist, each check code represents a combination of
+possible errors. Following are the different check codes and their check
+code notes:</p>
+<div class="section level3">
+<h3 id="cause-of-death-code-structure-checks-for-icd-10-version">Cause-of-death code structure checks for ICD-10 version<a class="anchor" aria-label="anchor" href="#cause-of-death-code-structure-checks-for-icd-10-version"></a>
+</h3>
+<table class="table">
+<colgroup>
+<col width="7%">
+<col width="6%">
+<col width="85%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">Score Combinations</th>
+<th align="right">CoD Check Score</th>
+<th align="left">CoD Check Note</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">0</td>
+<td align="right">0</td>
+<td align="left">No issues found in CoD code</td>
+</tr>
+<tr class="even">
+<td align="left">1</td>
+<td align="right">1</td>
+<td align="left">CoD code has a period (<code>.</code>) character in the
+wrong place</td>
+</tr>
+<tr class="odd">
+<td align="left">2</td>
+<td align="right">2</td>
+<td align="left">CoD code is 2 or less characters long</td>
+</tr>
+<tr class="even">
+<td align="left">1,2</td>
+<td align="right">3</td>
+<td align="left">CoD code has a period (<code>.</code>) character in the
+wrong place; CoD code is 2 or less characters long</td>
+</tr>
+<tr class="odd">
+<td align="left">4</td>
+<td align="right">4</td>
+<td align="left">CoD code does not start with a character value</td>
+</tr>
+<tr class="even">
+<td align="left">1,4</td>
+<td align="right">5</td>
+<td align="left">CoD code has a period (<code>.</code>) character in the
+wrong place; CoD code does not start with a character value</td>
+</tr>
+<tr class="odd">
+<td align="left">2,4</td>
+<td align="right">6</td>
+<td align="left">CoD code is 2 or less characters long; CoD code does
+not start with a character value</td>
+</tr>
+<tr class="even">
+<td align="left">1,2,4</td>
+<td align="right">7</td>
+<td align="left">CoD code has a period (<code>.</code>) character in the
+wrong place; CoD code is 2 or less characters long; CoD code does not
+start with a character value</td>
+</tr>
+<tr class="odd">
+<td align="left">8</td>
+<td align="right">8</td>
+<td align="left">CoD code contains the character value
+<code>U</code>
+</td>
+</tr>
+<tr class="even">
+<td align="left">1,8</td>
+<td align="right">9</td>
+<td align="left">CoD code has a period (<code>.</code>) character in the
+wrong place; CoD code contains the character value <code>U</code>
+</td>
+</tr>
+<tr class="odd">
+<td align="left">2,8</td>
+<td align="right">10</td>
+<td align="left">CoD code is 2 or less characters long; CoD code
+contains the character value <code>U</code>
+</td>
+</tr>
+<tr class="even">
+<td align="left">1,2,8</td>
+<td align="right">11</td>
+<td align="left">CoD code has a period (<code>.</code>) character in the
+wrong place; CoD code is 2 or less characters long; CoD code contains
+the character value <code>U</code>
+</td>
+</tr>
+<tr class="odd">
+<td align="left">4,8</td>
+<td align="right">12</td>
+<td align="left">CoD code does not start with a character value; CoD
+code contains the character value <code>U</code>
+</td>
+</tr>
+<tr class="even">
+<td align="left">1,4,8</td>
+<td align="right">13</td>
+<td align="left">CoD code has a period (<code>.</code>) character in the
+wrong place; CoD code does not start with a character value; CoD code
+contains the character value <code>U</code>
+</td>
+</tr>
+<tr class="odd">
+<td align="left">2,4,8</td>
+<td align="right">14</td>
+<td align="left">CoD code is 2 or less characters long; CoD code does
+not start with a character value; CoD code contains the character value
+<code>U</code>
+</td>
+</tr>
+<tr class="even">
+<td align="left">1,2,4,8</td>
+<td align="right">15</td>
+<td align="left">CoD code has a period (<code>.</code>) character in the
+wrong place; CoD code is 2 or less characters long; CoD code does not
+start with a character value; CoD code contains the character value
+<code>U</code>
+</td>
+</tr>
+<tr class="odd">
+<td align="left">16</td>
+<td align="right">16</td>
+<td align="left">CoD code uses asterisk</td>
+</tr>
+<tr class="even">
+<td align="left">1,16</td>
+<td align="right">17</td>
+<td align="left">CoD code has a period (<code>.</code>) character in the
+wrong place; CoD code uses asterisk</td>
+</tr>
+<tr class="odd">
+<td align="left">2,16</td>
+<td align="right">18</td>
+<td align="left">CoD code is 2 or less characters long; CoD code uses
+asterisk</td>
+</tr>
+<tr class="even">
+<td align="left">1,2,16</td>
+<td align="right">19</td>
+<td align="left">CoD code has a period (<code>.</code>) character in the
+wrong place; CoD code is 2 or less characters long; CoD code uses
+asterisk</td>
+</tr>
+<tr class="odd">
+<td align="left">4,16</td>
+<td align="right">20</td>
+<td align="left">CoD code does not start with a character value; CoD
+code uses asterisk</td>
+</tr>
+<tr class="even">
+<td align="left">1,4,16</td>
+<td align="right">21</td>
+<td align="left">CoD code has a period (<code>.</code>) character in the
+wrong place; CoD code does not start with a character value; CoD code
+uses asterisk</td>
+</tr>
+<tr class="odd">
+<td align="left">2,4,16</td>
+<td align="right">22</td>
+<td align="left">CoD code is 2 or less characters long; CoD code does
+not start with a character value; CoD code uses asterisk</td>
+</tr>
+<tr class="even">
+<td align="left">1,2,4,16</td>
+<td align="right">23</td>
+<td align="left">CoD code has a period (<code>.</code>) character in the
+wrong place; CoD code is 2 or less characters long; CoD code does not
+start with a character value; CoD code uses asterisk</td>
+</tr>
+<tr class="odd">
+<td align="left">8,16</td>
+<td align="right">24</td>
+<td align="left">CoD code contains the character value <code>U</code>;
+CoD code uses asterisk</td>
+</tr>
+<tr class="even">
+<td align="left">1,8,16</td>
+<td align="right">25</td>
+<td align="left">CoD code has a period (<code>.</code>) character in the
+wrong place; CoD code contains the character value <code>U</code>; CoD
+code uses asterisk</td>
+</tr>
+<tr class="odd">
+<td align="left">2,8,16</td>
+<td align="right">26</td>
+<td align="left">CoD code is 2 or less characters long; CoD code
+contains the character value <code>U</code>; CoD code uses asterisk</td>
+</tr>
+<tr class="even">
+<td align="left">1,2,8,16</td>
+<td align="right">27</td>
+<td align="left">CoD code has a period (<code>.</code>) character in the
+wrong place; CoD code is 2 or less characters long; CoD code contains
+the character value <code>U</code>; CoD code uses asterisk</td>
+</tr>
+<tr class="odd">
+<td align="left">4,8,16</td>
+<td align="right">28</td>
+<td align="left">CoD code does not start with a character value; CoD
+code contains the character value <code>U</code>; CoD code uses
+asterisk</td>
+</tr>
+<tr class="even">
+<td align="left">1,4,8,16</td>
+<td align="right">29</td>
+<td align="left">CoD code has a period (<code>.</code>) character in the
+wrong place; CoD code does not start with a character value; CoD code
+contains the character value <code>U</code>; CoD code uses asterisk</td>
+</tr>
+<tr class="odd">
+<td align="left">2,4,8,16</td>
+<td align="right">30</td>
+<td align="left">CoD code is 2 or less characters long; CoD code does
+not start with a character value; CoD code contains the character value
+<code>U</code>; CoD code uses asterisk</td>
+</tr>
+<tr class="even">
+<td align="left">1,2,4,8,16</td>
+<td align="right">31</td>
+<td align="left">CoD code has a period (<code>.</code>) character in the
+wrong place; CoD code is 2 or less characters long; CoD code does not
+start with a character value; CoD code contains the character value
+<code>U</code>; CoD code uses asterisk</td>
+</tr>
+<tr class="odd">
+<td align="left">32</td>
+<td align="right">32</td>
+<td align="left">CoD code is missing</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section level3">
+<h3 id="cause-of-death-code-structure-checks-for-icd-11-version">Cause-of-death code structure checks for ICD-11 version<a class="anchor" aria-label="anchor" href="#cause-of-death-code-structure-checks-for-icd-11-version"></a>
+</h3>
+<table class="table">
+<colgroup>
+<col width="6%">
+<col width="5%">
+<col width="88%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">Score Combinations</th>
+<th align="right">CoD Check Score</th>
+<th align="left">CoD Check Note</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">0</td>
+<td align="right">0</td>
+<td align="left">No issues found in CoD code</td>
+</tr>
+<tr class="even">
+<td align="left">1</td>
+<td align="right">1</td>
+<td align="left">CoD code has a period (<code>.</code>) character in the
+wrong place</td>
+</tr>
+<tr class="odd">
+<td align="left">2</td>
+<td align="right">2</td>
+<td align="left">CoD code starts with <code>O</code> or
+<code>I</code>
+</td>
+</tr>
+<tr class="even">
+<td align="left">1,2</td>
+<td align="right">3</td>
+<td align="left">CoD code has a period (<code>.</code>) character in the
+wrong place; CoD code starts with <code>O</code> or <code>I</code>
+</td>
+</tr>
+<tr class="odd">
+<td align="left">4</td>
+<td align="right">4</td>
+<td align="left">CoD code has a number as its second value</td>
+</tr>
+<tr class="even">
+<td align="left">1,4</td>
+<td align="right">5</td>
+<td align="left">CoD code has a period (<code>.</code>) character in the
+wrong place; CoD code has a number as its second value</td>
+</tr>
+<tr class="odd">
+<td align="left">2,4</td>
+<td align="right">6</td>
+<td align="left">CoD code starts with <code>O</code> or <code>I</code>;
+CoD code has a number as its second value</td>
+</tr>
+<tr class="even">
+<td align="left">1,2,4</td>
+<td align="right">7</td>
+<td align="left">CoD code has a period (<code>.</code>) character in the
+wrong place; CoD code starts with <code>O</code> or <code>I</code>; CoD
+code has a number as its second value</td>
+</tr>
+<tr class="odd">
+<td align="left">8</td>
+<td align="right">8</td>
+<td align="left">CoD code has <code>O</code> or <code>I</code> as its
+second value</td>
+</tr>
+<tr class="even">
+<td align="left">1,8</td>
+<td align="right">9</td>
+<td align="left">CoD code has a period (<code>.</code>) character in the
+wrong place; CoD code has <code>O</code> or <code>I</code> as its second
+value</td>
+</tr>
+<tr class="odd">
+<td align="left">2,8</td>
+<td align="right">10</td>
+<td align="left">CoD code starts with <code>O</code> or <code>I</code>;
+CoD code has <code>O</code> or <code>I</code> as its second value</td>
+</tr>
+<tr class="even">
+<td align="left">1,2,8</td>
+<td align="right">11</td>
+<td align="left">CoD code has a period (<code>.</code>) character in the
+wrong place; CoD code starts with <code>O</code> or <code>I</code>; CoD
+code has <code>O</code> or <code>I</code> as its second value</td>
+</tr>
+<tr class="odd">
+<td align="left">4,8</td>
+<td align="right">12</td>
+<td align="left">CoD code has a number as its second value; CoD code has
+<code>O</code> or <code>I</code> as its second value</td>
+</tr>
+<tr class="even">
+<td align="left">1,4,8</td>
+<td align="right">13</td>
+<td align="left">CoD code has a period (<code>.</code>) character in the
+wrong place; CoD code has a number as its second value; CoD code has
+<code>O</code> or <code>I</code> as its second value</td>
+</tr>
+<tr class="odd">
+<td align="left">2,4,8</td>
+<td align="right">14</td>
+<td align="left">CoD code starts with <code>O</code> or <code>I</code>;
+CoD code has a number as its second value; CoD code has <code>O</code>
+or <code>I</code> as its second value</td>
+</tr>
+<tr class="even">
+<td align="left">1,2,4,8</td>
+<td align="right">15</td>
+<td align="left">CoD code has a period (<code>.</code>) character in the
+wrong place; CoD code starts with <code>O</code> or <code>I</code>; CoD
+code has a number as its second value; CoD code has <code>O</code> or
+<code>I</code> as its second value</td>
+</tr>
+<tr class="odd">
+<td align="left">16</td>
+<td align="right">16</td>
+<td align="left">CoD code has a letter as its third value</td>
+</tr>
+<tr class="even">
+<td align="left">1,16</td>
+<td align="right">17</td>
+<td align="left">CoD code has a period (<code>.</code>) character in the
+wrong place; CoD code has a letter as its third value</td>
+</tr>
+<tr class="odd">
+<td align="left">2,16</td>
+<td align="right">18</td>
+<td align="left">CoD code starts with <code>O</code> or <code>I</code>;
+CoD code has a letter as its third value</td>
+</tr>
+<tr class="even">
+<td align="left">1,2,16</td>
+<td align="right">19</td>
+<td align="left">CoD code has a period (<code>.</code>) character in the
+wrong place; CoD code starts with <code>O</code> or <code>I</code>; CoD
+code has a letter as its third value</td>
+</tr>
+<tr class="odd">
+<td align="left">4,16</td>
+<td align="right">20</td>
+<td align="left">CoD code has a number as its second value; CoD code has
+a letter as its third value</td>
+</tr>
+<tr class="even">
+<td align="left">1,4,16</td>
+<td align="right">21</td>
+<td align="left">CoD code has a period (<code>.</code>) character in the
+wrong place; CoD code has a number as its second value; CoD code has a
+letter as its third value</td>
+</tr>
+<tr class="odd">
+<td align="left">2,4,16</td>
+<td align="right">22</td>
+<td align="left">CoD code starts with <code>O</code> or <code>I</code>;
+CoD code has a number as its second value; CoD code has a letter as its
+third value</td>
+</tr>
+<tr class="even">
+<td align="left">1,2,4,16</td>
+<td align="right">23</td>
+<td align="left">CoD code has a period (<code>.</code>) character in the
+wrong place; CoD code starts with <code>O</code> or <code>I</code>; CoD
+code has a number as its second value; CoD code has a letter as its
+third value</td>
+</tr>
+<tr class="odd">
+<td align="left">8,16</td>
+<td align="right">24</td>
+<td align="left">CoD code has <code>O</code> or <code>I</code> as its
+second value; CoD code has a letter as its third value</td>
+</tr>
+<tr class="even">
+<td align="left">1,8,16</td>
+<td align="right">25</td>
+<td align="left">CoD code has a period (<code>.</code>) character in the
+wrong place; CoD code has <code>O</code> or <code>I</code> as its second
+value; CoD code has a letter as its third value</td>
+</tr>
+<tr class="odd">
+<td align="left">2,8,16</td>
+<td align="right">26</td>
+<td align="left">CoD code starts with <code>O</code> or <code>I</code>;
+CoD code has <code>O</code> or <code>I</code> as its second value; CoD
+code has a letter as its third value</td>
+</tr>
+<tr class="even">
+<td align="left">1,2,8,16</td>
+<td align="right">27</td>
+<td align="left">CoD code has a period (<code>.</code>) character in the
+wrong place; CoD code starts with <code>O</code> or <code>I</code>; CoD
+code has <code>O</code> or <code>I</code> as its second value; CoD code
+has a letter as its third value</td>
+</tr>
+<tr class="odd">
+<td align="left">4,8,16</td>
+<td align="right">28</td>
+<td align="left">CoD code has a number as its second value; CoD code has
+<code>O</code> or <code>I</code> as its second value; CoD code has a
+letter as its third value</td>
+</tr>
+<tr class="even">
+<td align="left">1,4,8,16</td>
+<td align="right">29</td>
+<td align="left">CoD code has a period (<code>.</code>) character in the
+wrong place; CoD code has a number as its second value; CoD code has
+<code>O</code> or <code>I</code> as its second value; CoD code has a
+letter as its third value</td>
+</tr>
+<tr class="odd">
+<td align="left">2,4,8,16</td>
+<td align="right">30</td>
+<td align="left">CoD code starts with <code>O</code> or <code>I</code>;
+CoD code has a number as its second value; CoD code has <code>O</code>
+or <code>I</code> as its second value; CoD code has a letter as its
+third value</td>
+</tr>
+<tr class="even">
+<td align="left">1,2,4,8,16</td>
+<td align="right">31</td>
+<td align="left">CoD code has a period (<code>.</code>) character in the
+wrong place; CoD code starts with <code>O</code> or <code>I</code>; CoD
+code has a number as its second value; CoD code has <code>O</code> or
+<code>I</code> as its second value; CoD code has a letter as its third
+value</td>
+</tr>
+<tr class="odd">
+<td align="left">32</td>
+<td align="right">32</td>
+<td align="left">CoD code has <code>O</code> or <code>I</code> as its
+fourth value</td>
+</tr>
+<tr class="even">
+<td align="left">1,32</td>
+<td align="right">33</td>
+<td align="left">CoD code has a period (<code>.</code>) character in the
+wrong place; CoD code has <code>O</code> or <code>I</code> as its fourth
+value</td>
+</tr>
+<tr class="odd">
+<td align="left">2,32</td>
+<td align="right">34</td>
+<td align="left">CoD code starts with <code>O</code> or <code>I</code>;
+CoD code has <code>O</code> or <code>I</code> as its fourth value</td>
+</tr>
+<tr class="even">
+<td align="left">1,2,32</td>
+<td align="right">35</td>
+<td align="left">CoD code has a period (<code>.</code>) character in the
+wrong place; CoD code starts with <code>O</code> or <code>I</code>; CoD
+code has <code>O</code> or <code>I</code> as its fourth value</td>
+</tr>
+<tr class="odd">
+<td align="left">4,32</td>
+<td align="right">36</td>
+<td align="left">CoD code has a number as its second value; CoD code has
+<code>O</code> or <code>I</code> as its fourth value</td>
+</tr>
+<tr class="even">
+<td align="left">1,4,32</td>
+<td align="right">37</td>
+<td align="left">CoD code has a period (<code>.</code>) character in the
+wrong place; CoD code has a number as its second value; CoD code has
+<code>O</code> or <code>I</code> as its fourth value</td>
+</tr>
+<tr class="odd">
+<td align="left">2,4,32</td>
+<td align="right">38</td>
+<td align="left">CoD code starts with <code>O</code> or <code>I</code>;
+CoD code has a number as its second value; CoD code has <code>O</code>
+or <code>I</code> as its fourth value</td>
+</tr>
+<tr class="even">
+<td align="left">1,2,4,32</td>
+<td align="right">39</td>
+<td align="left">CoD code has a period (<code>.</code>) character in the
+wrong place; CoD code starts with <code>O</code> or <code>I</code>; CoD
+code has a number as its second value; CoD code has <code>O</code> or
+<code>I</code> as its fourth value</td>
+</tr>
+<tr class="odd">
+<td align="left">8,32</td>
+<td align="right">40</td>
+<td align="left">CoD code has <code>O</code> or <code>I</code> as its
+second value; CoD code has <code>O</code> or <code>I</code> as its
+fourth value</td>
+</tr>
+<tr class="even">
+<td align="left">1,8,32</td>
+<td align="right">41</td>
+<td align="left">CoD code has a period (<code>.</code>) character in the
+wrong place; CoD code has <code>O</code> or <code>I</code> as its second
+value; CoD code has <code>O</code> or <code>I</code> as its fourth
+value</td>
+</tr>
+<tr class="odd">
+<td align="left">2,8,32</td>
+<td align="right">42</td>
+<td align="left">CoD code starts with <code>O</code> or <code>I</code>;
+CoD code has <code>O</code> or <code>I</code> as its second value; CoD
+code has <code>O</code> or <code>I</code> as its fourth value</td>
+</tr>
+<tr class="even">
+<td align="left">1,2,8,32</td>
+<td align="right">43</td>
+<td align="left">CoD code has a period (<code>.</code>) character in the
+wrong place; CoD code starts with <code>O</code> or <code>I</code>; CoD
+code has <code>O</code> or <code>I</code> as its second value; CoD code
+has <code>O</code> or <code>I</code> as its fourth value</td>
+</tr>
+<tr class="odd">
+<td align="left">4,8,32</td>
+<td align="right">44</td>
+<td align="left">CoD code has a number as its second value; CoD code has
+<code>O</code> or <code>I</code> as its second value; CoD code has
+<code>O</code> or <code>I</code> as its fourth value</td>
+</tr>
+<tr class="even">
+<td align="left">1,4,8,32</td>
+<td align="right">45</td>
+<td align="left">CoD code has a period (<code>.</code>) character in the
+wrong place; CoD code has a number as its second value; CoD code has
+<code>O</code> or <code>I</code> as its second value; CoD code has
+<code>O</code> or <code>I</code> as its fourth value</td>
+</tr>
+<tr class="odd">
+<td align="left">2,4,8,32</td>
+<td align="right">46</td>
+<td align="left">CoD code starts with <code>O</code> or <code>I</code>;
+CoD code has a number as its second value; CoD code has <code>O</code>
+or <code>I</code> as its second value; CoD code has <code>O</code> or
+<code>I</code> as its fourth value</td>
+</tr>
+<tr class="even">
+<td align="left">1,2,4,8,32</td>
+<td align="right">47</td>
+<td align="left">CoD code has a period (<code>.</code>) character in the
+wrong place; CoD code starts with <code>O</code> or <code>I</code>; CoD
+code has a number as its second value; CoD code has <code>O</code> or
+<code>I</code> as its second value; CoD code has <code>O</code> or
+<code>I</code> as its fourth value</td>
+</tr>
+<tr class="odd">
+<td align="left">16,32</td>
+<td align="right">48</td>
+<td align="left">CoD code has a letter as its third value; CoD code has
+<code>O</code> or <code>I</code> as its fourth value</td>
+</tr>
+<tr class="even">
+<td align="left">1,16,32</td>
+<td align="right">49</td>
+<td align="left">CoD code has a period (<code>.</code>) character in the
+wrong place; CoD code has a letter as its third value; CoD code has
+<code>O</code> or <code>I</code> as its fourth value</td>
+</tr>
+<tr class="odd">
+<td align="left">2,16,32</td>
+<td align="right">50</td>
+<td align="left">CoD code starts with <code>O</code> or <code>I</code>;
+CoD code has a letter as its third value; CoD code has <code>O</code> or
+<code>I</code> as its fourth value</td>
+</tr>
+<tr class="even">
+<td align="left">1,2,16,32</td>
+<td align="right">51</td>
+<td align="left">CoD code has a period (<code>.</code>) character in the
+wrong place; CoD code starts with <code>O</code> or <code>I</code>; CoD
+code has a letter as its third value; CoD code has <code>O</code> or
+<code>I</code> as its fourth value</td>
+</tr>
+<tr class="odd">
+<td align="left">4,16,32</td>
+<td align="right">52</td>
+<td align="left">CoD code has a number as its second value; CoD code has
+a letter as its third value; CoD code has <code>O</code> or
+<code>I</code> as its fourth value</td>
+</tr>
+<tr class="even">
+<td align="left">1,4,16,32</td>
+<td align="right">53</td>
+<td align="left">CoD code has a period (<code>.</code>) character in the
+wrong place; CoD code has a number as its second value; CoD code has a
+letter as its third value; CoD code has <code>O</code> or <code>I</code>
+as its fourth value</td>
+</tr>
+<tr class="odd">
+<td align="left">2,4,16,32</td>
+<td align="right">54</td>
+<td align="left">CoD code starts with <code>O</code> or <code>I</code>;
+CoD code has a number as its second value; CoD code has a letter as its
+third value; CoD code has <code>O</code> or <code>I</code> as its fourth
+value</td>
+</tr>
+<tr class="even">
+<td align="left">1,2,4,16,32</td>
+<td align="right">55</td>
+<td align="left">CoD code has a period (<code>.</code>) character in the
+wrong place; CoD code starts with <code>O</code> or <code>I</code>; CoD
+code has a number as its second value; CoD code has a letter as its
+third value; CoD code has <code>O</code> or <code>I</code> as its fourth
+value</td>
+</tr>
+<tr class="odd">
+<td align="left">8,16,32</td>
+<td align="right">56</td>
+<td align="left">CoD code has <code>O</code> or <code>I</code> as its
+second value; CoD code has a letter as its third value; CoD code has
+<code>O</code> or <code>I</code> as its fourth value</td>
+</tr>
+<tr class="even">
+<td align="left">1,8,16,32</td>
+<td align="right">57</td>
+<td align="left">CoD code has a period (<code>.</code>) character in the
+wrong place; CoD code has <code>O</code> or <code>I</code> as its second
+value; CoD code has a letter as its third value; CoD code has
+<code>O</code> or <code>I</code> as its fourth value</td>
+</tr>
+<tr class="odd">
+<td align="left">2,8,16,32</td>
+<td align="right">58</td>
+<td align="left">CoD code starts with <code>O</code> or <code>I</code>;
+CoD code has <code>O</code> or <code>I</code> as its second value; CoD
+code has a letter as its third value; CoD code has <code>O</code> or
+<code>I</code> as its fourth value</td>
+</tr>
+<tr class="even">
+<td align="left">1,2,8,16,32</td>
+<td align="right">59</td>
+<td align="left">CoD code has a period (<code>.</code>) character in the
+wrong place; CoD code starts with <code>O</code> or <code>I</code>; CoD
+code has <code>O</code> or <code>I</code> as its second value; CoD code
+has a letter as its third value; CoD code has <code>O</code> or
+<code>I</code> as its fourth value</td>
+</tr>
+<tr class="odd">
+<td align="left">4,8,16,32</td>
+<td align="right">60</td>
+<td align="left">CoD code has a number as its second value; CoD code has
+<code>O</code> or <code>I</code> as its second value; CoD code has a
+letter as its third value; CoD code has <code>O</code> or <code>I</code>
+as its fourth value</td>
+</tr>
+<tr class="even">
+<td align="left">1,4,8,16,32</td>
+<td align="right">61</td>
+<td align="left">CoD code has a period (<code>.</code>) character in the
+wrong place; CoD code has a number as its second value; CoD code has
+<code>O</code> or <code>I</code> as its second value; CoD code has a
+letter as its third value; CoD code has <code>O</code> or <code>I</code>
+as its fourth value</td>
+</tr>
+<tr class="odd">
+<td align="left">2,4,8,16,32</td>
+<td align="right">62</td>
+<td align="left">CoD code starts with <code>O</code> or <code>I</code>;
+CoD code has a number as its second value; CoD code has <code>O</code>
+or <code>I</code> as its second value; CoD code has a letter as its
+third value; CoD code has <code>O</code> or <code>I</code> as its fourth
+value</td>
+</tr>
+<tr class="even">
+<td align="left">1,2,4,8,16,32</td>
+<td align="right">63</td>
+<td align="left">CoD code has a period (<code>.</code>) character in the
+wrong place; CoD code starts with <code>O</code> or <code>I</code>; CoD
+code has a number as its second value; CoD code has <code>O</code> or
+<code>I</code> as its second value; CoD code has a letter as its third
+value; CoD code has <code>O</code> or <code>I</code> as its fourth
+value</td>
+</tr>
+<tr class="odd">
+<td align="left">64</td>
+<td align="right">64</td>
+<td align="left">CoD code is missing</td>
+</tr>
+</tbody>
+</table>
+<p>These cause-of-death code structure checks are meant to detect
+writing/typing/encoding issues and gives feedback as to what potentially
+needs correction by the person performing the coding. Hence, these
+checks are most useful during routine cause-of-death code data quality
+checks prior to finalisation of cause-of-death data for reporting and/or
+statistical analysis use.</p>
+</div>
+</div>
+<div class="section level2">
+<h2 id="ill-defined-cause-of-death-codes">Ill-defined cause-of-death codes<a class="anchor" aria-label="anchor" href="#ill-defined-cause-of-death-codes"></a>
+</h2>
+<p>Ill-defined cause-of-death codes include codes for symptoms, signs,
+abnormal results of clinical or other investigative procedures, and
+ill-defined conditions regarding which no diagnosis classifiable
+elsewhere is recorded.</p>
+<p>The cause-of-death coding steps/process for both ICD-10 and ICD-11
+gives clear guidance on how to handle ill-defined codes during the
+coding process and for the most part, ill-defined codes are considered
+unreportable. Compared to issues with cause-of-death code structure,
+ill-defined codes are primarily issues with the actual death
+certification by the certifying individual rather than a issues with the
+coding process. The only way to rectify an ill-defined cause-of-death
+code is to go back to the actual patient record to see if there are any
+information that can support providing more detail for the coder and/or
+go back to the certifying individual for them to provide the additional
+information. These rectifying steps are likely infeasible for most
+contexts.</p>
+<p>Following are the ill-defined codes for the ICD-10<a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content='&lt;p&gt;World Health Organization. International Classification
+of Diseases Tenth Revision (ICD-10). Sixth Edition. Vol. 2 Instruction
+Manual. Geneva: World Health Organization, 2019. &lt;a href="https://icd.who.int/browse10/Content/statichtml/ICD10Volume2_en_2019.pdf" class="external-link uri"&gt;https://icd.who.int/browse10/Content/statichtml/ICD10Volume2_en_2019.pdf&lt;/a&gt;.&lt;/p&gt;'><sup>1</sup></a> and ICD-11<a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content='&lt;p&gt;World Health Organization. International Classification
+of Disease Eleventh Revision (ICD-11). Geneva: World Health
+Organization, 2022. &lt;a href="https://icdcdn.who.int/icd11referenceguide/en/html/index.html" class="external-link uri"&gt;https://icdcdn.who.int/icd11referenceguide/en/html/index.html&lt;/a&gt;.&lt;/p&gt;'><sup>2</sup></a>
+versions.</p>
+<table class="table">
+<colgroup>
+<col width="10%">
+<col width="89%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">ICD Version</th>
+<th align="left">Ill-defined Codes</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">ICD-10</td>
+<td align="left">R00-R94, R96-R99, Y10-Y34, Y87.2, C76, C80, C97, I47.2,
+I49.0, I46, I50, I51.4, I51.5, I51.6, I51.9, I70.9</td>
+</tr>
+<tr class="even">
+<td align="left">ICD-11</td>
+<td align="left">BD10-BD1Z, BA2Z, BE2Y, BE2Z, CB41.0, CB41.2, KB2D,
+KB2E, Chapter 21 codes</td>
+</tr>
+</tbody>
+</table>
+<p>Presence of ill-defined codes in the cause-of-death registry is
+critical as this can impact reported mortality statistics. This is the
+reason why one of the standard indicators for cause-of-death data
+quality is the proportion of ill-defined causes in cause-of-death
+registration<a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content='&lt;p&gt;&lt;a href="https://www.who.int/data/gho/indicator-metadata-registry/imr-details/3057#" class="external-link uri"&gt;https://www.who.int/data/gho/indicator-metadata-registry/imr-details/3057#&lt;/a&gt;:~:text=The%20following%20ICD%2D10%20codes,2%2C%20I49.&lt;/p&gt;'><sup>3</sup></a>.</p>
+<p>The functions <code><a href="../reference/cod_check_code.html">cod_check_code_ill_defined_icd10()</a></code> and
+<code><a href="../reference/cod_check_code.html">cod_check_code_ill_defined_icd11()</a></code> classifies a
+cause-of-death code as follows:</p>
+<table class="table">
+<thead><tr class="header">
+<th align="right">CoD Check Score</th>
+<th align="left">CoD Check Note</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="right">0</td>
+<td align="left">No issues found in CoD code</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="left">CoD code is an ill-defined code</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section level2">
+<h2 id="unlikely-cause-of-death-codes">Unlikely cause-of-death codes<a class="anchor" aria-label="anchor" href="#unlikely-cause-of-death-codes"></a>
+</h2>
+<p>An unlikely cause-of-death code is anything that is marked as a
+cause-of-death on a death certificate that cannot officially kill
+someone.</p>
+<p>Similar to issues with ill-defined codes, unlikely cause-of-death
+codes are primarily issues with the actual death certification by the
+certifying individual rather than a issues with the coding process. The
+only way to rectify an unlikely cause-of-death code is to go back to the
+actual patient record to see if there are any information that can
+support providing more detail for the coder and/or go back to the
+certifying individual for them to provide the additional information.
+These rectifying steps are likely infeasible for most contexts.</p>
+<p>Following are the unlikely cause-of-death codes for the ICD-10<a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content='&lt;p&gt;World Health Organization. International Classification
+of Diseases Tenth Revision (ICD-10). Sixth Edition. Vol. 2 Instruction
+Manual. Geneva: World Health Organization, 2019. &lt;a href="https://icd.who.int/browse10/Content/statichtml/ICD10Volume2_en_2019.pdf" class="external-link uri"&gt;https://icd.who.int/browse10/Content/statichtml/ICD10Volume2_en_2019.pdf&lt;/a&gt;.&lt;/p&gt;'><sup>4</sup></a> and
+ICD-11<a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content='&lt;p&gt;&lt;a href="https://icd.who.int/valuesets/viewer/582/en" class="external-link uri"&gt;https://icd.who.int/valuesets/viewer/582/en&lt;/a&gt;&lt;/p&gt;'><sup>5</sup></a>
+versions.</p>
+<table class="table">
+<colgroup>
+<col width="0%">
+<col width="99%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">ICD Version</th>
+<th align="left">Unlikely Cause-of-Death Codes</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">ICD-10</td>
+<td align="left">A31.1, A42.8, A53.0, A60.0, A63.0, A71.0-A71.9, A74.0,
+B00.2, B00.5, B00.8, B07, B08.1, B08.8, B30.0-B30.9, B35.0-B35.9,
+B36.0-B36.9, B85.0-B85.4, E28.0, E28.1, E28.3, E28.8, E28.9, E29.0,
+E29.1, E29.8, E29.9, E30.0, E30.1, E30.8, E30.9, E34.3, E34.4, E34.5,
+E65, F06.7, F32.0, F32.1, F33.0, F33.1, F33.4, F45.0, F45.1, F45.2,
+F45.3-F45.9, F50.1,F50.3-F50.9, F51.0-F51.9, F52.0-F52.9, F53.0,
+F60.0-F60.9, F61, F62.0-F62.9, F63.0-F63.9, F64.0-F64.9, F65.0-F65.9,
+F66.0-F66.9, F68.0-F68.9, F69, F70.0, F71.0, F80-F89, F93.0, F93.1,
+F93.2, F93.3, F93.8, F93.9, F94.0, F94.1, F94.2, F94.8, F94.9,
+F95.0-F95.9, F98.0-F98.9, G43.0-G43.2,G43.8-G43.9, G44.0-G44.2, G44.3,
+G44.4, G44.8, G45.0-G45.9, G47.0, G47.2, G50.0-G50.9, G51.0-G51.9,
+G52.0, G54.0-G54.9, G56.0-G56.9, G57.0-G57.9, G58.0, G58.7, H00.0-H00.1,
+H01.0-H01.9, H02.0-H02.9, H04.0-H04.9, H10.0-H10.9, H11.0-H11.9,
+H15.0-H15.9, H16.0-H16.9, H17.0-H17.9, H18.0-H18.9, H20.0-H20.9,
+H21.0-H21.9, H25.0-H25.9, H26.0-H26.9, H27.0-H27.9, H30.0-H30.9,
+H31.0-H31.9, H33.0-H33.5, H34.0-H34.9, H35.0-H35.9, H40.0-H40.9,
+H43.0-H43.9, H46, H47.0-H47.7, H49.0-H49.9, H50.0-H50.9, H51.0-H51.9,
+H52.0-H52.7, H53.0-H53.9, H54.0-H54.7, H55, H57.0-H57.9, H60.0-H60.9,
+H61.0-H61.9, H68.1, H69.0, H69.8, H69.9, H72.0, H72.1, H72.2, H72.8,
+H72.9, H73.8, H73.9, H74.0, H74.1, H74.2, H74.3, H74.4, H74.8, H74.9,
+H80.0-H80.9, H81.0, H81.1, H81.2, H81.3, H81.4, H81.8, H81.9, H83.0,
+H83.1, H83.2, H83.3-H83.9, H90.0-H90.8, H91.0-H91.9, H92.0-H92.2,
+H93.0-H93.9, J00, J01.9, J06.0-J06.9, J30.0-J30.4, J33.0-J33.9, J34.1,
+J34.2, J34.3, J35.0-J35.9, K00.0-K00.9, K01.0-K01.1, K02.0-K02.9,
+K03.0-K03.9, K04.0-K04.9, K05.0-K05.6, K06.0-K06.9, K07.0-K07.9,
+K08.0-K08.9, K09.0-K09.9, K10.0-K10.9, K11.0-K11.9, K13.1, K14.0-K14.9,
+K59.1, K59.2, K59.4, L01.0-L01.1, L03.0, L04.0-L04.9, L05.0-L05.9,
+L08.0-L08.8, L20.0-L20.9, L21.0-L21.9, L22, L23.0-L23.9, L24.0-L24.9,
+L25.0-L25.9, L28.0-L28.2, L29.0-L29.9, L30.0-L30.9, L40.0, L40.4,
+L41.0-L41.9, L42, L43.0-L43.9, L44.0-L44.9, L50.2, L50.3, L50.4, L50.5,
+L50.6, L53.9, L55.0-L55.1,L55.8-L55.9, L56.0-L56.9, L57.0-L57.9,
+L58.0-L58.9, L59.0-L59.9, L60.0-L60.9, L63.0-L63.9, L64.0-L64.9,
+L65.0-L65.9, L66.0-L66.9, L67.0-L67.9, L68.0-L68.9, L70.0-L70.9, L71.0,
+L71.1, L71.8, L71.9, L72.0-L72.9, L73.0-L73.9, L74.0-L74.9, L75.0-L75.9,
+L80, L81.0-L81.9, L82, L83, L84, L85.0-L85.9, L87.0-L87.9, L90.0-L90.9,
+L91.0-L91.9, L92.0-L92.9, L94.0-L94.9, L95.0, L98.0-L98.3,, L98.5-L95.9,
+M12.2, M12.3, M20.0-M20.6, M21.0-M21.9, M22.0-M22.9, M23.0-M23.9,
+M24.0-M24.9, M25.0-M25.8, M35.3, M40.0-M40.5, M41.0, M41.1, M41.2,
+M41.3, M41.4, M41.5, M41.8, M41.9, M43.6, M43.8-M43.9, M48.0,
+M53.0-M53.9, M54.0-M54.9, M60.0-M60.9, M62.4, M62.5, M62.6, M65.0-M65.9,
+M66.0-M66.5, M67.0-M67.9, M70.0-M70.9, M71.0-M71.9, M72.0, M72.1, M72.2,
+M75.0-M75.9, M76.0-M76.9, M77.0-M77.9, M79.0-M79.9, M89.1, M89.2, M89.3,
+M89.4, M91.2, M91.3, M91.8, M91.9, M92.0, M92.1, M92.2, M92.3, M92.4,
+M92.5, M92.6, M92.7, M92.8, M92.9, M95.0-M95.9, M99.0-M99.9, N39.3,
+N39.4, N42.2, N46, N47, N48.3, N48.4, N50.0, N60.0-N60.9, N62, N64.2,
+N64.3, N64.4, N64.5, N75.0, N84.0-N84.9, N85.0-N85.9, N86, N87.0-N87.9,
+N88.0-N88.9, N89.0-N89.9, N90.0-N90.9, N91.0-N91.5, N92.0-N92.6,
+N93.0-N93.9, N94.0-N94.9, N95.1, N95.2, N95.3, N96, N97.0-N97.9, O26.1,
+O26.2, O28.0, O28.1, O28.2, O28.3, O28.4, O28.5, O28.8, O28.9, O92.0,
+O92.2, O92.3, O92.4, O92.5, O92.6, O92.7, Q10.0-Q10.7, Q11.0-Q11.3,
+Q12.0-Q12.9, Q13.0-Q13.9, Q14.0-Q14.9, Q15.0-Q15.9, Q16.0-Q16.9,
+Q17.0-Q17.9, Q18.0-Q18.9, Q38.1, Q50.0, Q51.0, Q51.1, Q51.2, Q51.3,
+Q51.4, Q52.1, Q52.6, Q54.0, Q54.1, Q54.2, Q54.3, Q54.4, Q54.8, Q54.9,
+Q55.0, Q55.1, Q55.5, Q56.0, Q56.1, Q56.2, Q56.3, Q56.4, Q65.0-Q65.9,
+Q66.0-Q66.9, Q67.0-Q67.8, Q68.0-Q68.8, Q69.0-Q69.9, Q70.0-Q70.9,
+Q71.0-Q71.9, Q72.0-Q72.9, Q73.0-Q73.8, Q74.0-Q74.9, Q75.2,
+Q80.0-Q80.3,Q80.8-Q80.9, Q81.0, Q81.2-Q81.9, Q82.0-Q82.9, Q83.0-Q83.9,
+Q84.0-Q84.9, Q87.1, Q87.2, S00.0-S00.9, S05.0,S05.1,S05.8, S10.0-S10.9,
+S20.0-S20.8, S30.0-S30.9, S40.0-S40.9, S50.0-S50.9, S60.0-S60.9,
+S70.0-S70.9, S80.0-S80.9, S90.0-S90.9, T09.0, T11.0, T13.0, T14.0,
+T20.1, T21.1, T22.1, T23.1, T24.1, T25.1</td>
+</tr>
+<tr class="even">
+<td align="left">ICD-11</td>
+<td align="left">1A94.0, 1B21.2, 1B72, 1C10.Y, 1C20, 1C23, 1D84, 1E76,
+1E80, 1F00.0, 1F00.1, 1F00.Y, 1F0Y, 1F28, 1F2D, 1G00, 1G03, 6A00, 6A01,
+6A02, 6A03, 6A04, 6A06, 6A0Y, 6A0Z, 6B84, 6B8Y, 6B8Z, 6C00, 6C01, 6C20,
+NA, NA, NA, NA, NA, NA, 7A25, 7A26, 7A82, 7A83, 7A85, 7A86, 7A88, 7A8Y,
+7A8Z, 7B00.1, 7B00.2, 7B01.2, 7B01.Y, 7B01.Z, 7B2Y, 7B2Z, 8A05, 8A80,
+8A81, 8A82, 8B10, 8B82, 8B88, NA, 8C10, 8C11, 8C12.1, 8E43.00, NA, NA,
+NA, NA, NA, NA, NA, NA, NA, 9D7Y, 9D7Z, NA, 9E1Y, 9E1Z, NA, NA, AA6Z,
+AB33, AB37, AB3Y, AB3Z, NA, NA, AC0Y, AC0Z, BD90.0, CA00, CA04, CA07,
+CA08, CA0D, CA0F, CA0J, DA03, DA04, DA05, DA06, DA07, DA08, DA09, DA0A,
+DA0B, DA0C, DA0D, DA0E, DA0F, DA0F.0, DA0Y, DA0Z, EA10, EA12, NA, EA91,
+EA92, EA93, EA94, EA95, NA, EB30, NA, EB90.1, NA, NA, NA, NA, NA, NA,
+NA, EF40.0, NA, NA, EG9Y, EG9Z, EH40.0, EH40.1, EH75, EH92, EH93, EJ0Y,
+NA, NA, EJ30, NA, EJ6Y, NA, EK00, EK01, EK02, EK11, EK12, NA, EK5Y,
+EK70, EK90.0, EK91.0, EM0Y, EM0Z, FA22, FA30, FA31, FA32, FA33, FA34,
+FA35, FA36, FA37, FA5Y, FA5Z, FA70.0, FA70.2, FA71, FA82, FB10, FB1Y,
+FB1Z, FB30, FB40, FB41, FB42, FB50, FB52, FB53, FB54, FB55, FB56, FB6Z,
+FC00, GA12, GA13, GA14, GA15, GA16, GA1Y, GA1Z, NA, GA30.02, GA31, GA33,
+GA34, GB04, GB05, GB20, GB23.0, NA, JA65.3, JA65.4, JA66, JA8D, JB00.0,
+JB46.0, JB46.2, JB46.3, JB46.4, JB46.5, JB46.6, JB46.7, NA, NA, NA, NA,
+NA, LB70.00, LB74, LB75, LB76, LB77, LB78, LB79, LB80, LB90, LB91, LB92,
+LB93, LB94, LB95, LB96, LB98, LB99, LB9A, LB9B, LB9Y, LB9Z, NA, NA00,
+NA06.4, NA06.9, NA06.Y, NA20, NA80, NB50, NC10, NC30, NC51, NC70, NC90,
+ND11, ND56.0, ND90.0, ND92.0, ND94.0, ND95.0, ND96.0, ND97.0, EC31</td>
+</tr>
+</tbody>
+</table>
+<p>The <code>codeditr</code> package comes with datasets for ICD-10
+(<code>icd10_unlikely_cod</code>) and ICD-11
+(<code>icd11_unlikely_cod</code>) unlikely codes as reference.</p>
+<p>Presence of unlikely causes-of-death codes in the cause-of-death
+registry is critical as this can impact reported mortality statistics.
+Unlikely causes-of-death codes have also been termed as <em>garbage
+codes</em><a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content='&lt;p&gt;Ellingsen, Christian Lycke, G. Cecilie Alfsen, Marta
+Ebbing, Anne Gro Pedersen, Gerhard Sulo, Stein Emil Vollset, and Geir
+Sverre Braut. ‘Garbage Codes in the Norwegian Cause of Death Registry
+1996–2019’. BMC Public Health 22, no. 1 (December 2022): 1301. &lt;a href="https://doi.org/10.1186/s12889-022-13693-w" class="external-link uri"&gt;https://doi.org/10.1186/s12889-022-13693-w&lt;/a&gt;.&lt;/p&gt;'><sup>6</sup></a>.</p>
+<p>The functions <code><a href="../reference/cod_check_code.html">cod_check_code_unlikely_icd10()</a></code> and
+<code><a href="../reference/cod_check_code.html">cod_check_code_unlikely_icd11()</a></code> classifies a cause-of-death
+code as follows:</p>
+<table class="table">
+<thead><tr class="header">
+<th align="right">CoD Check Score</th>
+<th align="left">CoD Check Note</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="right">0</td>
+<td align="left">No issues found in CoD code</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="left">CoD code is an unlikely cause-of-death</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section level2">
+<h2 id="cause-of-death-code-not-appropriate-for-sex">Cause-of-death code not appropriate for sex<a class="anchor" aria-label="anchor" href="#cause-of-death-code-not-appropriate-for-sex"></a>
+</h2>
+<p>Certain cause-of-death codes are limited to or more likely to occur
+only to a specific sex. This type of cause-of-death issue is most likely
+due to a recording or coding issue and can potentially be corrected if
+identified early in the coding process.</p>
+<p>Following are cause-of-death codes for the ICD-10<a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content='&lt;p&gt;World Health Organization. International Classification
+of Diseases Tenth Revision (ICD-10). Sixth Edition. Vol. 2 Instruction
+Manual. Geneva: World Health Organization, 2019. &lt;a href="https://icd.who.int/browse10/Content/statichtml/ICD10Volume2_en_2019.pdf" class="external-link uri"&gt;https://icd.who.int/browse10/Content/statichtml/ICD10Volume2_en_2019.pdf&lt;/a&gt;.&lt;/p&gt;'><sup>7</sup></a> and ICD-11<a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content='&lt;p&gt;&lt;a href="https://icdcdn.who.int/icd11referenceguide/en/html/index.html#list-of-categories-limited-to-or-more-likely-to-occur-in-female-persons" class="external-link uri"&gt;https://icdcdn.who.int/icd11referenceguide/en/html/index.html#list-of-categories-limited-to-or-more-likely-to-occur-in-female-persons&lt;/a&gt;;
+&lt;a href="https://icdcdn.who.int/icd11referenceguide/en/html/index.html#list-of-categories-limited-to-or-more-likely-to-occur-in-male-persons" class="external-link uri"&gt;https://icdcdn.who.int/icd11referenceguide/en/html/index.html#list-of-categories-limited-to-or-more-likely-to-occur-in-male-persons&lt;/a&gt;&lt;/p&gt;'><sup>8</sup></a> versions
+specific to males and females.</p>
+<table class="table">
+<colgroup>
+<col width="1%">
+<col width="98%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">ICD Version</th>
+<th align="left">Male-Specific Cause-of-Death Codes</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">ICD-10</td>
+<td align="left">B26.0, C60.0, C60.1, C60.2, C60.8, C60.9, C61, C62.0,
+C62.1, C62.9, C63.0, C63.1, C63.2, C63.7, C63.8, C63.9, D07.4, D07.5,
+D07.6, D17.6, D29.0, D29.1, D29.2, D29.3, D29.4, D29.7, D29.9, D40.0,
+D40.1, D40.7, D40.9, E29.0, E29.1, E29.8, E29.9, E89.5, F52.4, I86.1,
+L29.1, N40, N41.0, N41.1, N41.2, N41.3, N41.8, N41.9, N42.0, N42.1,
+N42.2, N42.3, N42.8, N42.9, N43.0, N43.1, N43.2, N43.3, N43.4, N44,
+N45.0, N45.9, N46, N47, N48.0, N48.1, N48.2, N48.3, N48.4, N48.5, N48.6,
+N48.8, N48.9, N49.0, N49.1, N49.2, N49.8, N49.9, N50.0, N50.1, N50.8,
+N50.9, N51.0, N51.1, N51.2, N51.8, P83.5, Q53.0, Q53.1, Q53.2, Q53.9,
+Q54.0, Q54.1, Q54.2, Q54.3, Q54.4, Q54.8, Q54.9, Q55.0, Q55.1, Q55.2,
+Q55.3, Q55.4, Q55.5, Q55.6, Q55.8, Q55.9, Q98.0, Q98.1, Q98.2, Q98.3,
+Q98.4, Q98.5, Q98.6, Q98.7, Q98.8, Q98.9, R86.0, R86.1, R86.2, R86.3,
+R86.4, R86.5, R86.6, R86.7, R86.8, R86.9, S31.2, S31.3, Z12.5</td>
+</tr>
+<tr class="even">
+<td align="left">ICD-11</td>
+<td align="left">2C80, 2C80.2, 2C80.Y, 2C80.Z, 2C81, 2C81.0, 2C81.1,
+2C81.Y, 2C81.Z, 2C82, 2C82.0, 2C82.Y, 2C82.Z, 2C83, 2C83.0, 2C83.Y,
+2C83.Z, 2C84, 2C8Z, GA80, GA80.0, GA80.1, GA80.Y, GA81, GA81.0, GA81.Y,
+LB50, LB51, LB52, LB52.0, LB52.1, LB52.2, LB52.Y, LB52.Z, LB53, LB53.0,
+LB53.00, LB53.01, LB53.0Y, LB53.0Z, LB53.1, LB53.2, LB53.3, LB53.4,
+LB53.Y, LB53.Z, LB54, LB55, LB56, LB57, LB58, LB59, LB5Y, LB5Z, MF40,
+MF40.0, MF40.00, MF40.0Y, MF40.0Z, MF40.1, MF40.2, MF40.20, MF40.21,
+MF40.2Y, MF40.2Z, MF40.3, MF40.Y, MF40.Z, MF41, MF42, MF4Y, MF70, MF71,
+MF72, MF73, MF74, MF75, MF76, MF77, MF78, MF7Y, MF7Z, XM0LB5, XM4GA8,
+XM4MF4, XM8MF4, XN2C8</td>
+</tr>
+</tbody>
+</table>
+<table class="table">
+<colgroup>
+<col width="0%">
+<col width="99%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">ICD Version</th>
+<th align="left">Female-Specific Cause-of-Death Codes</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">ICD-10</td>
+<td align="left">A34, B37.3, C51.0, C51.1, C51.2, C51.8, C51.9, C52,
+C53.0, C53.1, C53.8, C53.9, C54.0, C54.1, C54.2, C54.3, C54.8, C54.9,
+C55, C56, C57.0, C57.1, C57.2, C57.3, C57.7, C57.9, C58, C79.6, D06.0,
+D06.1, D06.7, D06.9, D07.0, D07.1, D07.2, D07.3, D25.0, D25.1, D25.2,
+D25.9, D26.0, D26.1, D26.7, D26.9, D27, D28.0, D28.1, D28.2, D28.7,
+D28.9, D39.0, D39.1, D39.7, E28.0, E28.1, E28.2, E28.3, E28.8, E28.9,
+E89.4, F52.5, F53.0, F53.1, F53.8, F53.9, F84.2, I86.3, L29.2, L70.5,
+M80.0, M80.1, M81.0, M81.1, M83.0, N70.0, N70.1, N70.9, N71.0, N71.1,
+N71.9, N73.0, N73.2, N73.3, N73.4, N73.5, N73.6, N73.8, N73.9, N74.0,
+N74.1, N74.2, N74.3, N74.4, N74.8, N75.0, N75.1, N75.8, N75.9, N76.0,
+N76.1, N76.2, N76.3, N76.4, N76.5, N76.6, N76.8, N77.0, N77.1, N80.0,
+N80.2, N80.3, N80.4, N80.5, N80.6, N80.8, N80.9, N81.0, N81.1, N81.2,
+N81.3, N81.4, N81.5, N81.6, N81.8, N81.9, N82.0, N82.1, N82.2, N82.3,
+N82.4, N82.5, N82.8, N82.9, N83.0, N83.1, N83.2, N83.4, N83.6, N83.7,
+N83.8, N83.9, N84.0, N84.1, N84.2, N84.3, N84.8, N84.9, N85.0, N85.2,
+N85.3, N85.4, N85.6, N85.7, N85.8, N85.9, N86, N87.0, N87.1, N87.2,
+N87.9, N88.0, N88.1, N88.2, N88.3, N88.4, N88.8, N88.9, N89.0, N89.1,
+N89.2, N89.3, N89.4, N89.5, N89.6, N89.7, N89.8, N89.9, N90.0, N90.1,
+N90.2, N90.3, N90.4, N90.5, N90.7, N90.8, N90.9, N91.1, N91.2, N91.3,
+N91.4, N91.5, N92.0, N92.1, N92.2, N92.3, N92.4, N92.5, N92.6, N93.0,
+N93.8, N93.9, N94.0, N94.1, N94.2, N94.3, N94.4, N94.5, N94.6, N94.8,
+N94.9, N95.0, N95.1, N95.2, N95.3, N95.8, N95.9, N96, N97.0, N97.2,
+N97.3, N97.4, N97.9, N98.0, N98.1, N98.2, N98.3, N98.8, N98.9, N99.2,
+N99.3, O00.0, O00.1, O00.2, O00.8, O00.9, O01.0, O01.1, O01.9, O02.0,
+O02.1, O02.8, O02.9, O03.0, O03.1, O03.2, O03.3, O03.4, O03.5, O03.6,
+O03.7, O03.8, O03.9, O04.0, O04.2, O04.3, O04.4, O04.6, O04.7, O04.8,
+O04.9, O05.0, O05.1, O05.2, O05.3, O05.4, O05.5, O05.6, O05.7, O05.8,
+O05.9, O06.0, O06.1, O06.2, O06.3, O06.4, O06.5, O06.6, O06.7, O06.8,
+O06.9, O07.0, O07.1, O07.2, O07.3, O07.4, O07.5, O07.6, O07.7, O07.9,
+O08.0, O08.1, O08.3, O08.4, O08.5, O08.6, O08.7, O08.8, O08.9, O10.0,
+O10.1, O10.2, O10.3, O10.4, O10.9, O11, O12.0, O12.1, O12.2, O13, O14.0,
+O14.1, O14.2, O14.9, O15.0, O15.1, O15.2, O15.9, O16, O20.0, O20.8,
+O20.9, O21.0, O21.1, O21.2, O21.8, O21.9, O22.0, O22.1, O22.2, O22.3,
+O22.4, O22.5, O22.8, O22.9, O23.0, O23.1, O23.2, O23.3, O23.4, O23.5,
+O23.9, O24.0, O24.1, O24.2, O24.3, O24.4, O24.9, O25, O26.0, O26.1,
+O26.2, O26.3, O26.4, O26.5, O26.6, O26.7, O26.8, O26.9, O28.0, O28.1,
+O28.2, O28.3, O28.4, O28.5, O28.8, O28.9, O29.0, O29.1, O29.2, O29.3,
+O29.4, O29.5, O29.6, O29.8, O29.9, O30.0, O30.1, O30.2, O30.8, O30.9,
+O31.0, O31.1, O31.2, O31.8, O32.0, O32.1, O32.2, O32.3, O32.4, O32.5,
+O32.6, O32.8, O32.9, O33.0, O33.1, O33.2, O33.3, O33.4, O33.5, O33.6,
+O33.7, O33.8, O33.9, O34.0, O34.1, O34.2, O34.3, O34.4, O34.5, O34.6,
+O34.7, O34.8, O34.9, O35.0, O35.1, O35.2, O35.3, O35.4, O35.5, O35.6,
+O35.7, O35.8, O35.9, O36.0, O36.1, O36.2, O36.3, O36.4, O36.5, O36.6,
+O36.7, O36.8, O36.9, O40, O41.0, O41.1, O41.8, O41.9, O42.0, O42.1,
+O42.2, O42.9, O43.0, O43.1, O43.2, O43.8, O43.9, O44.0, O44.1, O45.0,
+O45.8, O45.9, O46.0, O46.8, O46.9, O47.0, O47.1, O47.9, O48, O60.0,
+O60.1, O60.2, O60.3, O61.0, O61.1, O61.8, O61.9, O62.0, O62.1, O62.2,
+O62.3, O62.4, O62.8, O62.9, O63.0, O63.1, O63.2, O63.9, O64.0, O64.1,
+O64.2, O64.3, O64.4, O64.5, O64.8, O64.9, O65.0, O65.1, O65.2, O65.3,
+O65.4, O65.5, O65.8, O65.9, O66.0, O66.1, O66.2, O66.3, O66.4, O66.5,
+O66.8, O66.9, O67.0, O67.9, O68.0, O68.1, O68.2, O68.3, O68.8, O68.9,
+O69.0, O69.1, O69.2, O69.3, O69.4, O69.5, O69.8, O69.9, O70.0, O70.1,
+O70.2, O70.3, O70.9, O71.1, O71.2, O71.3, O71.4, O71.5, O71.6, O71.7,
+O71.8, O71.9, O72.0, O72.1, O72.2, O72.3, O73.0, O73.1, O74.1, O74.2,
+O74.3, O74.4, O74.5, O74.6, O74.7, O74.8, O74.9, O75.0, O75.1, O75.2,
+O75.3, O75.4, O75.5, O75.6, O75.7, O75.8, O75.9, O80.0, O80.8, O80.9,
+O81.0, O81.1, O81.2, O81.3, O81.4, O81.5, O82.0, O82.1, O82.2, O82.8,
+O82.9, O83.0, O83.1, O83.3, O83.4, O83.8, O83.9, O84.0, O84.1, O84.2,
+O84.8, O84.9, O85, O86.0, O86.1, O86.2, O86.3, O86.4, O86.8, O87.0,
+O87.1, O87.2, O87.3, O87.9, O88.0, O88.1, O88.2, O88.3, O88.8, O89.0,
+O89.1, O89.2, O89.3, O89.4, O89.5, O89.6, O89.8, O89.9, O90.1, O90.2,
+O90.3, O90.4, O90.5, O90.8, O90.9, O91.0, O91.1, O91.2, O92.0, O92.1,
+O92.2, O92.3, O92.4, O92.5, O92.6, O92.7, O94, O95, O96.1, O96.9, O97.0,
+O97.1, O97.9, O98.0, O98.1, O98.2, O98.3, O98.4, O98.5, O98.6, O98.7,
+O98.8, O98.9, O99.1, O99.2, O99.3, O99.4, O99.5, O99.6, O99.7, O99.8,
+P54.6, Q50.0, Q50.1, Q50.2, Q50.3, Q50.4, Q50.5, Q50.6, Q51.0, Q51.1,
+Q51.2, Q51.3, Q51.5, Q51.6, Q51.7, Q51.8, Q51.9, Q52.0, Q52.1, Q52.2,
+Q52.3, Q52.4, Q52.5, Q52.6, Q52.7, Q52.8, Q52.9, Q96.0, Q96.2, Q96.4,
+Q96.8, Q96.9, Q97.0, Q97.1, Q97.2, Q97.3, Q97.9, R87.0, R87.1, R87.2,
+R87.3, R87.4, R87.5, R87.6, R87.7, R87.9, S31.4, S37.4, S37.5, S37.6,
+T19.2, T19.3, T83.3, Y76.0, Y76.1, Y76.2, Y76.3, Y76.8, Z01.4, Z12.4,
+Z30.1, Z30.3, Z31.1, Z31.2, Z32.0, Z32.1, Z33, Z34.0, Z34.8, Z34.9,
+Z35.1, Z35.2, Z35.3, Z35.4, Z35.5, Z35.6, Z35.7, Z35.8, Z35.9, Z36.1,
+Z36.2, Z36.3, Z36.4, Z36.5, Z36.8, Z36.9, Z37.0, Z37.2, Z37.3, Z37.4,
+Z37.5, Z37.6, Z37.7, Z37.9, Z39.0, Z39.1, Z64.0, Z64.1, Z87.5, Z91.7,
+Z97.5</td>
+</tr>
+<tr class="even">
+<td align="left">ICD-11</td>
+<td align="left">2C70, 2C70.0, 2C70.1, 2C70.2, 2C70.Y, 2C70.Z, 2C71,
+2C71.0, 2C71.1, 2C71.2, 2C71.Y, 2C71.Z, 2C72, 2C72.0, 2C72.1, 2C72.3,
+2C72.Y, 2C72.Z, 2C73, 2C73.0, 2C73.00, 2C73.01, 2C73.02, 2C73.03,
+2C73.04, 2C73.0Y, 2C73.0Z, 2C73.1, 2C73.2, 2C73.3, 2C73.4, 2C73.5,
+2C73.Y, 2C73.Z, 2C74, 2C74.0, 2C74.Y, 2C74.Z, 2C75, 2C75.0, 2C75.Y,
+2C75.Z, 2C76, 2C76.0, 2C76.1, 2C76.2, 2C76.3, 2C76.4, 2C76.40, 2C76.41,
+2C76.42, 2C76.43, 2C76.4Z, 2C76.Y, 2C76.Z, 2C77, 2C77.0, 2C77.1, 2C77.2,
+2C77.3, 2C77.Y, 2C77.Z, 2C78, 2C79, 2C7Y, 2C7Z, GA00, GA00.0, GA00.1,
+GA00.2, GA00.3, GA00.4, GA00.40, GA00.4Y, GA00.4Z, GA01, GA01.0,
+GA01.00, GA01.01, GA01.0Z, GA01.1, GA01.10, GA01.11, GA01.1Z, GA01.Y,
+GA01.Z, GA02, GA02.0, GA02.1, GA02.2, GA02.3, GA02.Z, GA03, GA03.0,
+GA03.1, GA03.Y, GA03.Z, GA04, GA05, GA05.0, GA05.1, GA05.2, GA05.3,
+GA05.Y, GA05.Z, GA06, GA07, GA07.0, GA07.1, GA07.Z, GA0Z, GC40, GC40.0,
+GC40.00, GC40.01, GC40.0Z, GC40.1, GC40.10, GC40.11, GC40.1Z, GC40.2,
+GC40.20, GC40.21, GC40.2Z, GC40.3, GC40.30, GC40.31, GC40.32, GC40.33,
+GC40.34, GC40.35, GC40.36, GC40.37, GC40.3Z, GC40.4, GC40.40, GC40.4Y,
+GC40.4Z, GC40.5, GC40.50, GC40.51, GC40.52, GC40.53, GC40.54, GC40.6,
+GC40.60, GC40.6Y, GC40.6Z, GC40.Z, GC41, GC42, GC42.0, GC42.1, GC4Z,
+JA00, JA00.0, JA00.00, JA00.01, JA00.02, JA00.03, JA00.04, JA00.05,
+JA00.06, JA00.07, JA00.08, JA00.09, JA00.1, JA00.10, JA00.11, JA00.12,
+JA00.13, JA00.14, JA00.15, JA00.16, JA00.17, JA00.18, JA00.19, JA00.2,
+JA00.20, JA00.21, JA00.22, JA00.23, JA00.24, JA00.25, JA00.26, JA00.27,
+JA00.28, JA00.29, JA00.3, JA00.30, JA00.31, JA00.32, JA00.33, JA00.34,
+JA00.35, JA00.36, JA00.37, JA00.38, JA00.39, JA01, JA01.0, JA01.1,
+JA01.2, JA01.Y, JA01.Z, JA02, JA02.0, JA02.1, JA02.Y, JA02.Z, JA03,
+JA04, JA05, JA05.0, JA05.1, JA05.2, JA05.3, JA05.4, JA05.5, JA05.6,
+JA05.7, JA05.Y, JA05.Z, JA0Z, LB40, LB40.0, LB40.1, LB40.2, LB40.Y,
+LB40.Z, LB41, LB41.0, LB41.1, LB41.2, LB41.Y, LB41.Z, LB42, LB42.0,
+LB42.1, LB42.2, LB42.3, LB42.4, LB42.5, LB42.Y, LB42.Z, LB43, LB43.0,
+LB43.1, LB43.Y, LB43.Z, LB44, LB44.0, LB44.1, LB44.2, LB44.3, LB44.4,
+LB44.5, LB44.6, LB44.Y, LB44.Z, LB45, LB45.0, LB45.1, LB45.2, LB45.3,
+LB45.4, LB45.5, LB45.6, LB45.7, LB45.8, LB45.9, LB45.Y, LB45.Z, LB4Y,
+LB4Z, MF30, MF31, MF32, MF33, MF34, MF35, MF36, MF37, MF38, MF39, MF3A,
+MF3Y, MF60, MF61, MF62, MF63, MF64, MF65, MF66, MF66.0, MF66.Y, MF66.Z,
+MF67, MF68, MF6Y, MF6Z, XA4JA0, XM0GA0, XM2C70, XM2C78, XM2JA0, XM3GA0,
+XM5GC4</td>
+</tr>
+</tbody>
+</table>
+<p>The functions <code><a href="../reference/cod_check_code.html">cod_check_code_sex_icd10()</a></code> and
+<code><a href="../reference/cod_check_code.html">cod_check_code_sex_icd11()</a></code> classifies a cause-of-death code
+as follows:</p>
+<table class="table">
+<thead><tr class="header">
+<th align="right">CoD Check Score</th>
+<th align="left">CoD Check Note</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="right">0</td>
+<td align="left">No issues found in CoD code</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="left">CoD code is not appropriate for person’s sex</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section level2">
+<h2 id="bibliogrpahy">Bibliogrpahy<a class="anchor" aria-label="anchor" href="#bibliogrpahy"></a>
+</h2>
+</div>
+
+  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+    </nav></aside>
 </div>
 
 

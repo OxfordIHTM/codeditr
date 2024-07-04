@@ -105,8 +105,6 @@
 
     
     
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/OxfordIHTM/codeditr" class="external-link">codeditr</a></span><span class="op">)</span></span></code></pre></div>
 <p>The <a href="https://www.who.int/" class="external-link">World Health Organization</a>’s <a href="https://www.who.int/standards/classifications/classification-of-diseases/services/codedit-tool" class="external-link">CoDEdit
 electronic tool</a> is intended to help producers of cause-of-death
 statistics in strengthening their capacity to perform routine checks on
@@ -127,7 +125,7 @@ using <code>codeditr</code><a class="anchor" aria-label="anchor" href="#workflow
 already formatted into a compatible structure required by the CoDEdit
 tool, we can perform a check on this dataset to see possible issues in
 its formatting and structure before using with the CoDEdit tool.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/cod_check_input.html">cod_check_codedit_input</a></span><span class="op">(</span><span class="va">icd10_example</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 3,613 × 8</span></span></span>
 <span><span class="co">#&gt;    sex_check sex_check_note  age_check age_check_note code_check code_check_note</span></span>
@@ -201,7 +199,7 @@ checks whether the values for the date of death are missing or not.</p>
 <p>Given a raw cause of death dataset that contains information on sex,
 date of birth, date of death, and cause-of-death code, we can format
 this into a compatible structure required by the CoDEdit tool.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/cod_structure.html">cod_structure_input</a></span><span class="op">(</span></span>
 <span>  df <span class="op">=</span> <span class="va">cod_data_raw_example</span>, </span>
 <span>  sex <span class="op">=</span> <span class="st">"sex"</span>, dob <span class="op">=</span> <span class="st">"dob"</span>, dod <span class="op">=</span> <span class="st">"dod"</span>, code <span class="op">=</span> <span class="st">"code"</span>, id <span class="op">=</span> <span class="st">"id"</span></span>
@@ -237,7 +235,7 @@ uploaded into the CoDEdit tool.</p>
 </h3>
 <p>The <code><a href="../reference/cod_check_code.html">cod_check_code()</a></code> function performs all the checks
 implemented by the CoDEdit tool.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/cod_check_code.html">cod_check_code</a></span><span class="op">(</span></span>
 <span>  <span class="va">cod_data_raw_example</span><span class="op">$</span><span class="va">code</span>, version <span class="op">=</span> <span class="st">"icd11"</span>, </span>
 <span>  sex <span class="op">=</span> <span class="va">cod_data_raw_example</span><span class="op">$</span><span class="va">sex</span>, age <span class="op">=</span> <span class="va">cod_data_raw_example</span><span class="op">$</span><span class="va">age</span></span>
@@ -271,7 +269,7 @@ implemented by the CoDEdit tool.</p>
 <span><span class="co">#&gt; <span style="color: #949494;">#   cod_check_note_age &lt;fct&gt;, cod_check_code &lt;dbl&gt;, cod_check_code_note &lt;fct&gt;</span></span></span></code></pre></div>
 <p>Results of the per row cause-of-death checks can also be summarised
 to give a count of issues found in the dataset.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/cod_check_code.html">cod_check_code</a></span><span class="op">(</span></span>
 <span>  <span class="va">cod_data_raw_example</span><span class="op">$</span><span class="va">code</span>, version <span class="op">=</span> <span class="st">"icd11"</span>, </span>
 <span>  sex <span class="op">=</span> <span class="va">cod_data_raw_example</span><span class="op">$</span><span class="va">sex</span>, age <span class="op">=</span> <span class="va">cod_data_raw_example</span><span class="op">$</span><span class="va">age</span></span>
@@ -336,7 +334,7 @@ perform specific check types on the cause-of-death data.</p>
 <ol style="list-style-type: decimal">
 <li>Check code structure</li>
 </ol>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">### Perform code structure check on cause-of-death data ----</span></span>
 <span><span class="fu"><a href="../reference/cod_check_code.html">cod_check_code_structure_icd11</a></span><span class="op">(</span><span class="va">cod_data_raw_example</span><span class="op">$</span><span class="va">code</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 20 × 2</span></span></span>
@@ -365,7 +363,7 @@ perform specific check types on the cause-of-death data.</p>
 <ol start="2" style="list-style-type: decimal">
 <li>Check for ill-defined codes</li>
 </ol>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">### Perform check for ill-defined codes on cause-of-death data ----</span></span>
 <span><span class="fu"><a href="../reference/cod_check_code.html">cod_check_code_ill_defined_icd11</a></span><span class="op">(</span><span class="va">cod_data_raw_example</span><span class="op">$</span><span class="va">code</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 20 × 2</span></span></span>
@@ -394,7 +392,7 @@ perform specific check types on the cause-of-death data.</p>
 <ol start="3" style="list-style-type: decimal">
 <li>Check for unlikely cause-of-death codes</li>
 </ol>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">### Perform check for unlikely cause-of-death codes ----</span></span>
 <span><span class="fu"><a href="../reference/cod_check_code.html">cod_check_code_unlikely_icd11</a></span><span class="op">(</span><span class="va">cod_data_raw_example</span><span class="op">$</span><span class="va">code</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 20 × 2</span></span></span>
@@ -423,7 +421,7 @@ perform specific check types on the cause-of-death data.</p>
 <ol start="4" style="list-style-type: decimal">
 <li>Check for cause-of-death codes inappropriate for given sex</li>
 </ol>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">### Perform check for cause-of-death codes inappropriate for specific sex ----</span></span>
 <span><span class="fu"><a href="../reference/cod_check_code.html">cod_check_code_sex_icd11</a></span><span class="op">(</span><span class="va">cod_data_raw_example</span><span class="op">$</span><span class="va">code</span>, <span class="va">cod_data_raw_example</span><span class="op">$</span><span class="va">sex</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 20 × 2</span></span></span>
@@ -452,7 +450,7 @@ perform specific check types on the cause-of-death data.</p>
 <ol start="5" style="list-style-type: decimal">
 <li>Check for cause-of-death codes inappropriate for given age</li>
 </ol>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">### Perform check for cause-of-death codes inappropriate for specific age ----</span></span>
 <span><span class="fu"><a href="../reference/cod_check_code.html">cod_check_code_age_icd11</a></span><span class="op">(</span><span class="va">cod_data_raw_example</span><span class="op">$</span><span class="va">code</span>, <span class="va">cod_data_raw_example</span><span class="op">$</span><span class="va">age</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 20 × 2</span></span></span>
