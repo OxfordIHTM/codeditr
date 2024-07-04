@@ -1,5 +1,5 @@
 #'
-#' Check date of death value in cause of death data based on CoDEdit rules
+#' Check date of death value in cause-of-death data based on CoDEdit rules
 #'
 #' @param dod Date of death value expressed in terms of the year death
 #'   occurred.

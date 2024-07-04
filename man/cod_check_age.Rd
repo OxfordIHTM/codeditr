@@ -2,7 +2,7 @@
 % Please edit documentation in R/cod_check_age.R
 \name{cod_check_age}
 \alias{cod_check_age}
-\title{Check age values in cause of death data based on CoDEdit rules}
+\title{Check age values in cause-of-death data based on CoDEdit rules}
 \usage{
 cod_check_age(age_value, age_type, age_type_code = c("D", "M", "Y"))
 }
@@ -26,7 +26,7 @@ A tibble with number of rows equal to length of \code{age_value} and
 two columns for age_check and age_check_note.
 }
 \description{
-Check age values in cause of death data based on CoDEdit rules
+Check age values in cause-of-death data based on CoDEdit rules
 }
 \examples{
 cod_check_age(120, "Y")

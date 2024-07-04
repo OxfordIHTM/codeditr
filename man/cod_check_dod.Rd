@@ -2,7 +2,7 @@
 % Please edit documentation in R/cod_check_dod.R
 \name{cod_check_dod}
 \alias{cod_check_dod}
-\title{Check date of death value in cause of death data based on CoDEdit rules}
+\title{Check date of death value in cause-of-death data based on CoDEdit rules}
 \usage{
 cod_check_dod(dod)
 }
@@ -15,7 +15,7 @@ A tibble with number of rows equal to length of \code{dod} and
 two columns for dod_check and dod_check_note.
 }
 \description{
-Check date of death value in cause of death data based on CoDEdit rules
+Check date of death value in cause-of-death data based on CoDEdit rules
 }
 \examples{
 cod_check_dod("2024")

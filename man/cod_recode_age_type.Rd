@@ -2,7 +2,7 @@
 % Please edit documentation in R/cod_recode_age_type.R
 \name{cod_recode_age_type}
 \alias{cod_recode_age_type}
-\title{Recode age type of cause of death data based on CoDEdit rules}
+\title{Recode age type of cause-of-death data based on CoDEdit rules}
 \usage{
 cod_recode_age_type(age_type, age_type_code = c("D", "M", "Y"))
 }
@@ -23,7 +23,7 @@ A character value or vector of values containing either "D", "M",
 or "Y" for \emph{days}, \emph{months}, or \emph{years} respectively.
 }
 \description{
-Recode age type of cause of death data based on CoDEdit rules
+Recode age type of cause-of-death data based on CoDEdit rules
 }
 \examples{
 cod_recode_age_type(

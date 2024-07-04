@@ -3,7 +3,7 @@
 \docType{data}
 \name{icd10_cod_child}
 \alias{icd10_cod_child}
-\title{Child-specific cause of death for ICD 10}
+\title{Child-specific cause-of-death for ICD 10}
 \format{
 A data frame with 2 columns and 122 rows:\tabular{ll}{
    \strong{Variable} \tab \strong{Description} \cr
@@ -18,7 +18,7 @@ https://www.icd10data.com/ICD10CM/Codes/Rules/Pediatric_Codes
 icd10_cod_child
 }
 \description{
-Child-specific cause of death for ICD 10
+Child-specific cause-of-death for ICD 10
 }
 \examples{
 icd10_cod_child
