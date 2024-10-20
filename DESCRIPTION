@@ -39,7 +39,7 @@ Remotes:
 Encoding: UTF-8
 Language: en-GB
 LazyData: true
-RoxygenNote: 7.3.1
+RoxygenNote: 7.3.2
 Roxygen: list(markdown = TRUE)
 URL: https://github.com/OxfordIHTM/codeditr, http://oxford-ihtm.io/codeditr/
 Config/testthat/edition: 3

@@ -52,7 +52,7 @@ This use case are for those that prefer not to use Microsoft Access (either beca
 
 ## Installation
 
-`coeditr` is not yet on CRAN but can be installed through the [Oxford IHTM R Universe](https://oxfordihtm.r-universe.dev) with:
+`codeditr` is not yet on CRAN but can be installed through the [Oxford IHTM R Universe](https://oxfordihtm.r-universe.dev) with:
 
 ```{r install, eval = FALSE}
 install.packages(
