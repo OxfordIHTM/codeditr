@@ -8,7 +8,7 @@ development:
 template:
   bootstrap: 5
   bootswatch: journal
-  theme: haddock
+  theme: breeze-light
   ganalytics: G-919S6XG78B
 
 home:
