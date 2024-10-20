@@ -7,9 +7,9 @@ development:
 
 template:
   bootstrap: 5
-  bootswatch: litera
+  bootswatch: journal
   theme: haddock
-  ganalytics: #
+  ganalytics: G-919S6XG78B
 
 home:
   links:
@@ -19,11 +19,11 @@ home:
     href: https://www.who.int/standards/classifications/classification-of-diseases/services/codedit-tool
 
 navbar:
-  bg: primary
+  bg: info
   type: light
   structure:
     left:  [home, intro, reference, articles, news]
-    #right: [twitter, facebook, linkedin, github]
+    right: [linkedin, mastodon, github]
 
   components:
     articles:
@@ -33,15 +33,12 @@ navbar:
         href: articles/introduction_to_icd.html
       - text: "Cause-of-Death Code Checks"
         href: articles/cause_of_death_code_checks.html
-    # twitter:
-    #   icon: "fab fa-x-twitter fa-lg"
-    #   href: http://twitter.com/OxIHTM
-    # facebook:
-    #   icon: "fab fa-facebook fa-lg"
-    #   href: https://www.facebook.com/MSc-in-International-Health-and-Tropical-Medicine-University-of-Oxford-433056700228246/
-    # linkedin:
-    #   icon: "fab fa-linkedin fa-lg"
-    #   href: https://www.linkedin.com/company/international-health-and-tropical-medicine
+    linkedin:
+      icon: "fab fa-linkedin fa-lg"
+      href: https://www.linkedin.com/company/oxford-ihealth
+    mastodon:
+      icon: "fab fa-mastodon fa-lg"
+      href: https://mastodon.social/@ihealth
 
 
 reference:
