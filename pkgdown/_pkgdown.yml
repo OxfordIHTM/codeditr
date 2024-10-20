@@ -23,7 +23,7 @@ navbar:
   type: light
   structure:
     left:  [home, intro, reference, articles, news]
-    right: [linkedin, mastodon, github]
+    right: [search, linkedin, mastodon, github]
 
   components:
     articles:
