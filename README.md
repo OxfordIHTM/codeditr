@@ -83,7 +83,7 @@ potentially large scale cause-of-death data quality checks.
 
 ## Installation
 
-`coeditr` is not yet on CRAN but can be installed through the [Oxford
+`codeditr` is not yet on CRAN but can be installed through the [Oxford
 IHTM R Universe](https://oxfordihtm.r-universe.dev) with:
 
 ``` r
