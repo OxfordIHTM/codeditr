@@ -1,114 +1,40 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://oxford-ihtm.io/codeditr/404.html</loc>
-  </url>
-  <url>
-    <loc>https://oxford-ihtm.io/codeditr/CODE_OF_CONDUCT.html</loc>
-  </url>
-  <url>
-    <loc>https://oxford-ihtm.io/codeditr/CONTRIBUTING.html</loc>
-  </url>
-  <url>
-    <loc>https://oxford-ihtm.io/codeditr/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>https://oxford-ihtm.io/codeditr/articles/cause_of_death_code_checks.html</loc>
-  </url>
-  <url>
-    <loc>https://oxford-ihtm.io/codeditr/articles/codeditr.html</loc>
-  </url>
-  <url>
-    <loc>https://oxford-ihtm.io/codeditr/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>https://oxford-ihtm.io/codeditr/articles/introduction_to_icd.html</loc>
-  </url>
-  <url>
-    <loc>https://oxford-ihtm.io/codeditr/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://oxford-ihtm.io/codeditr/index.html</loc>
-  </url>
-  <url>
-    <loc>https://oxford-ihtm.io/codeditr/news/index.html</loc>
-  </url>
-  <url>
-    <loc>https://oxford-ihtm.io/codeditr/reference/cod_calculate_age.html</loc>
-  </url>
-  <url>
-    <loc>https://oxford-ihtm.io/codeditr/reference/cod_check_age.html</loc>
-  </url>
-  <url>
-    <loc>https://oxford-ihtm.io/codeditr/reference/cod_check_code.html</loc>
-  </url>
-  <url>
-    <loc>https://oxford-ihtm.io/codeditr/reference/cod_check_code_summary.html</loc>
-  </url>
-  <url>
-    <loc>https://oxford-ihtm.io/codeditr/reference/cod_check_dod.html</loc>
-  </url>
-  <url>
-    <loc>https://oxford-ihtm.io/codeditr/reference/cod_check_input.html</loc>
-  </url>
-  <url>
-    <loc>https://oxford-ihtm.io/codeditr/reference/cod_check_sex.html</loc>
-  </url>
-  <url>
-    <loc>https://oxford-ihtm.io/codeditr/reference/cod_data_raw_example.html</loc>
-  </url>
-  <url>
-    <loc>https://oxford-ihtm.io/codeditr/reference/cod_recode_age_type.html</loc>
-  </url>
-  <url>
-    <loc>https://oxford-ihtm.io/codeditr/reference/cod_recode_sex.html</loc>
-  </url>
-  <url>
-    <loc>https://oxford-ihtm.io/codeditr/reference/cod_structure.html</loc>
-  </url>
-  <url>
-    <loc>https://oxford-ihtm.io/codeditr/reference/codeditr.html</loc>
-  </url>
-  <url>
-    <loc>https://oxford-ihtm.io/codeditr/reference/expand_icd10.html</loc>
-  </url>
-  <url>
-    <loc>https://oxford-ihtm.io/codeditr/reference/get_age.html</loc>
-  </url>
-  <url>
-    <loc>https://oxford-ihtm.io/codeditr/reference/icd10_cod_by_sex.html</loc>
-  </url>
-  <url>
-    <loc>https://oxford-ihtm.io/codeditr/reference/icd10_cod_child.html</loc>
-  </url>
-  <url>
-    <loc>https://oxford-ihtm.io/codeditr/reference/icd10_cod_neonate.html</loc>
-  </url>
-  <url>
-    <loc>https://oxford-ihtm.io/codeditr/reference/icd10_example.html</loc>
-  </url>
-  <url>
-    <loc>https://oxford-ihtm.io/codeditr/reference/icd10_unlikely_cod.html</loc>
-  </url>
-  <url>
-    <loc>https://oxford-ihtm.io/codeditr/reference/icd11_cod_by_sex.html</loc>
-  </url>
-  <url>
-    <loc>https://oxford-ihtm.io/codeditr/reference/icd11_cod_child.html</loc>
-  </url>
-  <url>
-    <loc>https://oxford-ihtm.io/codeditr/reference/icd11_cod_neonate.html</loc>
-  </url>
-  <url>
-    <loc>https://oxford-ihtm.io/codeditr/reference/icd11_example.html</loc>
-  </url>
-  <url>
-    <loc>https://oxford-ihtm.io/codeditr/reference/icd11_unlikely_cod.html</loc>
-  </url>
-  <url>
-    <loc>https://oxford-ihtm.io/codeditr/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://oxford-ihtm.io/codeditr/reference/list_ill_defined_icd11.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://oxford-ihtm.io/codeditr/404.html</loc></url>
+<url><loc>https://oxford-ihtm.io/codeditr/CODE_OF_CONDUCT.html</loc></url>
+<url><loc>https://oxford-ihtm.io/codeditr/CONTRIBUTING.html</loc></url>
+<url><loc>https://oxford-ihtm.io/codeditr/LICENSE.html</loc></url>
+<url><loc>https://oxford-ihtm.io/codeditr/articles/cause_of_death_code_checks.html</loc></url>
+<url><loc>https://oxford-ihtm.io/codeditr/articles/codeditr.html</loc></url>
+<url><loc>https://oxford-ihtm.io/codeditr/articles/index.html</loc></url>
+<url><loc>https://oxford-ihtm.io/codeditr/articles/introduction_to_icd.html</loc></url>
+<url><loc>https://oxford-ihtm.io/codeditr/authors.html</loc></url>
+<url><loc>https://oxford-ihtm.io/codeditr/index.html</loc></url>
+<url><loc>https://oxford-ihtm.io/codeditr/news/index.html</loc></url>
+<url><loc>https://oxford-ihtm.io/codeditr/reference/cod_calculate_age.html</loc></url>
+<url><loc>https://oxford-ihtm.io/codeditr/reference/cod_check_age.html</loc></url>
+<url><loc>https://oxford-ihtm.io/codeditr/reference/cod_check_code.html</loc></url>
+<url><loc>https://oxford-ihtm.io/codeditr/reference/cod_check_code_summary.html</loc></url>
+<url><loc>https://oxford-ihtm.io/codeditr/reference/cod_check_dod.html</loc></url>
+<url><loc>https://oxford-ihtm.io/codeditr/reference/cod_check_input.html</loc></url>
+<url><loc>https://oxford-ihtm.io/codeditr/reference/cod_check_sex.html</loc></url>
+<url><loc>https://oxford-ihtm.io/codeditr/reference/cod_data_raw_example.html</loc></url>
+<url><loc>https://oxford-ihtm.io/codeditr/reference/cod_recode_age_type.html</loc></url>
+<url><loc>https://oxford-ihtm.io/codeditr/reference/cod_recode_sex.html</loc></url>
+<url><loc>https://oxford-ihtm.io/codeditr/reference/cod_structure.html</loc></url>
+<url><loc>https://oxford-ihtm.io/codeditr/reference/codeditr.html</loc></url>
+<url><loc>https://oxford-ihtm.io/codeditr/reference/expand_icd10.html</loc></url>
+<url><loc>https://oxford-ihtm.io/codeditr/reference/get_age.html</loc></url>
+<url><loc>https://oxford-ihtm.io/codeditr/reference/icd10_cod_by_sex.html</loc></url>
+<url><loc>https://oxford-ihtm.io/codeditr/reference/icd10_cod_child.html</loc></url>
+<url><loc>https://oxford-ihtm.io/codeditr/reference/icd10_cod_neonate.html</loc></url>
+<url><loc>https://oxford-ihtm.io/codeditr/reference/icd10_example.html</loc></url>
+<url><loc>https://oxford-ihtm.io/codeditr/reference/icd10_unlikely_cod.html</loc></url>
+<url><loc>https://oxford-ihtm.io/codeditr/reference/icd11_cod_by_sex.html</loc></url>
+<url><loc>https://oxford-ihtm.io/codeditr/reference/icd11_cod_child.html</loc></url>
+<url><loc>https://oxford-ihtm.io/codeditr/reference/icd11_cod_neonate.html</loc></url>
+<url><loc>https://oxford-ihtm.io/codeditr/reference/icd11_example.html</loc></url>
+<url><loc>https://oxford-ihtm.io/codeditr/reference/icd11_unlikely_cod.html</loc></url>
+<url><loc>https://oxford-ihtm.io/codeditr/reference/index.html</loc></url>
+<url><loc>https://oxford-ihtm.io/codeditr/reference/list_ill_defined_icd11.html</loc></url>
 </urlset>
+
