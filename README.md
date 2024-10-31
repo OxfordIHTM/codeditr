@@ -84,7 +84,7 @@ potentially large scale cause-of-death data quality checks.
 ## Installation
 
 `codeditr` is not yet on CRAN but can be installed through the [Oxford
-IHTM R Universe](https://oxfordihtm.r-universe.dev) with:
+iHealth R Universe](https://oxfordihtm.r-universe.dev) with:
 
 ``` r
 install.packages(
@@ -114,20 +114,21 @@ structure before using with the CoDEdit tool.
 ``` r
 cod_check_codedit_input(icd10_example)
 #> # A tibble: 3,613 × 8
-#>    sex_check sex_check_note  age_check age_check_note code_check code_check_note
-#>        <int> <fct>               <int> <fct>               <int> <chr>          
-#>  1         0 No issues with…         0 No issues wit…          0 Cause of death…
-#>  2         0 No issues with…         0 No issues wit…          0 Cause of death…
-#>  3         0 No issues with…         0 No issues wit…          0 Cause of death…
-#>  4         0 No issues with…         0 No issues wit…          0 Cause of death…
-#>  5         0 No issues with…         0 No issues wit…          0 Cause of death…
-#>  6         0 No issues with…         0 No issues wit…          0 Cause of death…
-#>  7         0 No issues with…         0 No issues wit…          0 Cause of death…
-#>  8         0 No issues with…         0 No issues wit…          0 Cause of death…
-#>  9         0 No issues with…         0 No issues wit…          0 Cause of death…
-#> 10         0 No issues with…         0 No issues wit…          0 Cause of death…
+#>    sex_check sex_check_note           age_check age_check_note      code_check
+#>        <int> <fct>                        <int> <fct>                    <int>
+#>  1         0 No issues with sex value         0 No issues with age…          0
+#>  2         0 No issues with sex value         0 No issues with age…          0
+#>  3         0 No issues with sex value         0 No issues with age…          0
+#>  4         0 No issues with sex value         0 No issues with age…          0
+#>  5         0 No issues with sex value         0 No issues with age…          0
+#>  6         0 No issues with sex value         0 No issues with age…          0
+#>  7         0 No issues with sex value         0 No issues with age…          0
+#>  8         0 No issues with sex value         0 No issues with age…          0
+#>  9         0 No issues with sex value         0 No issues with age…          0
+#> 10         0 No issues with sex value         0 No issues with age…          0
 #> # ℹ 3,603 more rows
-#> # ℹ 2 more variables: dod_check <int>, dod_check_note <fct>
+#> # ℹ 3 more variables: code_check_note <chr>, dod_check <int>,
+#> #   dod_check_note <fct>
 ```
 
 2.  Structure raw cause-of-death data for input into CoDEdit tool
@@ -220,18 +221,18 @@ cod_check_code(
   cod_check_code_summary()
 #> $`Code structure`
 #> # A tibble: 65 × 2
-#>    cod_check_note                                                              n
-#>    <fct>                                                                   <int>
-#>  1 No issues found in CoD code                                                20
-#>  2 CoD code has a period (`.`) character in the wrong place                    0
-#>  3 CoD code starts with `O` or `I`                                             0
-#>  4 CoD code has a period (`.`) character in the wrong place; CoD code sta…     0
-#>  5 CoD code has a number as its second value                                   0
-#>  6 CoD code has a period (`.`) character in the wrong place; CoD code has…     0
-#>  7 CoD code starts with `O` or `I`; CoD code has a number as its second v…     0
-#>  8 CoD code has a period (`.`) character in the wrong place; CoD code sta…     0
-#>  9 CoD code has `O` or `I` as its second value                                 0
-#> 10 CoD code has a period (`.`) character in the wrong place; CoD code has…     0
+#>    cod_check_note                                                            n
+#>    <fct>                                                                 <int>
+#>  1 No issues found in CoD code                                              20
+#>  2 CoD code has a period (`.`) character in the wrong place                  0
+#>  3 CoD code starts with `O` or `I`                                           0
+#>  4 CoD code has a period (`.`) character in the wrong place; CoD code s…     0
+#>  5 CoD code has a number as its second value                                 0
+#>  6 CoD code has a period (`.`) character in the wrong place; CoD code h…     0
+#>  7 CoD code starts with `O` or `I`; CoD code has a number as its second…     0
+#>  8 CoD code has a period (`.`) character in the wrong place; CoD code s…     0
+#>  9 CoD code has `O` or `I` as its second value                               0
+#> 10 CoD code has a period (`.`) character in the wrong place; CoD code h…     0
 #> # ℹ 55 more rows
 #> 
 #> $`Ill-defined code`

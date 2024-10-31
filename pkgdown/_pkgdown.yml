@@ -7,7 +7,7 @@ development:
 
 template:
   bootstrap: 5
-  bootswatch: journal
+  bootswatch: sandstone
   theme: breeze-light
   ganalytics: G-919S6XG78B
 
@@ -19,7 +19,7 @@ home:
     href: https://www.who.int/standards/classifications/classification-of-diseases/services/codedit-tool
 
 navbar:
-  bg: info
+  bg: primary
   type: light
   structure:
     left:  [home, intro, reference, articles, news]
