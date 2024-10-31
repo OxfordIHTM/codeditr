@@ -25,7 +25,7 @@
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
-    <nav class="navbar navbar-expand-lg fixed-top bg-info" data-bs-theme="light" aria-label="Site navigation"><div class="container">
+    <nav class="navbar navbar-expand-lg fixed-top bg-primary" data-bs-theme="light" aria-label="Site navigation"><div class="container">
 
     <a class="navbar-brand me-2" href="index.html">codeditr</a>
 
@@ -92,7 +92,7 @@
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p><code>codeditr</code> is not yet on CRAN but can be installed through the <a href="https://oxfordihtm.r-universe.dev" class="external-link">Oxford IHTM R Universe</a> with:</p>
+<p><code>codeditr</code> is not yet on CRAN but can be installed through the <a href="https://oxfordihtm.r-universe.dev" class="external-link">Oxford iHealth R Universe</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span></span>
 <span>  <span class="st">"codeditr"</span>,</span>
@@ -116,20 +116,21 @@
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/cod_check_input.html">cod_check_codedit_input</a></span><span class="op">(</span><span class="va">icd10_example</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 3,613 × 8</span></span>
-<span><span class="co">#&gt;    sex_check sex_check_note  age_check age_check_note code_check code_check_note</span></span>
-<span><span class="co">#&gt;        &lt;int&gt; &lt;fct&gt;               &lt;int&gt; &lt;fct&gt;               &lt;int&gt; &lt;chr&gt;          </span></span>
-<span><span class="co">#&gt;  1         0 No issues with…         0 No issues wit…          0 Cause of death…</span></span>
-<span><span class="co">#&gt;  2         0 No issues with…         0 No issues wit…          0 Cause of death…</span></span>
-<span><span class="co">#&gt;  3         0 No issues with…         0 No issues wit…          0 Cause of death…</span></span>
-<span><span class="co">#&gt;  4         0 No issues with…         0 No issues wit…          0 Cause of death…</span></span>
-<span><span class="co">#&gt;  5         0 No issues with…         0 No issues wit…          0 Cause of death…</span></span>
-<span><span class="co">#&gt;  6         0 No issues with…         0 No issues wit…          0 Cause of death…</span></span>
-<span><span class="co">#&gt;  7         0 No issues with…         0 No issues wit…          0 Cause of death…</span></span>
-<span><span class="co">#&gt;  8         0 No issues with…         0 No issues wit…          0 Cause of death…</span></span>
-<span><span class="co">#&gt;  9         0 No issues with…         0 No issues wit…          0 Cause of death…</span></span>
-<span><span class="co">#&gt; 10         0 No issues with…         0 No issues wit…          0 Cause of death…</span></span>
+<span><span class="co">#&gt;    sex_check sex_check_note           age_check age_check_note      code_check</span></span>
+<span><span class="co">#&gt;        &lt;int&gt; &lt;fct&gt;                        &lt;int&gt; &lt;fct&gt;                    &lt;int&gt;</span></span>
+<span><span class="co">#&gt;  1         0 No issues with sex value         0 No issues with age…          0</span></span>
+<span><span class="co">#&gt;  2         0 No issues with sex value         0 No issues with age…          0</span></span>
+<span><span class="co">#&gt;  3         0 No issues with sex value         0 No issues with age…          0</span></span>
+<span><span class="co">#&gt;  4         0 No issues with sex value         0 No issues with age…          0</span></span>
+<span><span class="co">#&gt;  5         0 No issues with sex value         0 No issues with age…          0</span></span>
+<span><span class="co">#&gt;  6         0 No issues with sex value         0 No issues with age…          0</span></span>
+<span><span class="co">#&gt;  7         0 No issues with sex value         0 No issues with age…          0</span></span>
+<span><span class="co">#&gt;  8         0 No issues with sex value         0 No issues with age…          0</span></span>
+<span><span class="co">#&gt;  9         0 No issues with sex value         0 No issues with age…          0</span></span>
+<span><span class="co">#&gt; 10         0 No issues with sex value         0 No issues with age…          0</span></span>
 <span><span class="co">#&gt; # ℹ 3,603 more rows</span></span>
-<span><span class="co">#&gt; # ℹ 2 more variables: dod_check &lt;int&gt;, dod_check_note &lt;fct&gt;</span></span></code></pre></div>
+<span><span class="co">#&gt; # ℹ 3 more variables: code_check_note &lt;chr&gt;, dod_check &lt;int&gt;,</span></span>
+<span><span class="co">#&gt; #   dod_check_note &lt;fct&gt;</span></span></code></pre></div>
 <ol start="2" style="list-style-type: decimal">
 <li>Structure raw cause-of-death data for input into CoDEdit tool</li>
 </ol>
@@ -212,18 +213,18 @@
 <span>  <span class="fu"><a href="reference/cod_check_code_summary.html">cod_check_code_summary</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; $`Code structure`</span></span>
 <span><span class="co">#&gt; # A tibble: 65 × 2</span></span>
-<span><span class="co">#&gt;    cod_check_note                                                              n</span></span>
-<span><span class="co">#&gt;    &lt;fct&gt;                                                                   &lt;int&gt;</span></span>
-<span><span class="co">#&gt;  1 No issues found in CoD code                                                20</span></span>
-<span><span class="co">#&gt;  2 CoD code has a period (`.`) character in the wrong place                    0</span></span>
-<span><span class="co">#&gt;  3 CoD code starts with `O` or `I`                                             0</span></span>
-<span><span class="co">#&gt;  4 CoD code has a period (`.`) character in the wrong place; CoD code sta…     0</span></span>
-<span><span class="co">#&gt;  5 CoD code has a number as its second value                                   0</span></span>
-<span><span class="co">#&gt;  6 CoD code has a period (`.`) character in the wrong place; CoD code has…     0</span></span>
-<span><span class="co">#&gt;  7 CoD code starts with `O` or `I`; CoD code has a number as its second v…     0</span></span>
-<span><span class="co">#&gt;  8 CoD code has a period (`.`) character in the wrong place; CoD code sta…     0</span></span>
-<span><span class="co">#&gt;  9 CoD code has `O` or `I` as its second value                                 0</span></span>
-<span><span class="co">#&gt; 10 CoD code has a period (`.`) character in the wrong place; CoD code has…     0</span></span>
+<span><span class="co">#&gt;    cod_check_note                                                            n</span></span>
+<span><span class="co">#&gt;    &lt;fct&gt;                                                                 &lt;int&gt;</span></span>
+<span><span class="co">#&gt;  1 No issues found in CoD code                                              20</span></span>
+<span><span class="co">#&gt;  2 CoD code has a period (`.`) character in the wrong place                  0</span></span>
+<span><span class="co">#&gt;  3 CoD code starts with `O` or `I`                                           0</span></span>
+<span><span class="co">#&gt;  4 CoD code has a period (`.`) character in the wrong place; CoD code s…     0</span></span>
+<span><span class="co">#&gt;  5 CoD code has a number as its second value                                 0</span></span>
+<span><span class="co">#&gt;  6 CoD code has a period (`.`) character in the wrong place; CoD code h…     0</span></span>
+<span><span class="co">#&gt;  7 CoD code starts with `O` or `I`; CoD code has a number as its second…     0</span></span>
+<span><span class="co">#&gt;  8 CoD code has a period (`.`) character in the wrong place; CoD code s…     0</span></span>
+<span><span class="co">#&gt;  9 CoD code has `O` or `I` as its second value                               0</span></span>
+<span><span class="co">#&gt; 10 CoD code has a period (`.`) character in the wrong place; CoD code h…     0</span></span>
 <span><span class="co">#&gt; # ℹ 55 more rows</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $`Ill-defined code`</span></span>
